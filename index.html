@@ -1,34 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Polkadot | Protocols for prosperity.</title>
+    <title>Polkadot</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
             --grey-950: #0F0F0F;
             --grey-900: #1C1917;
+            --grey-800: #292524;
             --grey-500: #78716C;
             --cool-gray: #E5E7EB;
             --pure-black: #000000;
+            --white: #FFFFFF;
+            --bg-color: var(--pure-black);
+            --text-main: var(--white);
+            --navbar-bg: var(--grey-950);
         }
 
-        * { box-sizing: border-box; }
+        [data-theme="light"] {
+            --bg-color: #FAFAF9;
+            --text-main: #1C1917;
+            --navbar-bg: #FFFFFF;
+            --grey-950: #FFFFFF;
+            --pure-black: #FAFAF9;
+            --grey-500: #57534E;
+        }
+
+        * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--pure-black);
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'DM Sans', sans-serif;
             overflow-x: hidden;
         }
 
-        /* NAVBAR - Menu ripristinato */
+        /* NAVBAR */
         .navbar {
             height: 72px;
-            background-color: var(--grey-950);
+            background-color: var(--navbar-bg);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -37,174 +51,82 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
+        .nav-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+        .logo-img { width: 22px; height: 22px; }
+        .brand-name { font-family: 'DM Serif Display', serif; font-size: 20px; }
 
-        .logo-img {
-            width: 22px;
-            height: 22px;
-        }
+        .nav-right { display: flex; align-items: center; gap: 24px; }
+        .nav-link { text-decoration: none; color: inherit; font-size: 13px; opacity: 0.8; }
 
-        .brand-name {
-            font-family: 'DM Serif Display', serif;
-            font-size: 20px;
-            color: #ffffff;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .nav-link {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 400;
-            opacity: 0.8;
-        }
-
-        .nav-right-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-left: 12px;
-        }
-
-        .btn-theme {
-            background: #1c1917;
-            border: 1px solid #292524;
-            color: white;
+        .btn-toggle {
+            background: var(--grey-900);
+            border: 1px solid var(--grey-800);
+            color: var(--text-main);
             padding: 6px;
             border-radius: 6px;
             cursor: pointer;
-            display: flex;
         }
 
-        .btn-sign {
-            background: #1c1917;
-            border: 1px solid #292524;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        /* HERO - Noise ultra-fine animato */
+        /* HERO - Fine Grain Noise */
         .hero {
             position: relative;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: var(--pure-black);
             overflow: hidden;
+            background-color: var(--pure-black);
         }
 
         .noise-layer {
             position: absolute;
             inset: -200%;
             z-index: 1;
-            opacity: 0.45;
+            opacity: 0.4;
             mix-blend-mode: screen;
             pointer-events: none;
-            /* Grana microscopica */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            animation: grain-dance 0.1s steps(1) infinite;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.5' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            animation: grain 0.1s steps(1) infinite;
         }
 
-        @keyframes grain-dance {
+        @keyframes grain {
             0%, 100% { transform: translate(0,0); }
-            25% { transform: translate(-0.5%, -0.5%); }
-            50% { transform: translate(0.5%, 0.5%); }
-            75% { transform: translate(-0.5%, 0.5%); }
+            50% { transform: translate(-0.5%, -0.5%); }
         }
 
         .spotlight {
             position: absolute;
             inset: 0;
-            background: radial-gradient(
-                circle at var(--x, 50%) var(--y, 50%), 
-                transparent 0%, 
-                rgba(0, 0, 0, 0.96) 30%, 
-                var(--pure-black) 55%
-            );
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(0,0,0,0.95) 30%, var(--pure-black) 60%);
             z-index: 2;
             pointer-events: none;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-        }
+        .hero-content { position: relative; z-index: 3; text-align: center; }
+        .hero h1 { font-family: 'DM Serif Display', serif; font-size: 110px; margin: 0; }
+        .hero p { color: var(--grey-500); font-size: 24px; margin-top: 10px; }
 
-        .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 110px;
-            margin: 0;
-        }
+        /* SEZIONI TESTUALI */
+        .section-near { background-color: var(--grey-950); padding: 100px 48px; }
+        .section-pure { background-color: var(--pure-black); padding: 120px 48px; text-align: center; }
 
-        /* SEZIONI CENTRALI */
-        .section-near-black { background-color: var(--grey-950); padding: 100px 48px; }
-        .section-pure-black { background-color: var(--pure-black); padding: 120px 48px; text-align: center; }
+        .grid-3 { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .grid-2 { max-width: 1000px; margin: 60px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; text-align: left; }
 
-        .btn-follow {
-            background: #ffffff;
-            color: #000000;
-            padding: 12px 24px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 30px;
-            font-size: 14px;
-        }
+        h3, h2 { font-family: 'DM Serif Display', serif; }
+        p { color: var(--grey-500); line-height: 1.6; font-size: 15px; }
 
-        /* FOOTER - Sottile */
-        .footer {
-            background-color: var(--grey-950);
-            padding: 24px 48px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.03);
-        }
+        .manifesto { max-width: 800px; margin: 100px auto; font-size: 18px; line-height: 1.6; }
+        .claim { font-weight: 700; font-size: 22px; margin-top: 30px; color: var(--text-main); }
 
-        .footer-left { color: var(--grey-500); font-size: 12px; }
+        .btn-follow { background: var(--text-main); color: var(--bg-color); padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; }
 
-        .footer-right {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .footer-links { display: flex; gap: 18px; }
-        .footer-links a {
-            color: var(--grey-500);
-            text-decoration: none;
-            font-size: 12px;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 16px;
-            color: var(--grey-500);
-        }
-
-        .social-icons svg { width: 16px; height: 16px; fill: currentColor; }
-
+        /* FOOTER */
+        .footer { background-color: var(--grey-950); padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--grey-500); }
+        .footer-right { display: flex; gap: 24px; align-items: center; }
     </style>
 </head>
 <body>
@@ -215,69 +137,65 @@
             <span class="brand-name">Polkadot</span>
         </a>
         <div class="nav-right">
-            <a href="#" class="nav-link">Philosophy</a>
-            <a href="#" class="nav-link">Tech</a>
-            <a href="#" class="nav-link">Platform</a>
-            <a href="#" class="nav-link">Ecosystem</a>
-            <div class="nav-right-actions">
-                <button class="btn-theme"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
-                <button class="btn-sign">Sign in</button>
-            </div>
+            <a href="#" class="nav-link">Philosophy</a><a href="#" class="nav-link">Tech</a><a href="#" class="nav-link">Platform</a><a href="#" class="nav-link">Ecosystem</a>
+            <button class="btn-toggle" onclick="toggleTheme()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
         </div>
     </nav>
 
     <div class="hero" id="hero">
         <div class="noise-layer"></div>
         <div class="spotlight" id="spotlight"></div>
-        <div class="hero-content">
-            <h1>Polkadot</h1>
-            <p style="font-size: 24px; color: var(--grey-500); margin-top: 15px;">Crypto beyond currency.</p>
-        </div>
+        <div class="hero-content"><h1>Polkadot</h1><p>Protocols for prosperity.</p></div>
     </div>
 
-    <section class="section-near-black">
-        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
-            <div><h3 style="font-family:'DM Serif Display'; font-size:24px;">Honest by design</h3><p style="color:var(--grey-500); font-size:14px; line-height:1.5;">The rules are in the product, not buried in fine print.</p></div>
-            <div><h3 style="font-family:'DM Serif Display'; font-size:24px;">You own it</h3><p style="color:var(--grey-500); font-size:14px; line-height:1.5;">No company can seize or freeze your stuff.</p></div>
-            <div><h3 style="font-family:'DM Serif Display'; font-size:24px;">Built for humans</h3><p style="color:var(--grey-500); font-size:14px; line-height:1.5;">Everything you expect from modern apps.</p></div>
+    <section class="section-near">
+        <div class="grid-3">
+            <div><h3>Honest by design</h3><p>The rules are in the product, not buried in fine print.</p></div>
+            <div><h3>You own it</h3><p>No company can seize or freeze your stuff, snoop on you, or shut you out.</p></div>
+            <div><h3>Built for humans</h3><p>Everything you expect from modern apps. Nothing you have to compromise on.</p></div>
         </div>
     </section>
 
-    <section class="section-pure-black">
-        <h2 style="font-family:'DM Serif Display'; font-size:48px; margin-bottom:10px;">A new age of internet-enabled society</h2>
-        <p style="color:var(--grey-500); font-size:16px;">We're just getting started.</p>
-        <a href="#" class="btn-follow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            Follow on X
-        </a>
+    <section class="section-pure">
+        <h2>A new age of internet-enabled society</h2>
+        <p>The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
+        
+        <div class="grid-2">
+            <div><h4>The Problem</h4><p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything.</p></div>
+            <div><h4>A Different Way</h4><p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p></div>
+        </div>
+
+        <div class="manifesto">
+            <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable.</p>
+            <div class="claim">They took the internet from us. We're taking it back.</div>
+        </div>
+
+        <h3>Stay Updated</h3>
+        <p>We're just getting started.</p>
+        <a href="#" class="btn-follow">Follow on X</a>
     </section>
 
     <footer class="footer">
-        <div class="footer-left">© 2025</div>
+        <div>© 2025</div>
         <div class="footer-right">
-            <div class="footer-links">
-                <a href="#">Support</a>
-                <a href="#">Wiki</a>
-                <a href="#">About</a>
-            </div>
-            <div class="social-icons">
-                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            </div>
+            <span>Support</span><span>Wiki</span><span>About</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </div>
     </footer>
 
     <script>
-        const hero = document.getElementById('hero');
-        const spotlight = document.getElementById('spotlight');
-
+        const hero = document.getElementById('hero'), spotlight = document.getElementById('spotlight');
         hero.addEventListener('mousemove', e => {
             const rect = hero.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            spotlight.style.setProperty('--x', `${x}%`);
-            spotlight.style.setProperty('--y', `${y}%`);
+            spotlight.style.setProperty('--x', `${((e.clientX - rect.left) / rect.width) * 100}%`);
+            spotlight.style.setProperty('--y', `${((e.clientY - rect.top) / rect.height) * 100}%`);
         });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+        }
     </script>
 </body>
 </html>
