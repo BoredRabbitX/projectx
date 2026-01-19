@@ -6,19 +6,44 @@
     <title>Polkadot</title>
     <link rel="icon" type="image/png" href="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true">
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-
     <style>
+        /* --- FONT DEFINITIONS --- */
+        @font-face {
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 300 700;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmsans/v14/rP2Fp2ywxg089UriCZa4Hz-A.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: 'DM Sans Fallback';
+            src: local("Arial");
+            ascent-override:94.90%;descent-override:29.66%;line-gap-override:0.00%;size-adjust:104.53%;
+        }
+
+        @font-face {
+            font-family: "DM Serif Display";
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmserifdisplay/v15/-F6ufjN0uS2ttSbcK3lFE9v6v6icCIJ7.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: "DM Serif Display Fallback";
+            src: local("Times New Roman");
+            ascent-override:94.37%;descent-override:30.51%;line-gap-override:0.00%;size-adjust:109.78%;
+        }
+
         :root {
             --grey-950: #0F0F0F;
             --grey-900: #1C1917;
             --grey-800: #292524;
             --grey-400: #A8A29E;
             --cool-gray: #E5E7EB;
-            --dm-sans: 'DM Sans', sans-serif;
-            --dm-serif: 'DM Serif Display', serif;
+            --font-sans: "DM Sans", "DM Sans Fallback", sans-serif;
+            --font-serif: "DM Serif Display", "DM Serif Display Fallback", serif;
         }
 
         * { box-sizing: border-box; }
@@ -28,7 +53,7 @@
             padding: 0;
             background-color: var(--grey-950);
             color: var(--cool-gray);
-            font-family: var(--dm-sans);
+            font-family: var(--font-sans);
             scroll-behavior: smooth;
             font-size: 14px;
             overflow-x: hidden;
@@ -54,7 +79,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-family: var(--dm-serif);
+            font-family: var(--font-serif);
             font-weight: 400;
             font-size: 20px;
             color: #FFF;
@@ -63,13 +88,14 @@
         .nav-logo-img { width: 24px; height: 24px; }
 
         .nav-links { display: flex; align-items: center; gap: 32px; }
-        .nav-links a { color: var(--cool-gray); text-decoration: none; font-size: 13px; opacity: 0.8; }
+        .nav-links a { color: var(--cool-gray); text-decoration: none; font-size: 13px; opacity: 0.8; transition: opacity 0.2s; }
+        .nav-links a:hover { opacity: 1; }
         .btn-sign { background: var(--grey-800); padding: 8px 16px; border-radius: 8px; font-weight: 600; color: var(--cool-gray); text-decoration: none; }
 
-        /* --- HERO REAL FULL WIDTH (No Margins) --- */
+        /* --- HERO REAL FULL WIDTH --- */
         .hero {
             position: relative;
-            width: 100%;
+            width: 100vw;
             height: 80vh;
             display: flex;
             flex-direction: column;
@@ -94,7 +120,7 @@
         .noise-svg { width: 100%; height: 100%; }
 
         .title {
-            font-family: var(--dm-serif);
+            font-family: var(--font-serif);
             font-size: clamp(80px, 10vw, 120px);
             font-weight: 400;
             margin: 0;
@@ -135,7 +161,7 @@
             100% { opacity: 0; }
         }
 
-        /* --- CONTENT SECTIONS (RIPRISTINATI TUTTI) --- */
+        /* --- CONTENT SECTIONS --- */
         .sub-hero-section {
             background-color: #1a1715;
             padding: 100px 40px;
@@ -151,7 +177,7 @@
             margin: 0 auto;
         }
 
-        .feature-card h2 { font-family: var(--dm-serif); font-size: 28px; margin-bottom: 20px; color: #FFF; }
+        .feature-card h2 { font-family: var(--font-serif); font-size: 28px; margin-bottom: 20px; color: #FFF; }
         .feature-card p { color: var(--grey-400); font-size: 15px; line-height: 1.6; }
 
         .main-content {
@@ -162,7 +188,7 @@
         }
 
         .center-heading { text-align: center; max-width: 900px; margin: 0 auto 100px; }
-        .center-heading h1 { font-family: var(--dm-serif); font-size: clamp(32px, 8vw, 48px); color: #FFF; margin-bottom: 30px; }
+        .center-heading h1 { font-family: var(--font-serif); font-size: clamp(32px, 8vw, 48px); color: #FFF; margin-bottom: 30px; }
         .center-heading p { font-size: 20px; color: var(--grey-400); line-height: 1.6; }
 
         .problem-way-grid {
@@ -172,21 +198,23 @@
             max-width: 1100px;
             margin: 0 auto 120px;
         }
-        .problem-way-grid h2 { font-family: var(--dm-serif); font-size: 26px; color: #FFF; margin-bottom: 20px; }
+        .problem-way-grid h2 { font-family: var(--font-serif); font-size: 26px; color: #FFF; margin-bottom: 20px; }
         .problem-way-grid p { color: var(--grey-400); font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
 
         .manifesto-box { text-align: center; max-width: 850px; margin: 0 auto; }
         .manifesto-box p { font-size: 18px; color: var(--cool-gray); line-height: 1.8; margin-bottom: 40px; }
-        .manifesto-box h2 { font-family: var(--dm-serif); font-size: 30px; color: #FFF; }
+        .manifesto-box h2 { font-family: var(--font-serif); font-size: 30px; color: #FFF; }
 
         .stay-updated { text-align: center; padding: 100px 40px; }
         .x-btn {
             background-color: var(--cool-gray); color: var(--grey-950);
             padding: 14px 28px; border-radius: 12px; text-decoration: none;
             font-weight: 700; display: inline-flex; align-items: center; gap: 10px;
+            transition: transform 0.2s;
         }
+        .x-btn:hover { transform: scale(1.05); }
 
-        /* --- FOOTER IDENTICO --- */
+        /* --- FOOTER --- */
         footer {
             background-color: #12100e;
             padding: 40px 60px;
@@ -224,8 +252,7 @@
                     </feTurbulence>
                     <feColorMatrix type="saturate" values="0"/>
                 </filter>
-               <!-- <rect width="100%" height="100%" filter="url(#noiseFilter)"></rect> -->
-                <rect filter="url(#noiseFilter)"></rect>
+                <rect width="100%" height="100%" filter="url(#noiseFilter)"></rect>
             </svg>
         </div>
         <h1 class="title">Polkadot</h1>
@@ -280,7 +307,7 @@
     </div>
 
     <section class="stay-updated">
-        <h3 style="font-family: var(--dm-serif); font-size: 34px; color: #FFF; margin-bottom: 20px;">Stay Updated</h3>
+        <h3 style="font-family: var(--font-serif); font-size: 34px; color: #FFF; margin-bottom: 20px;">Stay Updated</h3>
         <a href="#" class="x-btn">Follow on X</a>
     </section>
 
@@ -302,6 +329,7 @@
         hero.addEventListener('mousemove', (e) => {
             const x = (e.clientX / window.innerWidth);
             const y = (e.clientY / window.innerHeight);
+            // Effetto noise dinamico on-mouse-over
             turb.setAttribute('baseFrequency', `${0.65 + (x * 0.15)} ${0.65 + (y * 0.15)}`);
             noise.style.opacity = "0.35";
             noise.style.transform = `scale(1.1) translate(${x * 20}px, ${y * 20}px)`;
