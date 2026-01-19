@@ -49,13 +49,12 @@
             display: flex; align-items: center; gap: 10px; 
             font-family: var(--font-serif); font-size: 18px; 
             color: #FFF; text-decoration: none;
-            white-space: nowrap; /* Impedisce le 2 righe */
+            white-space: nowrap;
         }
         .nav-links { display: flex; gap: 28px; align-items: center; }
         .nav-links a { font-size: 11px; text-decoration: none; color: var(--cool-gray); opacity: 0.6; }
 
-        /* Menu Mobile Toggle */
-        .menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 4px; z-index: 1001; }
+        .menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 4px; z-index: 1001; padding: 10px; }
         .menu-toggle span { width: 20px; height: 2px; background: #FFF; transition: 0.3s; }
 
         /* --- HERO --- */
@@ -70,6 +69,7 @@
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 1; pointer-events: none;
+            display: block;
         }
 
         .hero-content { 
@@ -141,7 +141,6 @@
             font-size: 11px; color: var(--grey-400);
         }
 
-        /* --- MODAL --- */
         .modal {
             display: none;
             position: fixed; z-index: 2000; left: 0; top: 0;
@@ -160,13 +159,10 @@
         .modal-content h3 { font-family: var(--font-serif); color: #FFF; margin-bottom: 20px; font-size: 20px; }
         .close-modal { position: absolute; top: 15px; right: 20px; color: #FFF; font-size: 24px; cursor: pointer; }
 
-        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
             nav { padding: 0 20px; }
             .nav-logo { font-size: 16px; }
-            
             .menu-toggle { display: flex; }
-
             .nav-links {
                 position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
                 background: var(--grey-950); flex-direction: column; justify-content: center;
@@ -174,7 +170,6 @@
             }
             .nav-links.active { right: 0; }
             .nav-links a { font-size: 18px; opacity: 1; }
-
             .columns-grid { gap: 40px; }
             footer { flex-direction: column; gap: 20px; text-align: center; }
         }
@@ -284,20 +279,16 @@
         // MOBILE MENU LOGIC
         const menuToggle = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
-
-        menuToggle.onclick = () => {
-            navList.classList.toggle('active');
-            // Animazione icona opzionale
-        };
-
-        // Chiudi menu quando si clicca un link
+        menuToggle.onclick = () => navList.classList.toggle('active');
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.onclick = () => navList.classList.remove('active');
         });
 
-        // NOISE CANVAS
+        // NOISE CANVAS - FIX MOBILE
         const canvas = document.getElementById('noiseCanvas');
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+        renderer.setPixelRatio(window.devicePixelRatio); // Fondamentale per mobile
+        
         const scene = new THREE.Scene();
         const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
         const material = new THREE.ShaderMaterial({
@@ -325,15 +316,23 @@
             `
         });
         scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+
         function resize() {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            renderer.setSize(w, h);
+            material.uniforms.u_resolution.value.set(w * window.devicePixelRatio, h * window.devicePixelRatio);
         }
         window.addEventListener('resize', resize);
-        resize();
-        window.addEventListener('mousemove', (e) => {
-            material.uniforms.u_mouse.value.set(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
-        });
+        resize(); // Inizializzazione corretta
+
+        // Mouse/Touch per mobile
+        const updateMouse = (x, y) => {
+            material.uniforms.u_mouse.value.set(x / window.innerWidth, y / window.innerHeight);
+        };
+        window.addEventListener('mousemove', (e) => updateMouse(e.clientX, e.clientY));
+        window.addEventListener('touchmove', (e) => updateMouse(e.touches[0].clientX, e.touches[0].clientY));
+
         function animate(time) {
             material.uniforms.u_time.value = time * 0.001;
             renderer.render(scene, camera);
@@ -353,23 +352,18 @@
         // FADE OBSERVER
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
 
-        // MODAL LOGIC
+        // MODAL
         const modal = document.getElementById("infoModal");
         const btn = document.getElementById("infoBtn");
         const span = document.getElementsByClassName("close-modal")[0];
-
-        btn.onclick = function() { modal.style.display = "block"; }
-        span.onclick = function() { modal.style.display = "none"; }
-        window.onclick = function(event) {
-            if (event.target == modal) { modal.style.display = "none"; }
-        }
+        btn.onclick = () => modal.style.display = "block";
+        span.onclick = () => modal.style.display = "none";
+        window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
     </script>
 </body>
 </html>
