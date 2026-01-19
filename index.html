@@ -3,53 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polkadot</title>
+    <title>Polkadot | Software for Sovereignty</title>
     <style>
-        /* RESET E BASE */
+        :root {
+            --bg: #000;
+            --text: #fff;
+            --text-dim: #a1a1a1;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
-            width: 100%;
-            background-color: #000;
+            background-color: var(--bg);
+            color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: #fff;
-            overflow-x: hidden;
+            line-height: 1.5;
         }
 
-        /* --- NOISE IDENTICO ALL'IMMAGINE (FISSO SU TUTTA LA PAGINA) --- */
-        .noise-overlay {
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.18;
-        }
-        .noise-svg { width: 100%; height: 100%; }
-
-        /* --- BARRA IN ALTO --- */
-        header {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-sizing: border-box;
-            z-index: 100;
-        }
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        /* --- HERO ZONE (SABBIA E FADE) --- */
+        /* --- HERO ZONE CON NOISE LIMITATO --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -58,31 +29,48 @@
             align-items: center;
             text-align: center;
             position: relative;
+            overflow: hidden; /* Fondamentale per contenere il noise */
         }
+
+        /* Il noise ora è dentro la hero, non più fixed su tutto il sito */
+        .noise-overlay {
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.18;
+        }
+        .noise-svg { width: 100%; height: 100%; }
+
         .title {
             font-family: "Georgia", serif;
-            font-size: 110px;
+            font-size: clamp(60px, 10vw, 110px);
             font-weight: 700;
             margin: 0;
             letter-spacing: -3px;
+            position: relative;
+            z-index: 2;
         }
+
         .subtitle-container {
             height: 30px;
             margin-top: 15px;
             position: relative;
             width: 100%;
+            z-index: 2;
         }
+
         .subtitle {
-            font-size: 24px;
+            font-size: clamp(18px, 2vw, 24px);
             font-weight: 300;
             opacity: 0;
             position: absolute;
-            width: 100%;
-            left: 0;
-            top: 0;
-            color: #ccc;
+            width: 100%; left: 0;
+            color: var(--text-dim);
             animation: fadeTransition 16s infinite;
         }
+
         .subtitle:nth-child(1) { animation-delay: 0s; }
         .subtitle:nth-child(2) { animation-delay: 4s; }
         .subtitle:nth-child(3) { animation-delay: 8s; }
@@ -96,61 +84,109 @@
             100% { opacity: 0; }
         }
 
-        /* --- CONTENUTI RIPRISTINATI --- */
-        .main-content {
-            padding: 100px 50px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin-top: 50px;
-        }
-        .card {
-            border-top: 1px solid #333;
-            padding-top: 20px;
-        }
-        .card h3 { font-size: 24px; }
-        .card p { color: #888; line-height: 1.6; }
-
-        /* --- FOOTER --- */
-        footer {
-            padding: 80px 50px;
-            border-top: 1px solid #222;
+        /* --- SEZIONI SENZA NOISE --- */
+        .values-section {
             display: flex;
             justify-content: space-between;
-            color: #555;
-            font-size: 14px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 40px;
+            gap: 40px;
+            background: var(--bg); /* Nero pulito */
         }
+
+        .value-card h2 {
+            font-family: "Georgia", serif;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: var(--text-dim);
+            font-size: 16px;
+        }
+
+        .age-section {
+            text-align: center;
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 0 40px;
+        }
+
+        .age-section h1 {
+            font-family: "Georgia", serif;
+            font-size: clamp(32px, 5vw, 56px);
+            margin-bottom: 30px;
+        }
+
+        .age-section p {
+            font-size: 20px;
+            color: var(--text-dim);
+        }
+
+        .dual-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1100px;
+            margin: 80px auto;
+            gap: 60px;
+            padding: 0 40px;
+        }
+
+        .dual-section h2 {
+            font-family: "Georgia", serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .dual-section p {
+            color: var(--text-dim);
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .final-cta {
+            text-align: center;
+            max-width: 800px;
+            margin: 100px auto 150px auto;
+            padding: 0 40px;
+        }
+
+        .final-cta h3 {
+            font-family: "Georgia", serif;
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .button-x {
+            background: #fff;
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="noise-overlay">
-        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="noise-svg">
-            <filter id="noiseFilter">
-                <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch">
-                    <animate attributeName="seed" from="0" to="100" dur="1s" repeatCount="indefinite" />
-                </feTurbulence>
-                <feColorMatrix type="saturate" values="0"/>
-            </filter>
-            <rect width="100%" height="100%" filter="url(#noiseFilter)"></rect>
-        </svg>
-    </div>
-
-    <header>
-        <div class="logo"><strong>Polkadot</strong></div>
-        <div class="nav-links">
-            <a href="#">Network</a>
-            <a href="#">Community</a>
-            <a href="#">Ecosystem</a>
-            <a href="#">Blog</a>
-        </div>
-    </header>
-
     <section class="hero">
+        <div class="noise-overlay">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="noise-svg">
+                <filter id="noiseFilter">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch">
+                        <animate attributeName="seed" from="0" to="100" dur="1s" repeatCount="indefinite" />
+                    </feTurbulence>
+                    <feColorMatrix type="saturate" values="0"/>
+                </filter>
+                <rect width="100%" height="100%" filter="url(#noiseFilter)"></rect>
+            </svg>
+        </div>
+
         <h1 class="title">Polkadot</h1>
         <div class="subtitle-container">
             <div class="subtitle">Crypto beyond currency.</div>
@@ -160,23 +196,44 @@
         </div>
     </section>
 
-    <main class="main-content">
-        <div class="grid">
-            <div class="card">
-                <h3>Scalability</h3>
-                <p>Polkadot allows multiple transactions to be processed in parallel, increasing the overall network capacity.</p>
-            </div>
-            <div class="card">
-                <h3>Governance</h3>
-                <p>A sophisticated voting system where everyone has a voice in the network's future development.</p>
-            </div>
+    <section class="values-section">
+        <div class="value-card">
+            <h2>Honest by design</h2>
+            <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
         </div>
-    </main>
+        <div class="value-card">
+            <h2>You own it</h2>
+            <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
+        </div>
+        <div class="value-card">
+            <h2>Built for humans</h2>
+            <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
+        </div>
+    </section>
 
-    <footer>
-        <div>© 2026 Polkadot Network</div>
-        <div>GitHub · Twitter · Discord</div>
-    </footer>
+    <section class="age-section">
+        <h1>A new age of internet-enabled society</h1>
+        <p>The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
+    </section>
+
+    <section class="dual-section">
+        <div class="column">
+            <h2>The Problem</h2>
+            <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships.</p>
+            <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
+        </div>
+        <div class="column">
+            <h2>A Different Way</h2>
+            <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
+            <p>We're building the social layer for this different kind of internet. Products that feel familiar, built on different foundations. That's Polkadot.</p>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <h3>They took the internet from us. We're taking it back.</h3>
+        <p style="color: var(--text-dim); margin-bottom: 30px;">Stay Updated. We're just getting started.</p>
+        <a href="#" class="button-x">Follow on X</a>
+    </section>
 
 </body>
 </html>
