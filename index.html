@@ -20,9 +20,9 @@
             --navbar-bg: var(--grey-950);
             --section-alt: var(--grey-950);
             
-            /* Noise Dark Mode */
-            --noise-opacity: 0.45;
-            --noise-blend: screen;
+            /* NUOVO NOISE DARK */
+            --noise-opacity: 0.5;
+            --noise-bg: #1a1a1a; /* Grigio scuro di fondo per il noise */
             --mouse-shadow: rgba(0, 0, 0, 0.98);
         }
 
@@ -32,10 +32,8 @@
             --navbar-bg: #FFFFFF;
             --section-alt: #F5F5F4;
             --grey-500: #57534E;
-            
-            /* Noise Light Mode (Invertito) */
-            --noise-opacity: 0.25;
-            --noise-blend: multiply;
+            --noise-opacity: 0.2;
+            --noise-bg: #e5e5e5;
             --mouse-shadow: rgba(250, 250, 249, 0.95);
         }
 
@@ -75,7 +73,7 @@
         .btn-toggle { background: #1c1917; border: 1px solid #292524; color: #fff; padding: 6px; border-radius: 6px; cursor: pointer; display: flex; }
         .btn-sign { background: #1c1917; border: 1px solid #292524; color: #fff; padding: 6px 14px; border-radius: 6px; font-size: 13px; cursor: pointer; }
 
-        /* HERO - SABBIOLINA PROFESSIONALE */
+        /* HERO - MODIFICATO SOLO NOISE E SPOTLIGHT */
         .hero {
             position: relative;
             height: 100vh;
@@ -83,7 +81,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background-color: var(--pure-black);
+            background-color: var(--noise-bg); /* Sfondo grigio scuro */
         }
 
         .noise-layer {
@@ -91,23 +89,27 @@
             inset: -200%;
             z-index: 1;
             opacity: var(--noise-opacity);
-            mix-blend-mode: var(--noise-blend);
+            mix-blend-mode: screen; /* Fa risaltare i pallini bianchi */
             pointer-events: none;
-            /* Grana microscopica con baseFrequency 9.0 */
+            /* Sabbiolina bianca finissima */
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='9.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            animation: grain-micro 0.1s steps(1) infinite;
+            animation: grain-slow 0.8s steps(1) infinite; /* Movimento piano piano */
         }
 
-        @keyframes grain-micro {
+        @keyframes grain-slow {
             0%, 100% { transform: translate(0,0); }
-            50% { transform: translate(-0.2%, -0.2%); }
+            50% { transform: translate(-0.1%, -0.1%); }
         }
 
-        /* SPOTLIGHT: LASCIA UN'OMBRA NERA */
+        /* SPOTLIGHT INVERTITO (OMBRA NERA) */
         .spotlight {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), var(--mouse-shadow) 0%, transparent 28%);
+            background: radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%), 
+                var(--mouse-shadow) 0%, 
+                transparent 30%
+            );
             z-index: 2;
             pointer-events: none;
         }
@@ -116,7 +118,7 @@
         .hero h1 { font-family: 'DM Serif Display', serif; font-size: 110px; margin: 0; line-height: 1; }
         .hero p { color: var(--grey-500); font-size: 24px; margin-top: 15px; }
 
-        /* SEZIONI TESTUALI - CLONE FEDELE */
+        /* SEZIONI TESTUALI */
         .section-near { background-color: var(--section-alt); padding: 120px 48px; }
         .section-pure { background-color: var(--bg-color); padding: 140px 48px; text-align: center; }
 
