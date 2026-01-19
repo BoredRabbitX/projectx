@@ -28,11 +28,10 @@
             color: var(--cool-gray);
             font-family: var(--dm-sans);
             scroll-behavior: smooth;
-            font-size: 14px;
             overflow-x: hidden;
         }
 
-        /* --- NAV (SOLIDA E FISSA) --- */
+        /* --- NAV --- */
         nav {
             position: fixed;
             top: 0;
@@ -55,6 +54,7 @@
             font-family: var(--dm-serif);
             font-weight: 400;
             font-size: 20px;
+            color: #FFF;
         }
 
         .nav-logo-img { width: 24px; height: 24px; }
@@ -130,7 +130,7 @@
             100% { opacity: 0; }
         }
 
-        /* --- SEZIONE SOTTO HERO (#1a1715) --- */
+        /* --- CONTENT SECTION (#1a1715) --- */
         .sub-hero-section {
             background-color: #1a1715;
             padding: 100px 40px;
@@ -175,7 +175,27 @@
         .manifesto-box p { font-size: 18px; color: var(--cool-gray); line-height: 1.8; margin-bottom: 40px; }
         .manifesto-box h2 { font-family: var(--dm-serif); font-size: 30px; color: #FFF; }
 
-        /* --- FOOTER --- */
+        /* --- STAY UPDATED AREA --- */
+        .stay-updated {
+            text-align: center;
+            padding: 100px 40px;
+            background-color: var(--grey-950);
+        }
+        .stay-updated h3 { font-family: var(--dm-serif); font-size: 32px; color: #FFF; margin-bottom: 10px; }
+        .stay-updated p { color: var(--grey-400); margin-bottom: 40px; }
+        .x-btn-large {
+            background-color: var(--cool-gray);
+            color: var(--grey-950);
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- FOOTER IDENTICO --- */
         footer {
             background-color: #12100e;
             padding: 40px 60px;
@@ -186,9 +206,10 @@
             font-size: 13px;
             color: var(--grey-400);
         }
+
         .footer-right { display: flex; align-items: center; gap: 30px; }
         .footer-right a { color: var(--grey-400); text-decoration: none; }
-        .social-icons { display: flex; gap: 20px; }
+        .social-icons { display: flex; gap: 20px; align-items: center; }
         .social-icons svg { fill: var(--grey-400); width: 18px; height: 18px; }
 
     </style>
@@ -252,27 +273,40 @@
         <section class="problem-way-grid">
             <div class="col">
                 <h2>The Problem</h2>
-                <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships.</p>
+                <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
+                <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
             </div>
             <div class="col">
                 <h2>A Different Way</h2>
-                <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
+                <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
                 <p>We're building the social layer for this different kind of internet. Products that feel familiar, built on different foundations. That's Polkadot.</p>
             </div>
         </section>
 
         <div class="manifesto-box">
-            <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable. What they missed was that values need enforcement to survive.</p>
+            <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable. What they missed was that values need enforcement to survive. On Polkadot, transparency, user control, and unchangeable rules are properties of the platform itself.</p>
             <h2>They took the internet from us. We're taking it back.</h2>
         </div>
     </div>
 
+    <section class="stay-updated">
+        <h3>Stay Updated</h3>
+        <p>We're just getting started.</p>
+        <a href="#" class="x-btn-large">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Follow on X
+        </a>
+    </section>
+
     <footer>
-        <div>© 2025</div>
+        <div class="footer-left">© 2025</div>
         <div class="footer-right">
-            <a href="#">Support</a><a href="#">Wiki</a><a href="#">About</a>
+            <a href="#">Support</a>
+            <a href="#">Wiki</a>
+            <a href="#">About</a>
             <div class="social-icons">
                 <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             </div>
         </div>
     </footer>
@@ -287,7 +321,7 @@
             const y = (e.clientY / window.innerHeight).toFixed(2);
             turb.setAttribute('baseFrequency', `${0.65 + (x * 0.1)} ${0.65 + (y * 0.1)}`);
             noise.style.opacity = "0.35";
-            noise.style.transform = `scale(1.1) translate(${x * 10}px, ${y * 10}px)`;
+            noise.style.transform = `scale(1.1) translate(${x * 15}px, ${y * 15}px)`;
         });
 
         hero.addEventListener('mouseleave', () => {
