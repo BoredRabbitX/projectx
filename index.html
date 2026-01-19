@@ -1,139 +1,127 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merchant Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Polkadot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --topbar-bg: #111827; /* Nero/Grigio scuro profondo, senza noise */
-            --body-bg: #f9fafb;
-            --accent-blue: #3b82f6;
-            --text-main: #111827;
-            --text-muted: #6b7280;
+            --accent: #E6007A;
+            --bg-black: #000000;
+            --text-white: #ffffff;
+            --grey-900: #111111;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            background-color: var(--body-bg);
-            color: var(--text-main);
+            padding: 0;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: 'Inter', -apple-system, sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* BARRA IN ALTO - CLONE IDENTICO */
-        .header {
-            background-color: var(--topbar-bg);
-            height: 64px;
+        /* NAVBAR CLONATA DALL'HTML ORIGINALE */
+        .navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 24px;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            height: 80px;
+            padding: 0 40px;
+            background-color: var(--bg-black); /* Sfondo pieno come richiesto */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .header-left {
+        .navbar-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        /* Logo Identico (Square con icona) */
-        .logo-box {
+        /* Logo SVG Polkadot */
+        .logo-svg {
             width: 32px;
             height: 32px;
-            background-color: var(--accent-blue);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-box svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
+            fill: var(--accent);
         }
 
         .brand-text {
-            color: #ffffff;
-            font-size: 1.25rem;
-            font-weight: 600;
-            letter-spacing: -0.025em;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            text-transform: lowercase;
+            color: var(--text-white);
         }
 
-        .header-right {
-            color: #9ca3af;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        /* CONTENUTO */
-        .main-content {
-            max-width: 1000px;
-            margin: 40px auto;
+        /* CONTENUTO DASHBOARD */
+        .main-container {
+            max-width: 1200px;
+            margin: 60px auto;
             padding: 0 20px;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .review-card {
+            background-color: var(--grey-900);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 32px;
             margin-bottom: 24px;
         }
 
-        .card {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 16px;
+        .username {
+            font-family: 'Unbounded', sans-serif;
+            color: var(--accent);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
         }
 
-        .reviewer-name {
-            font-weight: 600;
-            font-size: 1rem;
-            margin: 0 0 4px 0;
+        .comment {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            color: #e5e5e5;
         }
 
-        .review-text {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        /* SEZIONE RISPOSTA */
+        /* INTERFACCIA RISPOSTA */
         .reply-box {
-            border-top: 1px solid #f3f4f6;
-            padding-top: 20px;
-        }
-
-        .reply-label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 20px;
         }
 
         textarea {
             width: 100%;
-            border: 1px solid #d1d5db;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 15px;
+            font-family: 'Inter', sans-serif;
             border-radius: 6px;
-            padding: 12px;
-            font-family: inherit;
-            font-size: 0.95rem;
+            resize: none;
             box-sizing: border-box;
         }
 
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
         .btn-submit {
-            background-color: var(--topbar-bg);
+            background-color: var(--accent);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-top: 12px;
+            padding: 12px 28px;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 4px;
+            margin-top: 16px;
             cursor: pointer;
-            transition: opacity 0.2s;
+            text-transform: uppercase;
         }
 
         .btn-submit:hover {
@@ -143,41 +131,33 @@
 </head>
 <body>
 
-    <header class="header">
-        <div class="header-left">
-            <div class="logo-box">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-            </div>
-            <span class="brand-text">Merchant</span>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="32"/>
+                <circle cx="32" cy="32" r="12" fill="white"/>
+            </svg>
+            <span class="brand-text">polkadot</span>
         </div>
-        <div class="header-right">
-            Gestione Recensioni
-        </div>
-    </header>
+    </nav>
 
-    <main class="main-content">
-        <h1 class="section-title">Recensioni</h1>
-        
-        <div class="card">
-            <h3 class="reviewer-name">Mario Rossi</h3>
-            <p class="review-text">"Servizio eccellente e spedizione rapida. Consigliato!"</p>
+    <main class="main-container">
+        <div class="review-card">
+            <div class="username">Network_User_01</div>
+            <p class="comment">"The parachain auction system is incredibly efficient, but I'd like to see more tools for small merchants."</p>
             
             <div class="reply-box">
-                <span class="reply-label">Rispondi alla recensione</span>
-                <textarea rows="3" placeholder="Scrivi qui la tua risposta ufficiale..."></textarea>
+                <textarea rows="3" placeholder="Scrivi la tua risposta ufficiale..."></textarea>
                 <button class="btn-submit">Invia Risposta</button>
             </div>
         </div>
 
-        <div class="card">
-            <h3 class="reviewer-name">Luca Bianchi</h3>
-            <p class="review-text">"Il prodotto è arrivato integro, ma con un giorno di ritardo."</p>
+        <div class="review-card">
+            <div class="username">Web3_Dev_Italy</div>
+            <p class="comment">"Great UI, very consistent with the Polkadot design system. Good job."</p>
             
             <div class="reply-box">
-                <span class="reply-label">Rispondi alla recensione</span>
-                <textarea rows="3" placeholder="Scrivi qui la tua risposta ufficiale..."></textarea>
+                <textarea rows="3" placeholder="Scrivi la tua risposta ufficiale..."></textarea>
                 <button class="btn-submit">Invia Risposta</button>
             </div>
         </div>
