@@ -1,187 +1,245 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polkadot - A New Age</title>
+    <title>Polkadot</title>
     <style>
-        /* --- STILI ORIGINALI INVARIATI --- */
         body {
-            background-color: #0f0f0f;
+            background-color: #0a0a0a;
             color: #ffffff;
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        header {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-bottom: 100px;
-        }
-
-        h3 { font-family: serif; font-size: 1.5rem; margin-bottom: 10px; }
-        p { color: #a0a0a0; font-size: 0.9rem; }
-
-        .hero {
+            max-width: 900px;
+            padding: 80px 20px;
             text-align: center;
-            margin-bottom: 100px;
-            position: relative;
-            height: 150px; /* Altezza fissa per la sovrapposizione */
         }
 
-        .hero h1 {
+        /* --- EFFETTO FADE --- */
+        .fade-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER TOP --- */
+        .top-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 120px;
+        }
+
+        .top-features h2 {
             font-family: serif;
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .top-features p {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* --- HERO (TESTI SOVRAPPOSTI) --- */
+        .hero-container {
+            position: relative;
+            height: 100px;
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-container h1 {
             position: absolute;
-            width: 100%;
-            left: 0;
-            top: 0;
+            font-family: serif;
+            font-size: 3.2rem;
+            margin: 0;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            width: 100%;
         }
 
-        /* Classe per mostrare il testo attivo nell'hero */
-        .hero h1.active {
+        .hero-container h1.active {
             opacity: 1;
         }
 
-        .main-content {
+        .hero-sub {
+            color: #888;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 100px auto;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
+            text-align: left;
             margin-bottom: 80px;
         }
 
+        .columns h3 {
+            font-family: serif;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+
+        .columns p {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- CENTRAL QUOTE --- */
+        .central-statement {
+            max-width: 700px;
+            margin: 100px auto;
+        }
+
+        .central-statement p {
+            font-size: 1.3rem;
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .central-statement h2 {
+            font-family: serif;
+            font-size: 2rem;
+        }
+
+        /* --- CTA --- */
         .cta-section {
-            text-align: center;
-            margin-top: 100px;
+            margin-top: 60px;
         }
 
         .btn-x {
-            background: white;
-            color: black;
-            padding: 12px 24px;
-            border-radius: 50px;
+            background: #fff;
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 10px;
         }
 
-        /* --- AGGIUNTA EFFETTO FADE SULLA PAGINA --- */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         footer {
-            margin-top: 100px;
-            padding: 20px;
-            border-top: 1px solid #333;
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px 20px;
             display: flex;
             justify-content: space-between;
             font-size: 0.8rem;
-            color: #666;
+            color: #444;
+            border-top: 1px solid #1a1a1a;
+            margin-top: 100px;
         }
+
+        footer a { color: #444; text-decoration: none; margin-left: 15px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header class="fade-in">
+    <div class="top-features fade-element">
         <div>
-            <h3>Honest by design</h3>
+            <h2>Honest by design</h2>
             <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
         </div>
         <div>
-            <h3>You own it</h3>
+            <h2>You own it</h2>
             <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
         </div>
         <div>
-            <h3>Built for humans</h3>
+            <h2>Built for humans</h2>
             <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
-        </div>
-    </header>
-
-    <section class="hero fade-in">
-        <h1 class="active">A new age of internet-enabled society</h1>
-        <h1>The way we connect and do business is changing</h1>
-        <h1>Polkadot is the social tooling to make it work</h1>
-    </section>
-
-    <div class="main-content">
-        <div class="fade-in">
-            <h3 style="color: #fff;">The Problem</h3>
-            <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do...</p>
-        </div>
-        <div class="fade-in">
-            <h3 style="color: #fff;">A Different Way</h3>
-            <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold...</p>
         </div>
     </div>
 
-    <section class="cta-section fade-in">
-        <p style="font-size: 1.2rem; color: #fff; max-width: 700px; margin: 0 auto 40px auto;">
-            "They took the internet from us. We're taking it back."
-        </p>
-        <h3>Stay Updated</h3>
-        <p>We're just getting started.</p>
-        <a href="#" class="btn-x">Follow on X</a>
-    </section>
+    <div class="hero-container fade-element">
+        <h1 class="active">A new age of internet-enabled society</h1>
+        <h1>The way we connect, do business, and organize is changing.</h1>
+    </div>
+    
+    <p class="hero-sub fade-element">Polkadot is the social tooling to make it work.</p>
 
-    <footer>
-        <span>© 2025</span>
-        <div style="display: flex; gap: 20px;">
-            <a href="#">Support</a>
-            <a href="#">Wiki</a>
-            <a href="#">About</a>
+    <div class="columns fade-element">
+        <div>
+            <h3>The Problem</h3>
+            <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
+            <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
+            <p>The technology you rely on every day serves someone else's interests first. Their bottom line matters more than your expectations.</p>
         </div>
-    </footer>
+        <div>
+            <h3>A Different Way</h3>
+            <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
+            <p>We're building the social layer for this different kind of internet. How you prove you're real without revealing who you are. How your relationships aren't locked inside one app. How your history follows you when you want it to. Products that feel familiar, built on different foundations. That's Polkadot.</p>
+        </div>
+    </div>
+
+    <div class="central-statement fade-element">
+        <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable. What they missed was that values need enforcement to survive. On Polkadot, transparency, user control, and unchangeable rules are properties of the platform itself.</p>
+        <h2>They took the internet from us. We're taking it back.</h2>
+    </div>
+
+    <div class="cta-section fade-element">
+        <h3 style="font-family: serif; font-size: 1.8rem; margin-bottom: 10px;">Stay Updated</h3>
+        <p style="color: #888; margin-bottom: 30px;">We're just getting started.</p>
+        <a href="#" class="btn-x">𝕏 Follow on X</a>
+    </div>
 </div>
 
+<footer>
+    <div>© 2025</div>
+    <div>
+        <a href="#">Support</a>
+        <a href="#">Wiki</a>
+        <a href="#">About</a>
+        <a href="#">𝕏</a>
+        <a href="#">GitHub</a>
+    </div>
+</footer>
+
 <script>
-    // Gestione Fade-in all'invio dello scroll
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOptions = { threshold: 0.15 };
-
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    // Fade in on scroll
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
         });
-    }, appearOptions);
+    }, { threshold: 0.1 });
 
-    faders.forEach(fader => appearOnScroll.observe(fader));
+    document.querySelectorAll('.fade-element').forEach(el => observer.observe(el));
 
-    // Gestione Testi Hero (Sovrapposizione e Fade)
-    const titles = document.querySelectorAll('.hero h1');
-    let currentIndex = 0;
+    // Hero Text Overlay Transition
+    const titles = document.querySelectorAll('.hero-container h1');
+    let current = 0;
 
-    function rotateHeroText() {
-        titles[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % titles.length;
-        titles[currentIndex].classList.add('active');
-    }
-
-    setInterval(rotateHeroText, 3500); // Cambia testo ogni 3.5 secondi
+    setInterval(() => {
+        titles[current].classList.remove('active');
+        current = (current + 1) % titles.length;
+        titles[current].classList.add('active');
+    }, 4000);
 </script>
 
 </body>
