@@ -3,30 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polkadot | Products for people</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <title>Polkadot | Products for people.</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
-            --grey-950: #0F0F0F;
+            --bg-dark: #0F0F0F;
+            --text-main: #E5E7EB;
+            --text-muted: #78716C;
             --grey-900: #1C1917;
-            --grey-800: #292524;
-            --grey-500: #78716C;
-            --grey-400: #A8A29E;
-            --cool-gray: #E5E7EB;
             --pink-accent: #FF2867;
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: var(--grey-950);
-            color: var(--cool-gray);
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             font-family: 'DM Sans', sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- LAYER DEL RUMORE ANIMATO --- */
+        /* --- LAYER 1: CANVAS NOISE (Sempre in cima ma trasparente) --- */
         #grain-canvas {
             position: fixed;
             top: 0;
@@ -34,205 +32,252 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 2;
-            opacity: 0.08; /* Intensità del noise come da screenshot */
+            z-index: 50;
+            opacity: 0.07; /* Intensità del noise calibrata sulle immagini */
         }
 
-        /* --- HERO CON EFFETTO TORCIA --- */
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: var(--grey-950);
-            cursor: none; /* Nasconde il cursore per l'effetto torcia */
-        }
-
-        /* Ombra nera dinamica che segue il mouse */
-        .spotlight {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            background: radial-gradient(
-                circle 350px at var(--x, 50%) var(--y, 50%), 
-                rgba(255, 255, 255, 0.03) 0%, 
-                rgba(0, 0, 0, 0.95) 100%
-            );
-            pointer-events: none;
-        }
-
-        /* --- CONTENUTI --- */
-        .ui-overlay {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-        }
-
+        /* --- HEADER --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 25px 50px;
-            box-sizing: border-box;
+            align-items: center;
+            padding: 24px 48px;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(15,15,15,0.8), transparent);
+        }
+
+        .logo { font-weight: 700; font-size: 20px; display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; align-items: center; }
+        .nav-links span { opacity: 0.8; cursor: pointer; transition: opacity 0.2s; }
+        .nav-links span:hover { opacity: 1; }
+        
+        .btn-signin {
+            border: 1px solid #333;
+            padding: 6px 16px;
+            border-radius: 4px;
             font-size: 13px;
-            font-weight: 500;
         }
 
-        .hero-h1 {
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        /* Effetto ombra che segue il mouse */
+        .spotlight {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(
+                circle 450px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(40, 40, 40, 0.15) 0%, 
+                rgba(15, 15, 15, 1) 100%
+            );
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .hero h1 {
             font-family: 'DM Serif Display', serif;
-            font-size: 100px;
-            margin: 0;
-            letter-spacing: -1px;
+            font-size: clamp(80px, 12vw, 140px);
+            margin-bottom: 8px;
+            letter-spacing: -2px;
         }
 
-        .hero-sub {
-            font-size: 24px;
-            color: var(--grey-400);
-            margin-top: 15px;
-            font-weight: 300;
+        .hero p {
+            font-size: 28px;
+            color: var(--text-muted);
+            font-weight: 400;
         }
 
-        /* Sezione Griglia (Honest by Design, etc) */
-        .info-grid {
+        /* --- SECTION: THREE COLUMNS --- */
+        .features-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            padding: 100px 15%;
-            background: #121110;
-            border-top: 1px solid var(--grey-900);
-            position: relative;
-            z-index: 10;
+            padding: 100px 10%;
+            background: #141312; /* Leggero stacco dallo sfondo */
+            border-top: 1px solid #1C1917;
+            gap: 60px;
         }
 
-        .info-card h2 {
+        .feature-item h3 {
             font-family: 'DM Serif Display', serif;
             font-size: 28px;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
-        .info-card p {
-            color: var(--grey-500);
-            line-height: 1.6;
+        .feature-item p {
             font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-muted);
         }
 
-        /* Sezione Manifesto */
+        /* --- SECTION: MANIFESTO --- */
         .manifesto {
-            padding: 150px 15%;
+            padding: 140px 10% 80px;
             text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
         }
 
         .manifesto h2 {
             font-family: 'DM Serif Display', serif;
-            font-size: 52px;
-            margin-bottom: 30px;
+            font-size: 56px;
+            max-width: 900px;
+            margin: 0 auto 32px;
+            line-height: 1.1;
         }
 
-        .comparison {
+        .manifesto-sub {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .problem-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 100px;
             text-align: left;
-            margin-top: 80px;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        .btn-follow {
+        .problem-col h4 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+
+        .problem-col p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* --- CTA BOX --- */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        .btn-x {
             background: white;
             color: black;
-            padding: 12px 30px;
-            border-radius: 50px;
+            padding: 14px 28px;
+            border-radius: 100px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            margin-top: 40px;
+            transition: transform 0.2s;
         }
+        .btn-x:hover { transform: scale(1.05); }
 
+        /* --- FOOTER --- */
         footer {
-            padding: 40px 50px;
+            padding: 40px 48px;
             display: flex;
             justify-content: space-between;
             font-size: 12px;
-            color: var(--grey-500);
-            border-top: 1px solid var(--grey-900);
+            color: #555;
+            border-top: 1px solid #1C1917;
         }
+
+        .footer-links { display: flex; gap: 20px; }
+
     </style>
 </head>
 <body>
 
     <canvas id="grain-canvas"></canvas>
 
-    <header class="ui-overlay">
-        <div style="font-weight: 800; font-size: 18px;">● Polkadot</div>
-        <div style="display: flex; gap: 25px;">
+    <header>
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+            Polkadot
+        </div>
+        <div class="nav-links">
             <span>Philosophy</span>
             <span>Tech</span>
             <span>Platform</span>
             <span>Ecosystem</span>
-            <span style="border: 1px solid #444; padding: 4px 12px; border-radius: 4px;">Sign in</span>
+            <div class="btn-signin">Sign in</div>
         </div>
     </header>
 
-    <section class="hero-section" id="hero">
+    <section class="hero" id="hero-area">
         <div class="spotlight"></div>
-        <div class="ui-overlay">
-            <h1 class="hero-h1">Polkadot</h1>
-            <p class="hero-sub">Products for people.</p>
+        <div class="hero-content">
+            <h1>Polkadot</h1>
+            <p>Products for people.</p>
         </div>
     </section>
 
-    <section class="info-grid">
-        <div class="info-card">
-            <h2>Honest by design</h2>
+    <section class="features-row">
+        <div class="feature-item">
+            <h3>Honest by design</h3>
             <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
         </div>
-        <div class="info-card">
-            <h2>You own it</h2>
+        <div class="feature-item">
+            <h3>You own it</h3>
             <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
         </div>
-        <div class="info-card">
-            <h2>Built for humans</h2>
+        <div class="feature-item">
+            <h3>Built for humans</h3>
             <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
         </div>
     </section>
 
     <section class="manifesto">
         <h2>A new age of internet-enabled society</h2>
-        <p style="color: var(--grey-500); font-size: 18px;">The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
+        <p class="manifesto-sub">The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
 
-        <div class="comparison">
-            <div>
-                <h3 style="font-family: 'DM Serif Display'; font-size: 24px;">The Problem</h3>
-                <p style="color: var(--grey-500);">Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships.</p>
+        <div class="problem-grid">
+            <div class="problem-col">
+                <h4>The Problem</h4>
+                <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
+                <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
             </div>
-            <div>
-                <h3 style="font-family: 'DM Serif Display'; font-size: 24px;">A Different Way</h3>
-                <p style="color: var(--grey-500);">What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
+            <div class="problem-col">
+                <h4>A Different Way</h4>
+                <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
+                <p>We're building the social layer for this different kind of internet. How you prove you're real without revealing who you are. How your relationships aren't locked inside one app. Products that feel familiar, built on different foundations. That's Polkadot.</p>
             </div>
-        </div>
-
-        <div style="margin-top: 100px;">
-            <p style="font-style: italic; color: var(--grey-400);">They took the internet from us. We're taking it back.</p>
-            <a href="#" class="btn-follow">𝕏 Follow on X</a>
         </div>
     </section>
 
+    <div class="cta-section">
+        <p class="quote">They took the internet from us. We're taking it back.</p>
+        <a href="#" class="btn-x">𝕏 Follow on X</a>
+    </div>
+
     <footer>
         <div>© 2026 Polkadot</div>
-        <div style="display: flex; gap: 20px;">
+        <div class="footer-links">
             <span>Support</span>
             <span>Wiki</span>
             <span>About</span>
@@ -242,39 +287,41 @@
     </footer>
 
     <script>
-        // --- LOGICA DEL RUMORE (GRAIN) ---
+        // --- ANIMAZIONE GRAIN (RUMORE) ---
         const canvas = document.getElementById('grain-canvas');
         const ctx = canvas.getContext('2d');
+        let width, height;
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', resize);
-        resize();
 
-        function grain() {
-            const pixels = ctx.createImageData(canvas.width, canvas.height);
-            const data = pixels.data;
-            for (let i = 0; i < data.length; i += 4) {
-                const val = Math.random() * 255;
-                data[i] = val;
-                data[i+1] = val;
-                data[i+2] = val;
-                data[i+3] = 255;
+        function generateNoise() {
+            const idata = ctx.createImageData(width, height);
+            const buffer32 = new Uint32Array(idata.data.buffer);
+            for (let i = 0; i < buffer32.length; i++) {
+                if (Math.random() < 0.5) buffer32[i] = 0xffffffff;
             }
-            ctx.putImageData(pixels, 0, 0);
-            requestAnimationFrame(grain);
+            ctx.putImageData(idata, 0, 0);
         }
-        grain();
 
-        // --- LOGICA DEL MOUSE (SPOTLIGHT) ---
-        const hero = document.getElementById('hero');
-        window.addEventListener('mousemove', e => {
-            const x = (e.clientX / window.innerWidth) * 100;
-            const y = (e.clientY / window.innerHeight) * 100;
-            hero.style.setProperty('--x', x + '%');
-            hero.style.setProperty('--y', y + '%');
+        function loop() {
+            generateNoise();
+            requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        loop();
+
+        // --- TRACKING MOUSE PER SPOTLIGHT ---
+        const heroArea = document.getElementById('hero-area');
+        window.addEventListener('mousemove', (e) => {
+            const xPct = (e.clientX / window.innerWidth) * 100;
+            const yPct = (e.clientY / window.innerHeight) * 100;
+            heroArea.style.setProperty('--mouse-x', xPct + '%');
+            heroArea.style.setProperty('--mouse-y', yPct + '%');
         });
     </script>
 </body>
