@@ -14,17 +14,18 @@
             --cool-gray: #E5E7EB;
             --pure-black: #000000;
             --white: #FFFFFF;
+            
             --bg-color: var(--pure-black);
             --text-main: var(--white);
             --navbar-bg: var(--grey-950);
+            --section-alt: var(--grey-950);
         }
 
         [data-theme="light"] {
             --bg-color: #FAFAF9;
             --text-main: #1C1917;
             --navbar-bg: #FFFFFF;
-            --grey-950: #FFFFFF;
-            --pure-black: #FAFAF9;
+            --section-alt: #F5F5F4;
             --grey-500: #57534E;
         }
 
@@ -36,7 +37,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'DM Sans', sans-serif;
-            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* NAVBAR */
@@ -46,27 +47,37 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 40px;
+            padding: 0 48px;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
 
         .nav-left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
         .logo-img { width: 22px; height: 22px; }
-        .brand-name { font-family: 'DM Serif Display', serif; font-size: 20px; }
+        .brand-name { font-family: 'DM Serif Display', serif; font-size: 20px; font-weight: 400; }
 
         .nav-right { display: flex; align-items: center; gap: 24px; }
-        .nav-link { text-decoration: none; color: inherit; font-size: 13px; opacity: 0.8; }
+        .nav-link { text-decoration: none; color: inherit; font-size: 13px; font-weight: 400; opacity: 0.8; }
 
+        .actions { display: flex; align-items: center; gap: 12px; }
         .btn-toggle {
-            background: var(--grey-900);
-            border: 1px solid var(--grey-800);
-            color: var(--text-main);
+            background: #1c1917;
+            border: 1px solid #292524;
+            color: #fff;
             padding: 6px;
             border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+        }
+        .btn-sign {
+            background: #1c1917;
+            border: 1px solid #292524;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
             cursor: pointer;
         }
 
@@ -85,10 +96,10 @@
             position: absolute;
             inset: -200%;
             z-index: 1;
-            opacity: 0.4;
+            opacity: 0.45;
             mix-blend-mode: screen;
             pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.5' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             animation: grain 0.1s steps(1) infinite;
         }
 
@@ -100,33 +111,39 @@
         .spotlight {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(0,0,0,0.95) 30%, var(--pure-black) 60%);
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(0,0,0,0.96) 30%, var(--pure-black) 55%);
             z-index: 2;
             pointer-events: none;
         }
 
         .hero-content { position: relative; z-index: 3; text-align: center; }
-        .hero h1 { font-family: 'DM Serif Display', serif; font-size: 110px; margin: 0; }
-        .hero p { color: var(--grey-500); font-size: 24px; margin-top: 10px; }
+        .hero h1 { font-family: 'DM Serif Display', serif; font-size: 110px; margin: 0; line-height: 1; }
+        .hero p { color: var(--grey-500); font-size: 24px; margin-top: 15px; }
 
         /* SEZIONI TESTUALI */
-        .section-near { background-color: var(--grey-950); padding: 100px 48px; }
-        .section-pure { background-color: var(--pure-black); padding: 120px 48px; text-align: center; }
+        .section-near { background-color: var(--section-alt); padding: 120px 48px; }
+        .section-pure { background-color: var(--pure-black); padding: 140px 48px; text-align: center; }
 
-        .grid-3 { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-        .grid-2 { max-width: 1000px; margin: 60px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; text-align: left; }
+        .content-wrap { max-width: 1200px; margin: 0 auto; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; text-align: left; }
+        
+        h3 { font-family: 'DM Serif Display', serif; font-size: 28px; margin: 0 0 16px 0; }
+        h2 { font-family: 'DM Serif Display', serif; font-size: 52px; margin: 0 0 24px 0; line-height: 1.1; }
+        h4 { font-size: 18px; font-weight: 700; margin: 0 0 20px 0; }
+        p { color: var(--grey-500); line-height: 1.6; font-size: 15px; margin-bottom: 20px; }
 
-        h3, h2 { font-family: 'DM Serif Display', serif; }
-        p { color: var(--grey-500); line-height: 1.6; font-size: 15px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; text-align: left; margin-top: 80px; }
 
-        .manifesto { max-width: 800px; margin: 100px auto; font-size: 18px; line-height: 1.6; }
-        .claim { font-weight: 700; font-size: 22px; margin-top: 30px; color: var(--text-main); }
+        .manifesto { max-width: 850px; margin: 100px auto; font-size: 19px; line-height: 1.6; color: var(--text-main); opacity: 0.9; }
+        .claim { font-weight: 700; font-size: 24px; margin-top: 40px; color: var(--text-main); opacity: 1; }
 
-        .btn-follow { background: var(--text-main); color: var(--bg-color); padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; }
+        .btn-follow { background: #fff; color: #000; padding: 12px 28px; border-radius: 99px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; margin-top: 40px; font-size: 14px; }
 
         /* FOOTER */
-        .footer { background-color: var(--grey-950); padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--grey-500); }
-        .footer-right { display: flex; gap: 24px; align-items: center; }
+        .footer { background-color: var(--grey-950); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--grey-500); border-top: 1px solid rgba(255,255,255,0.03); }
+        .footer-right { display: flex; gap: 32px; align-items: center; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links span { cursor: pointer; }
     </style>
 </head>
 <body>
@@ -137,49 +154,94 @@
             <span class="brand-name">Polkadot</span>
         </a>
         <div class="nav-right">
-            <a href="#" class="nav-link">Philosophy</a><a href="#" class="nav-link">Tech</a><a href="#" class="nav-link">Platform</a><a href="#" class="nav-link">Ecosystem</a>
-            <button class="btn-toggle" onclick="toggleTheme()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+            <a href="#" class="nav-link">Philosophy</a>
+            <a href="#" class="nav-link">Tech</a>
+            <a href="#" class="nav-link">Platform</a>
+            <a href="#" class="nav-link">Ecosystem</a>
+            <div class="actions">
+                <button class="btn-toggle" onclick="toggleTheme()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </button>
+                <button class="btn-sign">Sign in</button>
+            </div>
         </div>
     </nav>
 
     <div class="hero" id="hero">
         <div class="noise-layer"></div>
         <div class="spotlight" id="spotlight"></div>
-        <div class="hero-content"><h1>Polkadot</h1><p>Protocols for prosperity.</p></div>
+        <div class="hero-content">
+            <h1>Polkadot</h1>
+            <p>Protocols for prosperity.</p>
+        </div>
     </div>
 
     <section class="section-near">
-        <div class="grid-3">
-            <div><h3>Honest by design</h3><p>The rules are in the product, not buried in fine print.</p></div>
-            <div><h3>You own it</h3><p>No company can seize or freeze your stuff, snoop on you, or shut you out.</p></div>
-            <div><h3>Built for humans</h3><p>Everything you expect from modern apps. Nothing you have to compromise on.</p></div>
+        <div class="content-wrap">
+            <div class="grid-3">
+                <div>
+                    <h3>Honest by design</h3>
+                    <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
+                </div>
+                <div>
+                    <h3>You own it</h3>
+                    <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
+                </div>
+                <div>
+                    <h3>Built for humans</h3>
+                    <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="section-pure">
-        <h2>A new age of internet-enabled society</h2>
-        <p>The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
-        
-        <div class="grid-2">
-            <div><h4>The Problem</h4><p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything.</p></div>
-            <div><h4>A Different Way</h4><p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p></div>
-        </div>
+        <div class="content-wrap">
+            <h2>A new age of internet-enabled society</h2>
+            <p style="font-size: 18px;">The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
+            
+            <div class="grid-2">
+                <div>
+                    <h4>The Problem</h4>
+                    <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
+                    <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
+                    <p>The technology you rely on every day serves someone else's interests first. Their bottom line matters more than your expectations.</p>
+                </div>
+                <div>
+                    <h4>A Different Way</h4>
+                    <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
+                    <p>We're building the social layer for this different kind of internet. How you prove you're real without revealing who you are. How your relationships aren't locked inside one app. How your history follows you when you want it to. Products that feel familiar, built on different foundations. That's Polkadot.</p>
+                </div>
+            </div>
 
-        <div class="manifesto">
-            <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable.</p>
-            <div class="claim">They took the internet from us. We're taking it back.</div>
-        </div>
+            <div class="manifesto">
+                <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable. What they missed was that values need enforcement to survive. On Polkadot, transparency, user control, and unchangeable rules are properties of the platform itself.</p>
+                <div class="claim">They took the internet from us. We're taking it back.</div>
+            </div>
 
-        <h3>Stay Updated</h3>
-        <p>We're just getting started.</p>
-        <a href="#" class="btn-follow">Follow on X</a>
+            <div style="margin-top: 100px;">
+                <h3>Stay Updated</h3>
+                <p>We're just getting started.</p>
+                <a href="#" class="btn-follow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    Follow on X
+                </a>
+            </div>
+        </div>
     </section>
 
     <footer class="footer">
         <div>© 2025</div>
         <div class="footer-right">
-            <span>Support</span><span>Wiki</span><span>About</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <div class="footer-links">
+                <span>Support</span>
+                <span>Wiki</span>
+                <span>About</span>
+            </div>
+            <div style="display: flex; gap: 16px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
         </div>
     </footer>
 
