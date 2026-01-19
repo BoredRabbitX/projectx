@@ -7,33 +7,22 @@
     <link rel="icon" type="image/png" href="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true">
     
     <style>
-        /* --- FONT DEFINITIONS --- */
+        /* --- FONTS DAL TUO FOGLIO DI STILE --- */
         @font-face {
-            font-family: 'DM Sans';
-            font-style: normal;
-            font-weight: 300 700;
-            font-display: swap;
-            src: url(https://fonts.gstatic.com/s/dmsans/v14/rP2Fp2ywxg089UriCZa4Hz-A.woff2) format('woff2');
+            font-family: DM Sans; font-style: normal; font-weight: 300; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmsans/v14/rP2Fp2ywxg089UriCZa4Hz-A.woff2) format("woff2");
         }
-
         @font-face {
-            font-family: 'DM Sans Fallback';
-            src: local("Arial");
-            ascent-override:94.90%;descent-override:29.66%;line-gap-override:0.00%;size-adjust:104.53%;
+            font-family: DM Sans; font-style: normal; font-weight: 400; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmsans/v14/rP2Fp2ywxg089UriCZa4Hz-A.woff2) format("woff2");
         }
-
         @font-face {
-            font-family: "DM Serif Display";
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url(https://fonts.gstatic.com/s/dmserifdisplay/v15/-F6ufjN0uS2ttSbcK3lFE9v6v6icCIJ7.woff2) format('woff2');
+            font-family: "DM Serif Display"; font-style: normal; font-weight: 400; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmserifdisplay/v15/-F6ufjN0uS2ttSbcK3lFE9v6v6icCIJ7.woff2) format("woff2");
         }
-
         @font-face {
-            font-family: "DM Serif Display Fallback";
-            src: local("Times New Roman");
-            ascent-override:94.37%;descent-override:30.51%;line-gap-override:0.00%;size-adjust:109.78%;
+            font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/jetbrainsmono/v18/t6fq52k5yyz_u8OI_R7X6_e6v6icS0N7.woff2) format("woff2");
         }
 
         :root {
@@ -42,15 +31,16 @@
             --grey-800: #292524;
             --grey-400: #A8A29E;
             --cool-gray: #E5E7EB;
-            --font-sans: "DM Sans", "DM Sans Fallback", sans-serif;
-            --font-serif: "DM Serif Display", "DM Serif Display Fallback", serif;
+            /* Variabili dal tuo CSS */
+            --font-sans: "DM Sans", sans-serif;
+            --font-serif: "DM Serif Display", serif;
+            --font-mono: "JetBrains Mono", monospace;
         }
 
         * { box-sizing: border-box; }
 
         body, html {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--grey-950);
             color: var(--cool-gray);
             font-family: var(--font-sans);
@@ -58,94 +48,61 @@
             font-size: 14px;
             overflow-x: hidden;
             width: 100%;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* --- NAV --- */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 64px;
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 64px;
             background-color: var(--grey-950);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 40px; z-index: 1000;
         }
 
         .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-family: var(--font-serif);
-            font-weight: 400;
-            font-size: 20px;
-            color: #FFF;
+            display: flex; align-items: center; gap: 12px;
+            font-family: var(--font-serif); font-weight: 400; font-size: 20px; color: #FFF;
         }
 
         .nav-logo-img { width: 24px; height: 24px; }
 
         .nav-links { display: flex; align-items: center; gap: 32px; }
-        .nav-links a { color: var(--cool-gray); text-decoration: none; font-size: 13px; opacity: 0.8; transition: opacity 0.2s; }
+        .nav-links a { color: var(--cool-gray); text-decoration: none; font-size: 13px; opacity: 0.8; transition: 0.3s; }
         .nav-links a:hover { opacity: 1; }
-        .btn-sign { background: var(--grey-800); padding: 8px 16px; border-radius: 8px; font-weight: 600; color: var(--cool-gray); text-decoration: none; }
+        .btn-sign { background: var(--grey-800); padding: 8px 16px; border-radius: 8px; font-weight: 600; }
 
-        /* --- HERO REAL FULL WIDTH --- */
+        /* --- HERO FULL WIDTH CON NOISE --- */
         .hero {
             position: relative;
-            width: 100vw;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-color: var(--grey-950);
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
+            width: 100vw; height: 80vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; background-color: var(--grey-950);
+            overflow: hidden; margin: 0; padding: 0;
         }
 
         .noise-overlay {
-            position: absolute;
-            top: -50%; left: -50%;
+            position: absolute; top: -50%; left: -50%;
             width: 200%; height: 200%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.22;
-            transition: opacity 0.3s ease;
+            pointer-events: none; z-index: 1;
+            opacity: 0.22; transition: opacity 0.3s ease;
         }
         .noise-svg { width: 100%; height: 100%; }
 
         .title {
             font-family: var(--font-serif);
             font-size: clamp(80px, 10vw, 120px);
-            font-weight: 400;
-            margin: 0;
-            letter-spacing: -2px;
-            position: relative;
-            z-index: 2;
-            color: #FFFFFF;
+            font-weight: 400; margin: 0; letter-spacing: -2px;
+            position: relative; z-index: 2; color: #FFFFFF;
         }
 
-        .subtitle-container {
-            height: 40px;
-            margin-top: 20px;
-            position: relative;
-            width: 100%;
-            z-index: 2;
-        }
+        .subtitle-container { height: 40px; margin-top: 20px; position: relative; width: 100%; z-index: 2; }
 
         .subtitle {
             font-size: clamp(18px, 2.5vw, 22px);
-            font-weight: 300;
-            opacity: 0;
-            position: absolute;
-            width: 100%; left: 0;
-            color: var(--grey-400);
-            animation: fadeTransition 16s infinite;
+            font-weight: 300; opacity: 0;
+            position: absolute; width: 100%; left: 0;
+            color: var(--grey-400); animation: fadeTransition 16s infinite;
         }
 
         .subtitle:nth-child(1) { animation-delay: 0s; }
@@ -162,72 +119,50 @@
         }
 
         /* --- CONTENT SECTIONS --- */
-        .sub-hero-section {
-            background-color: #1a1715;
-            padding: 100px 40px;
-            position: relative;
-            z-index: 10;
-        }
+        .sub-hero-section { background-color: #1a1715; padding: 100px 40px; position: relative; z-index: 10; }
 
         .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px; max-width: 1200px; margin: 0 auto;
         }
 
         .feature-card h2 { font-family: var(--font-serif); font-size: 28px; margin-bottom: 20px; color: #FFF; }
         .feature-card p { color: var(--grey-400); font-size: 15px; line-height: 1.6; }
 
-        .main-content {
-            background-color: var(--grey-950);
-            padding: 100px 40px;
-            position: relative;
-            z-index: 10;
-        }
+        .main-content { background-color: var(--grey-950); padding: 100px 40px; position: relative; z-index: 10; }
 
         .center-heading { text-align: center; max-width: 900px; margin: 0 auto 100px; }
         .center-heading h1 { font-family: var(--font-serif); font-size: clamp(32px, 8vw, 48px); color: #FFF; margin-bottom: 30px; }
-        .center-heading p { font-size: 20px; color: var(--grey-400); line-height: 1.6; }
 
         .problem-way-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 100px;
-            max-width: 1100px;
-            margin: 0 auto 120px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 100px; max-width: 1100px; margin: 0 auto 120px;
         }
         .problem-way-grid h2 { font-family: var(--font-serif); font-size: 26px; color: #FFF; margin-bottom: 20px; }
         .problem-way-grid p { color: var(--grey-400); font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
 
         .manifesto-box { text-align: center; max-width: 850px; margin: 0 auto; }
         .manifesto-box p { font-size: 18px; color: var(--cool-gray); line-height: 1.8; margin-bottom: 40px; }
-        .manifesto-box h2 { font-family: var(--font-serif); font-size: 30px; color: #FFF; }
 
         .stay-updated { text-align: center; padding: 100px 40px; }
         .x-btn {
             background-color: var(--cool-gray); color: var(--grey-950);
             padding: 14px 28px; border-radius: 12px; text-decoration: none;
-            font-weight: 700; display: inline-flex; align-items: center; gap: 10px;
-            transition: transform 0.2s;
+            font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
         }
-        .x-btn:hover { transform: scale(1.05); }
+        .x-btn:hover { transform: scale(1.05); background: #FFF; }
 
         /* --- FOOTER --- */
         footer {
-            background-color: #12100e;
-            padding: 40px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #1c1917;
-            font-size: 13px;
+            background-color: #12100e; padding: 40px 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid #1c1917; font-size: 13px; font-family: var(--font-mono);
         }
         .footer-right { display: flex; align-items: center; gap: 30px; }
         .footer-right a { color: var(--grey-400); text-decoration: none; }
         .social-icons { display: flex; gap: 20px; }
-        .social-icons svg { fill: var(--grey-400); width: 18px; height: 18px; }
+        .social-icons svg { fill: var(--grey-400); width: 18px; height: 18px; transition: 0.3s; }
+        .social-icons svg:hover { fill: #FFF; }
 
     </style>
 </head>
@@ -329,7 +264,7 @@
         hero.addEventListener('mousemove', (e) => {
             const x = (e.clientX / window.innerWidth);
             const y = (e.clientY / window.innerHeight);
-            // Effetto noise dinamico on-mouse-over
+            // Reazione noise on-mouse-over
             turb.setAttribute('baseFrequency', `${0.65 + (x * 0.15)} ${0.65 + (y * 0.15)}`);
             noise.style.opacity = "0.35";
             noise.style.transform = `scale(1.1) translate(${x * 20}px, ${y * 20}px)`;
