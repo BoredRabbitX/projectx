@@ -1,246 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polkadot</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Polkadot | Software for Sovereignty</title>
+    <link rel="icon" type="image/png" href="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true">
+
     <style>
-        body {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        @font-face {
+            font-family: 'DM Sans';
+            font-style: normal; font-weight: 300 700; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmsans/v14/rP2Fp2ywxg089UriCZa4Hz-A.woff2) format("woff2");
+        }
+        @font-face {
+            font-family: "DM Serif Display";
+            font-style: normal; font-weight: 400; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmserifdisplay/v15/-F6ufjN0uS2ttSbcK3lFE9v6v6icCIJ7.woff2) format("woff2");
         }
 
-        .container {
-            max-width: 900px;
-            padding: 80px 20px;
-            text-align: center;
+        :root {
+            --font-sans: 'DM Sans', sans-serif;
+            --font-serif: 'DM Serif Display', serif;
+            --grey-950: #0F0F0F;
+            --grey-900: #1C1917;
+            --grey-800: #292524;
+            --grey-400: #A8A29E;
+            --cool-gray: #E5E7EB;
         }
 
-        /* --- EFFETTO FADE --- */
-        .fade-element {
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body, html {
+            background-color: var(--grey-950);
+            color: var(--cool-gray);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 56px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 40px; z-index: 1000; background: rgba(15, 15, 15, 0.4);
+            backdrop-filter: blur(12px);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 18px; color: #FFF; text-decoration: none; }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a { font-size: 11px; text-decoration: none; color: var(--cool-gray); opacity: 0.6; }
+        .btn-sign { background: var(--grey-800); padding: 6px 14px; border-radius: 6px; font-weight: 600; font-size: 11px; }
+
+        /* --- HERO --- */
+        .hero {
+            position: relative;
+            width: 100vw; height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: var(--grey-950); overflow: hidden;
+        }
+
+        #noiseCanvas {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+        }
+
+        .hero-content { 
+            position: relative; z-index: 2; text-align: center; pointer-events: none; 
+            display: flex; flex-direction: column; align-items: center;
+        }
+        
+        .hero-title {
+            font-family: var(--font-serif); font-size: clamp(45px, 7vw, 80px);
+            line-height: 1.1; letter-spacing: -0.02em; color: #FFF;
+            margin: 0; max-width: 800px;
+        }
+
+        /* SOVRAPPOSIZIONE TESTI HERO */
+        .subtitle-wrapper { 
+            height: 40px; margin-top: 25px; 
+            position: relative; width: 80vw;
+            display: flex; justify-content: center;
+        }
+        
+        .subtitle-item {
+            position: absolute; 
+            font-size: clamp(16px, 2vw, 20px); font-weight: 300;
+            color: var(--grey-400); opacity: 0;
+            white-space: normal;
+            transition: opacity 1.5s ease-in-out;
+            max-width: 700px;
+        }
+
+        .subtitle-item.active {
+            opacity: 1;
+        }
+
+        /* --- FADE-IN SCROLL LOGIC --- */
+        .fade-section {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: opacity, transform;
         }
 
-        .fade-element.visible {
+        .fade-section.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* --- HEADER TOP --- */
-        .top-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 40px;
-            text-align: left;
-            margin-bottom: 120px;
-        }
-
-        .top-features h2 {
-            font-family: serif;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .top-features p {
-            color: #888;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* --- HERO (TESTI SOVRAPPOSTI) --- */
-        .hero-container {
-            position: relative;
-            height: 100px;
-            margin-bottom: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-container h1 {
-            position: absolute;
-            font-family: serif;
-            font-size: 3.2rem;
-            margin: 0;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            width: 100%;
-        }
-
-        .hero-container h1.active {
-            opacity: 1;
-        }
-
-        .hero-sub {
-            color: #888;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 100px auto;
-        }
-
-        /* --- MAIN CONTENT --- */
-        .columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        /* --- CONTENT STYLE --- */
+        .features-section { background: #141211; padding: 100px 5%; }
+        .grid-container {
+            max-width: 1100px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 60px;
-            text-align: left;
-            margin-bottom: 80px;
         }
+        .feature-card h2 { font-family: var(--font-serif); font-size: 24px; margin-bottom: 14px; color: #FFF; }
+        .feature-card p { font-size: 14px; line-height: 1.6; color: var(--grey-400); }
 
-        .columns h3 {
-            font-family: serif;
-            font-size: 1.4rem;
-            margin-bottom: 20px;
+        .main-content { padding: 100px 5%; max-width: 1100px; margin: 0 auto; }
+        .section-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px); text-align: center; margin-bottom: 80px; color: #FFF; }
+        
+        .columns-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 80px; margin-bottom: 100px;
         }
+        .col h2 { font-family: var(--font-serif); font-size: 22px; margin-bottom: 20px; color: #FFF; }
+        .col p { font-size: 15px; line-height: 1.7; color: var(--grey-400); margin-bottom: 20px; }
 
-        .columns p {
-            color: #888;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
+        .manifesto-box { text-align: center; max-width: 800px; margin: 100px auto; }
+        .manifesto-box p { font-size: 17px; line-height: 1.8; color: var(--cool-gray); margin-bottom: 40px; }
+        .manifesto-box h2 { font-family: var(--font-serif); font-size: 32px; color: #FFF; line-height: 1.3; }
 
-        /* --- CENTRAL QUOTE --- */
-        .central-statement {
-            max-width: 700px;
-            margin: 100px auto;
-        }
-
-        .central-statement p {
-            font-size: 1.3rem;
-            color: #ccc;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        .central-statement h2 {
-            font-family: serif;
-            font-size: 2rem;
-        }
-
-        /* --- CTA --- */
-        .cta-section {
-            margin-top: 60px;
-        }
-
-        .btn-x {
-            background: #fff;
-            color: #000;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+        .cta-footer { text-align: center; margin-bottom: 100px; }
+        .btn-x { 
+            background: #FFF; color: #000; padding: 14px 32px; border-radius: 50px; 
+            text-decoration: none; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
         }
 
         footer {
-            width: 100%;
-            max-width: 1200px;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: #444;
-            border-top: 1px solid #1a1a1a;
-            margin-top: 100px;
+            padding: 40px 5%; border-top: 1px solid var(--grey-900);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 12px; color: var(--grey-400);
         }
-
-        footer a { color: #444; text-decoration: none; margin-left: 15px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="top-features fade-element">
-        <div>
-            <h2>Honest by design</h2>
-            <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
+    <nav>
+        <a href="/" class="nav-logo">
+            <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" width="18" height="18" alt="Polkadot">
+            Polkadot
+        </a>
+        <div class="nav-links">
+            <a href="#">Philosophy</a><a href="#">Tech</a><a href="#">Platform</a><a href="#">Ecosystem</a><a href="#" class="btn-sign">Sign in</a>
         </div>
-        <div>
-            <h2>You own it</h2>
-            <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
+    </nav>
+
+    <section class="hero" id="hero">
+        <canvas id="noiseCanvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">A new age of internet-enabled society</h1>
+            <div class="subtitle-wrapper">
+                <div class="subtitle-item active">The way we connect, do business, and organize is changing.</div>
+                <div class="subtitle-item">Polkadot is the social tooling to make it work.</div>
+            </div>
         </div>
-        <div>
-            <h2>Built for humans</h2>
-            <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
+    </section>
+
+    <section class="features-section fade-section">
+        <div class="grid-container">
+            <div class="feature-card">
+                <h2>Honest by design</h2>
+                <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
+            </div>
+            <div class="feature-card">
+                <h2>You own it</h2>
+                <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
+            </div>
+            <div class="feature-card">
+                <h2>Built for humans</h2>
+                <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <div class="columns-grid fade-section">
+            <div class="col">
+                <h2>The Problem</h2>
+                <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
+                <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
+                <p>The technology you rely on every day serves someone else's interests first. Their bottom line matters more than your expectations.</p>
+            </div>
+            <div class="col">
+                <h2>A Different Way</h2>
+                <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
+                <p>We're building the social layer for this different kind of internet. How you prove you're real without revealing who you are. How your relationships aren't locked inside one app. How your history follows you when you want it to. Products that feel familiar, built on different foundations. That's Polkadot.</p>
+            </div>
+        </div>
+
+        <div class="manifesto-box fade-section">
+            <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable. What they missed was that values need enforcement to survive. On Polkadot, transparency, user control, and unchangeable rules are properties of the platform itself.</p>
+            <h2>They took the internet from us.<br>We're taking it back.</h2>
+        </div>
+
+        <div class="cta-footer fade-section">
+            <h3 style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 10px;">Stay Updated</h3>
+            <p style="color: var(--grey-400); margin-bottom: 30px; font-size: 14px;">We're just getting started.</p>
+            <a href="#" class="btn-x">Follow on X</a>
         </div>
     </div>
 
-    <div class="hero-container fade-element">
-        <h1 class="active">A new age of internet-enabled society</h1>
-        <h1>The way we connect, do business, and organize is changing.</h1>
-    </div>
-    
-    <p class="hero-sub fade-element">Polkadot is the social tooling to make it work.</p>
-
-    <div class="columns fade-element">
-        <div>
-            <h3>The Problem</h3>
-            <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
-            <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
-            <p>The technology you rely on every day serves someone else's interests first. Their bottom line matters more than your expectations.</p>
+    <footer>
+        <div>© 2025</div>
+        <div style="display: flex; gap: 20px;">
+            <a href="#" style="text-decoration:none; color:inherit;">Support</a>
+            <a href="#" style="text-decoration:none; color:inherit;">Wiki</a>
+            <a href="#" style="text-decoration:none; color:inherit;">About</a>
         </div>
-        <div>
-            <h3>A Different Way</h3>
-            <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
-            <p>We're building the social layer for this different kind of internet. How you prove you're real without revealing who you are. How your relationships aren't locked inside one app. How your history follows you when you want it to. Products that feel familiar, built on different foundations. That's Polkadot.</p>
-        </div>
-    </div>
+    </footer>
 
-    <div class="central-statement fade-element">
-        <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable. What they missed was that values need enforcement to survive. On Polkadot, transparency, user control, and unchangeable rules are properties of the platform itself.</p>
-        <h2>They took the internet from us. We're taking it back.</h2>
-    </div>
-
-    <div class="cta-section fade-element">
-        <h3 style="font-family: serif; font-size: 1.8rem; margin-bottom: 10px;">Stay Updated</h3>
-        <p style="color: #888; margin-bottom: 30px;">We're just getting started.</p>
-        <a href="#" class="btn-x">𝕏 Follow on X</a>
-    </div>
-</div>
-
-<footer>
-    <div>© 2025</div>
-    <div>
-        <a href="#">Support</a>
-        <a href="#">Wiki</a>
-        <a href="#">About</a>
-        <a href="#">𝕏</a>
-        <a href="#">GitHub</a>
-    </div>
-</footer>
-
-<script>
-    // Fade in on scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // NOISE CORE (Invariato)
+        const canvas = document.getElementById('noiseCanvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                u_time: { value: 0 },
+                u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
+                u_resolution: { value: new THREE.Vector2() }
+            },
+            vertexShader: `void main() { gl_Position = vec4(position, 1.0); }`,
+            fragmentShader: `
+                precision highp float;
+                uniform float u_time;
+                uniform vec2 u_mouse;
+                uniform vec2 u_resolution;
+                float random(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
+                void main() {
+                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                    float n = random(uv + fract(u_time * 0.15)); 
+                    n = mix(0.0, 0.12, n);
+                    float dist = distance(uv, vec2(u_mouse.x, 1.0 - u_mouse.y));
+                    float shadow = smoothstep(0.1, 0.8, dist);
+                    vec3 color = vec3(n) - (shadow * 0.15);
+                    gl_FragColor = vec4(color, 1.0);
+                }
+            `
         });
-    }, { threshold: 0.1 });
+        scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+        function resize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+        window.addEventListener('mousemove', (e) => {
+            material.uniforms.u_mouse.value.set(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+        });
+        function animate(time) {
+            material.uniforms.u_time.value = time * 0.001;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
 
-    document.querySelectorAll('.fade-element').forEach(el => observer.observe(el));
+        // --- SISTEMAZIONE HERO TEXT (FADE OVERLAP) ---
+        const subs = document.querySelectorAll('.subtitle-item');
+        let currentSub = 0;
+        setInterval(() => {
+            subs[currentSub].classList.remove('active');
+            currentSub = (currentSub + 1) % subs.length;
+            subs[currentSub].classList.add('active');
+        }, 4500);
 
-    // Hero Text Overlay Transition
-    const titles = document.querySelectorAll('.hero-container h1');
-    let current = 0;
-
-    setInterval(() => {
-        titles[current].classList.remove('active');
-        current = (current + 1) % titles.length;
-        titles[current].classList.add('active');
-    }, 4000);
-</script>
-
+        // FADE IN ON SCROLL
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
+    </script>
 </body>
 </html>
