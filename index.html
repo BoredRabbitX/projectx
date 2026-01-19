@@ -20,10 +20,10 @@
             --navbar-bg: var(--grey-950);
             --section-alt: var(--grey-950);
             
-            /* Noise Dark Mode: Bianco su Nero */
-            --noise-opacity: 0.65;
+            /* Noise Settings Dark */
+            --noise-opacity: 0.4;
             --noise-blend: screen;
-            --noise-filter: contrast(350%) brightness(150%);
+            --shadow-color: rgba(0, 0, 0, 0.98);
         }
 
         [data-theme="light"] {
@@ -33,10 +33,10 @@
             --section-alt: #F5F5F4;
             --grey-500: #57534E;
             
-            /* Noise Light Mode: Nero su Bianco */
-            --noise-opacity: 0.18;
+            /* Noise Settings Light */
+            --noise-opacity: 0.2;
             --noise-blend: multiply;
-            --noise-filter: contrast(250%) brightness(80%);
+            --shadow-color: rgba(250, 250, 249, 0.95);
         }
 
         * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
@@ -91,7 +91,7 @@
             cursor: pointer;
         }
 
-        /* HERO - TV STATIC NOISE IDENTICO */
+        /* HERO - SABBIOLINA FINISSIMA */
         .hero {
             position: relative;
             height: 100vh;
@@ -104,30 +104,30 @@
 
         .noise-layer {
             position: absolute;
-            inset: -250%; /* Sovradimensionato per coprire i movimenti dell'animazione */
+            inset: -200%;
             z-index: 1;
             opacity: var(--noise-opacity);
             mix-blend-mode: var(--noise-blend);
             pointer-events: none;
-            /* Frequenza altissima per granuli finissimi e "TV static" */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='tvNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23tvNoise)'/%3E%3C/svg%3E");
-            filter: var(--noise-filter);
-            animation: tv-flicker 0.12s steps(2) infinite;
+            /* Frequenza 8.0 per grana microscopica */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='8.0' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            animation: grain-fast 0.08s steps(1) infinite;
         }
 
-        @keyframes tv-flicker {
-            0% { transform: translate(0, 0); }
-            20% { transform: translate(-2%, 1%); }
-            40% { transform: translate(1%, -2%); }
-            60% { transform: translate(-1%, 2%); }
-            80% { transform: translate(2%, -1%); }
-            100% { transform: translate(0, 2%); }
+        @keyframes grain-fast {
+            0%, 100% { transform: translate(0,0); }
+            50% { transform: translate(-0.2%, -0.2%); }
         }
 
+        /* SPOTLIGHT INVERTITO: LASCIA UN'OMBRA NERA */
         .spotlight {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(0,0,0,0.96) 30%, var(--bg-color) 60%);
+            background: radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%), 
+                var(--shadow-color) 0%, 
+                transparent 25%
+            );
             z-index: 2;
             pointer-events: none;
         }
@@ -214,34 +214,18 @@
     <section class="section-pure">
         <div class="content-wrap">
             <h2>A new age of internet-enabled society</h2>
-            <p style="font-size: 18px;">The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
-            
             <div class="grid-2">
                 <div>
                     <h4>The Problem</h4>
-                    <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
-                    <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
-                    <p>The technology you rely on every day serves someone else's interests first. Their bottom line matters more than your expectations.</p>
+                    <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything...</p>
                 </div>
                 <div>
                     <h4>A Different Way</h4>
-                    <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
-                    <p>We're building the social layer for this different kind of internet. How you prove you're real without revealing who you are. How your relationships aren't locked inside one app. How your history follows you when you want it to. Products that feel familiar, built on different foundations. That's Polkadot.</p>
+                    <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
                 </div>
             </div>
-
             <div class="manifesto">
-                <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable. What they missed was that values need enforcement to survive. On Polkadot, transparency, user control, and unchangeable rules are properties of the platform itself.</p>
                 <div class="claim">They took the internet from us. We're taking it back.</div>
-            </div>
-
-            <div style="margin-top: 100px;">
-                <h3>Stay Updated</h3>
-                <p>We're just getting started.</p>
-                <a href="#" class="btn-follow">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    Follow on X
-                </a>
             </div>
         </div>
     </section>
@@ -249,15 +233,7 @@
     <footer class="footer">
         <div>© 2025</div>
         <div class="footer-right">
-            <div class="footer-links">
-                <span>Support</span>
-                <span>Wiki</span>
-                <span>About</span>
-            </div>
-            <div style="display: flex; gap: 16px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            </div>
+            <div class="footer-links"><span>Support</span><span>Wiki</span><span>About</span></div>
         </div>
     </footer>
 
