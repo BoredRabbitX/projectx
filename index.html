@@ -7,10 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
-            --grey-950: #0F0F0F;
+            --grey-950: #0F0F0F; /* Near Black */
             --grey-900: #1C1917;
             --grey-500: #78716C;
             --cool-gray: #E5E7EB;
+            --pure-black: #000000;
         }
 
         * { box-sizing: border-box; }
@@ -18,7 +19,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--grey-950);
+            background-color: var(--pure-black);
             color: #ffffff;
             font-family: 'DM Sans', sans-serif;
             overflow-x: hidden;
@@ -56,20 +57,7 @@
             color: #ffffff;
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
-
-        .nav-link {
-            color: var(--cool-gray);
-            text-decoration: none;
-            font-size: 14px;
-            opacity: 0.7;
-        }
-
-        /* HERO - NOISE ANIMATO IDENTICO */
+        /* HERO - NOISE ANIMATO */
         .hero {
             position: relative;
             height: 100vh;
@@ -77,51 +65,35 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #000;
+            background-color: var(--pure-black);
             overflow: hidden;
         }
 
-        /* Overlay per il noise animato */
-        .noise-container {
+        .noise-layer {
             position: absolute;
-            inset: -100%;
+            inset: -200%;
             z-index: 1;
-            pointer-events: none;
             opacity: 0.35;
             mix-blend-mode: screen;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            animation: grain-dance 0.15s steps(2) infinite;
         }
 
-        .noise-container::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            animation: noise-anim 0.2s steps(2) infinite;
-        }
-
-        @keyframes noise-anim {
+        @keyframes grain-dance {
             0% { transform: translate(0,0); }
-            10% { transform: translate(-5%,-5%); }
-            20% { transform: translate(-10%,5%); }
-            30% { transform: translate(5%,-10%); }
-            40% { transform: translate(-5%,15%); }
-            50% { transform: translate(-10%,5%); }
-            60% { transform: translate(15%,0); }
-            70% { transform: translate(0,10%); }
-            80% { transform: translate(-15%,0); }
-            90% { transform: translate(10%,5%); }
-            100% { transform: translate(5%,0); }
+            50% { transform: translate(-5%, -5%); }
+            100% { transform: translate(5%, 5%); }
         }
 
-        /* Ombra spotlight che segue il mouse */
         .spotlight {
             position: absolute;
             inset: 0;
             background: radial-gradient(
                 circle at var(--x, 50%) var(--y, 50%), 
                 transparent 0%, 
-                rgba(0, 0, 0, 0.85) 35%, 
-                #000 65%
+                rgba(0, 0, 0, 0.9) 35%, 
+                var(--pure-black) 65%
             );
             z-index: 2;
             pointer-events: none;
@@ -140,72 +112,70 @@
             line-height: 1;
         }
 
-        .hero p {
-            font-size: 24px;
-            color: var(--grey-500);
-            margin-top: 20px;
+        /* SEZIONE 1 - Near Black (#0F0F0F) */
+        .section-near-black {
+            background-color: var(--grey-950);
+            padding: 120px 48px;
         }
 
-        /* SEZIONI SOTTO HERO */
-        .main-content {
+        .features-grid {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 40px;
-        }
-
-        .features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 60px;
-            margin-bottom: 150px;
+            gap: 64px;
         }
 
         .feature h3 {
             font-family: 'DM Serif Display', serif;
             font-size: 28px;
-            margin-bottom: 15px;
+            margin: 0 0 16px 0;
         }
 
         .feature p {
             color: var(--grey-500);
             font-size: 16px;
             line-height: 1.6;
+            margin: 0;
         }
 
-        .center-title {
+        /* SEZIONE 2 - Pure Black (#000000) */
+        .section-pure-black {
+            background-color: var(--pure-black);
+            padding: 140px 48px;
             text-align: center;
+        }
+
+        .content-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-pure-black h2 {
             font-family: 'DM Serif Display', serif;
-            font-size: 52px;
-            margin-bottom: 100px;
+            font-size: clamp(40px, 6vw, 56px);
+            margin: 0 0 32px 0;
         }
 
         .col-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
-            margin-bottom: 120px;
+            text-align: left;
+            margin-top: 80px;
         }
 
-        .col h4 { font-weight: 700; font-size: 18px; margin-bottom: 20px; }
-        .col p { color: var(--grey-500); line-height: 1.7; margin-bottom: 20px; }
-
-        .stay-updated {
-            text-align: center;
-            padding: 100px 0;
-            border-top: 1px solid var(--grey-900);
-        }
-
-        .btn-follow {
-            background: #fff;
-            color: #000;
-            padding: 12px 30px;
-            border-radius: 99px;
-            text-decoration: none;
+        .col h4 {
+            font-size: 18px;
             font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 30px;
+            margin: 0 0 24px 0;
+        }
+
+        .col p {
+            color: var(--grey-500);
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 24px;
         }
     </style>
 </head>
@@ -213,28 +183,24 @@
 
     <nav class="navbar">
         <a href="#" class="nav-left">
-            <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" class="logo-img" alt="Polkadot">
+            <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" class="logo-img" alt="Polkadot Logo">
             <span class="brand-name">Polkadot</span>
         </a>
         <div class="nav-right">
-            <a href="#" class="nav-link">Philosophy</a>
-            <a href="#" class="nav-link">Tech</a>
-            <a href="#" class="nav-link">Platform</a>
-            <a href="#" class="nav-link">Ecosystem</a>
-        </div>
+            </div>
     </nav>
 
     <div class="hero" id="hero">
-        <div class="noise-container"></div>
+        <div class="noise-layer"></div>
         <div class="spotlight" id="spotlight"></div>
         <div class="hero-content">
             <h1>Polkadot</h1>
-            <p>Crypto beyond currency.</p>
+            <p style="font-size: 24px; color: var(--grey-500);">Crypto beyond currency.</p>
         </div>
     </div>
 
-    <main class="main-content">
-        <section class="features">
+    <section class="section-near-black">
+        <div class="features-grid">
             <div class="feature">
                 <h3>Honest by design</h3>
                 <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
@@ -247,27 +213,26 @@
                 <h3>Built for humans</h3>
                 <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <h2 class="center-title">A new age of internet-enabled society</h2>
-
-        <section class="col-layout">
-            <div class="col">
-                <h4>The Problem</h4>
-                <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships.</p>
+    <section class="section-pure-black">
+        <div class="content-wrap">
+            <h2>A new age of internet-enabled society</h2>
+            <p style="color: var(--grey-500); font-size: 18px;">The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
+            
+            <div class="col-layout">
+                <div class="col">
+                    <h4>The Problem</h4>
+                    <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships.</p>
+                </div>
+                <div class="col">
+                    <h4>A Different Way</h4>
+                    <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
+                </div>
             </div>
-            <div class="col">
-                <h4>A Different Way</h4>
-                <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
-            </div>
-        </section>
-
-        <section class="stay-updated">
-            <h3>Stay Updated</h3>
-            <p style="color: var(--grey-500)">We're just getting started.</p>
-            <a href="#" class="btn-follow">Follow on X</a>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <script>
         const hero = document.getElementById('hero');
