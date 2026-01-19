@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
-            --grey-950: #0F0F0F; /* Near Black */
+            --grey-950: #0F0F0F;
             --grey-900: #1C1917;
             --grey-500: #78716C;
             --cool-gray: #E5E7EB;
@@ -25,14 +25,14 @@
             overflow-x: hidden;
         }
 
-        /* NAVBAR */
+        /* NAVBAR - Menu ripristinato */
         .navbar {
-            height: 80px;
+            height: 72px;
             background-color: var(--grey-950);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 48px;
+            padding: 0 40px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -42,22 +42,63 @@
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
         }
 
         .logo-img {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
         }
 
         .brand-name {
             font-family: 'DM Serif Display', serif;
-            font-size: 22px;
+            font-size: 20px;
             color: #ffffff;
         }
 
-        /* HERO - NOISE A GRANA FINE */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .nav-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: 12px;
+        }
+
+        .btn-theme {
+            background: #1c1917;
+            border: 1px solid #292524;
+            color: white;
+            padding: 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+        }
+
+        .btn-sign {
+            background: #1c1917;
+            border: 1px solid #292524;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* HERO - Noise ultra-fine animato */
         .hero {
             position: relative;
             height: 100vh;
@@ -73,19 +114,19 @@
             position: absolute;
             inset: -200%;
             z-index: 1;
-            opacity: 0.4;
+            opacity: 0.45;
             mix-blend-mode: screen;
             pointer-events: none;
-            /* Grana molto più piccola aumentando baseFrequency */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            /* Grana microscopica */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             animation: grain-dance 0.1s steps(1) infinite;
         }
 
         @keyframes grain-dance {
             0%, 100% { transform: translate(0,0); }
-            25% { transform: translate(-1%, -1%); }
-            50% { transform: translate(1%, 1%); }
-            75% { transform: translate(-1%, 1%); }
+            25% { transform: translate(-0.5%, -0.5%); }
+            50% { transform: translate(0.5%, 0.5%); }
+            75% { transform: translate(-0.5%, 0.5%); }
         }
 
         .spotlight {
@@ -94,8 +135,8 @@
             background: radial-gradient(
                 circle at var(--x, 50%) var(--y, 50%), 
                 transparent 0%, 
-                rgba(0, 0, 0, 0.95) 30%, 
-                var(--pure-black) 60%
+                rgba(0, 0, 0, 0.96) 30%, 
+                var(--pure-black) 55%
             );
             z-index: 2;
             pointer-events: none;
@@ -109,86 +150,60 @@
 
         .hero h1 {
             font-family: 'DM Serif Display', serif;
-            font-size: clamp(80px, 12vw, 130px);
+            font-size: 110px;
             margin: 0;
         }
 
         /* SEZIONI CENTRALI */
-        .section-near-black { background-color: var(--grey-950); padding: 120px 48px; }
-        .section-pure-black { background-color: var(--pure-black); padding: 140px 48px; text-align: center; }
-
-        .features-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 64px;
-        }
-
-        .feature h3 { font-family: 'DM Serif Display', serif; font-size: 28px; margin-bottom: 16px; }
-        .feature p { color: var(--grey-500); line-height: 1.6; }
+        .section-near-black { background-color: var(--grey-950); padding: 100px 48px; }
+        .section-pure-black { background-color: var(--pure-black); padding: 120px 48px; text-align: center; }
 
         .btn-follow {
             background: #ffffff;
             color: #000000;
-            padding: 14px 32px;
+            padding: 12px 24px;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            margin-top: 40px;
+            margin-top: 30px;
+            font-size: 14px;
         }
 
-        /* FOOTER - CLONE FEDELE */
+        /* FOOTER - Sottile */
         .footer {
             background-color: var(--grey-950);
-            padding: 60px 48px;
+            padding: 24px 48px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.03);
         }
 
-        .footer-left { color: var(--grey-500); font-size: 14px; }
+        .footer-left { color: var(--grey-500); font-size: 12px; }
 
         .footer-right {
             display: flex;
             align-items: center;
-            gap: 32px;
-        }
-
-        .footer-links {
-            display: flex;
             gap: 24px;
         }
 
+        .footer-links { display: flex; gap: 18px; }
         .footer-links a {
             color: var(--grey-500);
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s;
+            font-size: 12px;
         }
-
-        .footer-links a:hover { color: #ffffff; }
 
         .social-icons {
             display: flex;
-            gap: 20px;
-            align-items: center;
+            gap: 16px;
             color: var(--grey-500);
         }
 
-        .social-icons svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .social-icons svg:hover { color: #ffffff; }
+        .social-icons svg { width: 16px; height: 16px; fill: currentColor; }
 
     </style>
 </head>
@@ -196,9 +211,19 @@
 
     <nav class="navbar">
         <a href="#" class="nav-left">
-            <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" class="logo-img" alt="Polkadot">
+            <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" class="logo-img" alt="logo">
             <span class="brand-name">Polkadot</span>
         </a>
+        <div class="nav-right">
+            <a href="#" class="nav-link">Philosophy</a>
+            <a href="#" class="nav-link">Tech</a>
+            <a href="#" class="nav-link">Platform</a>
+            <a href="#" class="nav-link">Ecosystem</a>
+            <div class="nav-right-actions">
+                <button class="btn-theme"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+                <button class="btn-sign">Sign in</button>
+            </div>
+        </div>
     </nav>
 
     <div class="hero" id="hero">
@@ -206,39 +231,29 @@
         <div class="spotlight" id="spotlight"></div>
         <div class="hero-content">
             <h1>Polkadot</h1>
-            <p style="font-size: 24px; color: var(--grey-500);">Crypto beyond currency.</p>
+            <p style="font-size: 24px; color: var(--grey-500); margin-top: 15px;">Crypto beyond currency.</p>
         </div>
     </div>
 
     <section class="section-near-black">
-        <div class="features-grid">
-            <div class="feature">
-                <h3>Honest by design</h3>
-                <p>The rules are in the product, not buried in fine print.</p>
-            </div>
-            <div class="feature">
-                <h3>You own it</h3>
-                <p>No company can seize or freeze your stuff. It's yours.</p>
-            </div>
-            <div class="feature">
-                <h3>Built for humans</h3>
-                <p>Everything you expect from modern apps.</p>
-            </div>
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+            <div><h3 style="font-family:'DM Serif Display'; font-size:24px;">Honest by design</h3><p style="color:var(--grey-500); font-size:14px; line-height:1.5;">The rules are in the product, not buried in fine print.</p></div>
+            <div><h3 style="font-family:'DM Serif Display'; font-size:24px;">You own it</h3><p style="color:var(--grey-500); font-size:14px; line-height:1.5;">No company can seize or freeze your stuff.</p></div>
+            <div><h3 style="font-family:'DM Serif Display'; font-size:24px;">Built for humans</h3><p style="color:var(--grey-500); font-size:14px; line-height:1.5;">Everything you expect from modern apps.</p></div>
         </div>
     </section>
 
     <section class="section-pure-black">
-        <h2>A new age of internet-enabled society</h2>
+        <h2 style="font-family:'DM Serif Display'; font-size:48px; margin-bottom:10px;">A new age of internet-enabled society</h2>
+        <p style="color:var(--grey-500); font-size:16px;">We're just getting started.</p>
         <a href="#" class="btn-follow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             Follow on X
         </a>
     </section>
 
     <footer class="footer">
-        <div class="footer-left">
-            © 2025
-        </div>
+        <div class="footer-left">© 2025</div>
         <div class="footer-right">
             <div class="footer-links">
                 <a href="#">Support</a>
