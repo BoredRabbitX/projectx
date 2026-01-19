@@ -3,14 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Polkadot | Protocols for prosperity.</title>
+    <title>Polkadot</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
             --grey-950: #0F0F0F;
             --grey-900: #1C1917;
+            --grey-800: #292524;
             --grey-500: #78716C;
             --cool-gray: #E5E7EB;
+            --white: #FFFFFF;
         }
 
         * { box-sizing: border-box; }
@@ -19,19 +21,19 @@
             margin: 0;
             padding: 0;
             background-color: var(--grey-950);
-            color: #ffffff;
+            color: var(--white);
             font-family: 'DM Sans', sans-serif;
             overflow-x: hidden;
         }
 
-        /* NAVBAR - Sfondo solido e Logo ufficiale */
+        /* NAVBAR */
         .navbar {
-            height: 72px;
+            height: 80px;
             background-color: var(--grey-950);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 48px;
+            padding: 0 40px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -46,42 +48,40 @@
         }
 
         .logo-img {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
         }
 
         .brand-name {
             font-family: 'DM Serif Display', serif;
             font-size: 22px;
-            color: #ffffff;
-            letter-spacing: -0.01em;
+            color: var(--white);
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 24px;
         }
 
         .nav-link {
-            color: var(--cool-gray);
+            color: var(--grey-500);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            opacity: 0.7;
         }
 
         .btn-sign-in {
             background-color: var(--grey-900);
-            color: #ffffff;
-            border: 1px solid #292524;
+            color: var(--white);
+            border: 1px solid var(--grey-800);
             padding: 8px 18px;
             border-radius: 8px;
             font-size: 14px;
             cursor: pointer;
         }
 
-        /* HERO SECTION - NOISY ANIMATO VETTORIALE */
+        /* HERO - NOISY ANIMATO E SPOTLIGHT */
         .hero {
             position: relative;
             height: 90vh;
@@ -91,27 +91,25 @@
             justify-content: center;
             background-color: #000;
             overflow: hidden;
-            margin-top: 0;
         }
 
-        /* Noise SVG animato (puntini che si muovono) */
-        .noise-canvas {
+        /* Rumore vettoriale animato */
+        .noise-overlay {
             position: absolute;
             inset: 0;
             z-index: 1;
-            opacity: 0.18;
+            opacity: 0.2;
             pointer-events: none;
         }
 
-        /* Spotlight che segue il mouse */
         .spotlight {
             position: absolute;
             inset: 0;
             background: radial-gradient(
                 circle at var(--x, 50%) var(--y, 50%), 
                 transparent 5%, 
-                rgba(0, 0, 0, 0.92) 45%, 
-                #000 70%
+                rgba(0, 0, 0, 0.95) 40%, 
+                #000 65%
             );
             z-index: 2;
             pointer-events: none;
@@ -125,52 +123,134 @@
 
         .hero h1 {
             font-family: 'DM Serif Display', serif;
-            font-size: clamp(80px, 12vw, 130px);
+            font-size: clamp(80px, 10vw, 120px);
             margin: 0;
             line-height: 1;
-            color: #ffffff;
         }
 
         .hero p {
-            font-size: clamp(20px, 4vw, 32px);
+            font-size: 28px;
             color: var(--grey-500);
-            margin-top: 20px;
+            margin-top: 24px;
         }
 
-        /* GRID SECTION - Proporzioni Screenshot */
-        .grid-section {
+        /* SEZIONI SOTTO HERO - RIPRODUZIONE FEDELE */
+        .main-container {
             max-width: 1200px;
-            margin: 80px auto;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 60px;
-            padding: 0 60px;
+            margin-bottom: 160px;
         }
 
-        .feature h3 {
+        .feature-item h3 {
             font-family: 'DM Serif Display', serif;
             font-size: 28px;
-            margin-bottom: 18px;
-            color: #ffffff;
+            margin-bottom: 16px;
         }
 
-        .feature p {
+        .feature-item p {
             color: var(--grey-500);
             font-size: 16px;
             line-height: 1.6;
         }
 
-        /* SVG FILTER PER IL NOISE DINAMICO */
-        svg#noise-filter {
-            height: 0; width: 0; position: absolute;
+        .section-center {
+            text-align: center;
+            margin-bottom: 100px;
         }
+
+        .section-center h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 52px;
+            margin-bottom: 24px;
+        }
+
+        .section-center p {
+            color: var(--grey-500);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .columns-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 120px;
+        }
+
+        .col-item h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 24px;
+        }
+
+        .col-item p {
+            color: var(--grey-500);
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .manifesto-box {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 120px auto;
+        }
+
+        .manifesto-box p {
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--grey-200);
+            margin-bottom: 30px;
+        }
+
+        .manifesto-box .bold-claim {
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--white);
+        }
+
+        .stay-updated {
+            text-align: center;
+            border-top: 1px solid var(--grey-900);
+            padding-top: 100px;
+        }
+
+        .stay-updated h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .btn-x {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            color: #000;
+            padding: 12px 28px;
+            border-radius: 99px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 30px;
+        }
+
+        svg#noise-filter { height: 0; width: 0; position: absolute; }
     </style>
 </head>
 <body>
 
     <svg id="noise-filter">
-      <filter id="grainy">
-        <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch">
+      <filter id="grain">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch">
             <animate attributeName="seed" from="0" to="100" dur="1s" repeatCount="indefinite" />
         </feTurbulence>
         <feColorMatrix type="saturate" values="0"/>
@@ -179,7 +259,7 @@
 
     <nav class="navbar">
         <a href="#" class="nav-left">
-            <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" class="logo-img" alt="Polkadot Icon">
+            <img src="polkadot-icon__cool-gray-on-near-black.png" class="logo-img" alt="logo">
             <span class="brand-name">Polkadot</span>
         </a>
         <div class="nav-right">
@@ -192,35 +272,67 @@
     </nav>
 
     <div class="hero" id="hero">
-        <div class="noise-canvas" style="filter: url(#grainy); width: 100%; height: 100%;"></div>
+        <div class="noise-overlay" style="filter: url(#grain); width: 100%; height: 100%;"></div>
         <div class="spotlight" id="spotlight"></div>
-        
         <div class="hero-content">
             <h1>Polkadot</h1>
             <p>Protocols for prosperity.</p>
         </div>
     </div>
 
-    <section class="grid-section">
-        <div class="feature">
-            <h3>Honest by design</h3>
-            <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
-        </div>
-        <div class="feature">
-            <h3>You own it</h3>
-            <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
-        </div>
-        <div class="feature">
-            <h3>Built for humans</h3>
-            <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
-        </div>
-    </section>
+    <main class="main-container">
+        <section class="features-grid">
+            <div class="feature-item">
+                <h3>Honest by design</h3>
+                <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
+            </div>
+            <div class="feature-item">
+                <h3>You own it</h3>
+                <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Built for humans</h3>
+                <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
+            </div>
+        </section>
+
+        <section class="section-center">
+            <h2>A new age of internet-enabled society</h2>
+            <p>The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
+        </section>
+
+        <section class="columns-container">
+            <div class="col-item">
+                <h4>The Problem</h4>
+                <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
+                <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
+            </div>
+            <div class="col-item">
+                <h4>A Different Way</h4>
+                <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
+                <p>We're building the social layer for this different kind of internet. How you prove you're real without revealing who you are. How your relationships aren't locked inside one app. Products that feel familiar, built on different foundations. That's Polkadot.</p>
+            </div>
+        </section>
+
+        <section class="manifesto-box">
+            <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable. What they missed was that values need enforcement to survive. On Polkadot, transparency, user control, and unchangeable rules are properties of the platform itself.</p>
+            <p class="bold-claim">They took the internet from us. We're taking it back.</p>
+        </section>
+
+        <section class="stay-updated">
+            <h3>Stay Updated</h3>
+            <p>We're just getting started.</p>
+            <a href="#" class="btn-x">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                Follow on X
+            </a>
+        </section>
+    </main>
 
     <script>
         const hero = document.getElementById('hero');
         const spotlight = document.getElementById('spotlight');
 
-        // Tracking del mouse per lo spotlight
         hero.addEventListener('mousemove', e => {
             const rect = hero.getBoundingClientRect();
             const x = ((e.clientX - rect.left) / rect.width) * 100;
