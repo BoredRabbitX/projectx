@@ -3,36 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polkadot Hero</title>
+    <title>Polkadot | Sovereignty</title>
     <style>
+        :root {
+            --bg-color: #000;
+            --text-main: #fff;
+            --text-dim: #ccc;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100%;
-            background-color: #000;
+            background-color: var(--bg-color);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            color: var(--text-main);
+            scroll-behavior: smooth;
         }
 
-        /* HERO ZONE */
-        .hero {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-            z-index: 1;
-        }
-
-        /* NOISE DINAMICO (L'EFFETTO SABBIOSO) */
+        /* --- NOISE DINAMICO FISSO (NON TOCCARE) --- */
         .noise-overlay {
             position: fixed;
             top: -50%;
@@ -40,59 +29,120 @@
             width: 200%;
             height: 200%;
             pointer-events: none;
-            z-index: 2;
-            opacity: 0.18; /* Regola l'intensità della grana qui */
+            z-index: 9999; /* Sopra a tutto */
+            opacity: 0.18;
         }
 
-        /* SVG Filter per il rumore organico */
         .noise-svg {
             width: 100%;
             height: 100%;
         }
 
-        /* TITOLO PRINCIPALE - Proporzioni corrette */
-        .title {
-            font-family: "Georgia", serif; /* Simile al font serif dell'immagine */
-            font-size: 110px;
-            font-weight: 700;
-            margin: 0;
-            letter-spacing: -2px;
-            z-index: 3;
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
         }
 
-        /* SUBTITLE CON EFFETTO FADE */
-        .subtitle-container {
-            height: 30px;
-            margin-top: 10px;
+        .logo-nav {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: -1px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { opacity: 1; }
+
+        /* --- HERO ZONE (IDENTICA ALL'IMMAGINE) --- */
+        .hero {
             position: relative;
-            z-index: 3;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title {
+            font-family: "Georgia", serif;
+            font-size: clamp(60px, 10vw, 110px);
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -3px;
+        }
+
+        .subtitle-container {
+            height: 40px;
+            margin-top: 15px;
+            position: relative;
+            width: 100%;
         }
 
         .subtitle {
-            font-size: 24px;
+            font-size: clamp(18px, 2vw, 24px);
             font-weight: 300;
             opacity: 0;
             position: absolute;
             width: 100%;
             left: 0;
             top: 0;
-            white-space: nowrap;
-            color: #ccc;
+            color: var(--text-dim);
             animation: fadeTransition 16s infinite;
         }
 
-        /* Timing per le 4 frasi (4s ciascuna) */
         .subtitle:nth-child(1) { animation-delay: 0s; }
         .subtitle:nth-child(2) { animation-delay: 4s; }
         .subtitle:nth-child(3) { animation-delay: 8s; }
         .subtitle:nth-child(4) { animation-delay: 12s; }
 
         @keyframes fadeTransition {
-            0% { opacity: 0; transform: translateY(5px); }
+            0% { opacity: 0; transform: translateY(8px); }
             5% { opacity: 1; transform: translateY(0); }
             20% { opacity: 1; transform: translateY(0); }
-            25% { opacity: 0; transform: translateY(-5px); }
+            25% { opacity: 0; transform: translateY(-8px); }
             100% { opacity: 0; }
+        }
+
+        /* --- CONTENUTI EXTRA --- */
+        .content-section {
+            padding: 100px 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .content-section h2 {
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 50px;
+            border-top: 1px solid #333;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
         }
     </style>
 </head>
@@ -101,17 +151,8 @@
     <div class="noise-overlay">
         <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="noise-svg">
             <filter id="noiseFilter">
-                <feTurbulence 
-                    type="fractalNoise" 
-                    baseFrequency="0.65" 
-                    numOctaves="3" 
-                    stitchTiles="stitch">
-                    <animate 
-                        attributeName="seed" 
-                        from="0" 
-                        to="100" 
-                        dur="1s" 
-                        repeatCount="indefinite" />
+                <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch">
+                    <animate attributeName="seed" from="0" to="100" dur="1s" repeatCount="indefinite" />
                 </feTurbulence>
                 <feColorMatrix type="saturate" values="0"/>
             </filter>
@@ -119,7 +160,16 @@
         </svg>
     </div>
 
-    <div class="hero">
+    <nav>
+        <div class="logo-nav">Polkadot.</div>
+        <div class="nav-links">
+            <a href="#">Network</a>
+            <a href="#">Community</a>
+            <a href="#">Build</a>
+        </div>
+    </nav>
+
+    <section class="hero">
         <h1 class="title">Polkadot</h1>
         <div class="subtitle-container">
             <div class="subtitle">Crypto beyond currency.</div>
@@ -127,7 +177,17 @@
             <div class="subtitle">Software for sovereignty.</div>
             <div class="subtitle">Instruments for individuality.</div>
         </div>
-    </div>
+    </section>
+
+    <main class="content-section">
+        <h2>The multichain vision.</h2>
+        <p>Polkadot enables cross-chain registries and cross-chain computation. Any type of data can be sent between blockchains. This is not just about tokens; it's about a decentralized web where users own their data and identity.</p>
+        <p>Everything you see here is covered by a layer of organic noise to maintain the gritty, analog aesthetic you requested.</p>
+    </main>
+
+    <footer>
+        &copy; 2026 Polkadot Network. Software for sovereignty.
+    </footer>
 
 </body>
 </html>
