@@ -19,6 +19,10 @@
             --text-main: var(--white);
             --navbar-bg: var(--grey-950);
             --section-alt: var(--grey-950);
+            
+            /* Noise Settings per Dark Mode */
+            --noise-opacity: 0.6;
+            --noise-blend: screen;
         }
 
         [data-theme="light"] {
@@ -26,7 +30,11 @@
             --text-main: #1C1917;
             --navbar-bg: #FFFFFF;
             --section-alt: #F5F5F4;
-            --grey-500: #57534E;
+            --grey-50: #57534E;
+            
+            /* Noise Settings per Light Mode (Invertito) */
+            --noise-opacity: 0.15;
+            --noise-blend: multiply;
         }
 
         * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
@@ -81,7 +89,7 @@
             cursor: pointer;
         }
 
-        /* HERO - Definite Grain Noise */
+        /* HERO - OLD TV STATIC NOISE */
         .hero {
             position: relative;
             height: 100vh;
@@ -89,32 +97,37 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background-color: var(--pure-black);
+            background-color: var(--bg-color);
         }
 
         .noise-layer {
             position: absolute;
             inset: -200%;
             z-index: 1;
-            opacity: 0.55; /* Leggermente più visibile */
-            mix-blend-mode: screen;
+            opacity: var(--noise-opacity);
+            mix-blend-mode: var(--noise-blend);
             pointer-events: none;
-            /* Filtro SVG con baseFrequency più alta per massima definizione dei grani */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='5.5' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            /* Filtro CSS per rendere i puntini più "taglienti" e definiti */
-            filter: contrast(180%) brightness(120%);
-            animation: grain 0.1s steps(1) infinite;
+            /* Texture tipo TV vecchia (grana grossa e irregolare) */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            filter: contrast(300%) brightness(150%);
+            animation: grain-static 0.15s steps(2) infinite;
         }
 
-        @keyframes grain {
-            0%, 100% { transform: translate(0,0); }
-            50% { transform: translate(-0.5%, -0.5%); }
+        /* Effetto flickering tipico della TV */
+        @keyframes grain-static {
+            0% { transform: translate(0,0); }
+            10% { transform: translate(-1%, -1%); }
+            20% { transform: translate(2%, 1%); }
+            40% { transform: translate(-2%, 2%); }
+            60% { transform: translate(1%, -2%); }
+            80% { transform: translate(-1%, 1%); }
+            100% { transform: translate(1%, 2%); }
         }
 
         .spotlight {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(0,0,0,0.96) 30%, var(--pure-black) 55%);
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(0,0,0,0.92) 35%, var(--bg-color) 65%);
             z-index: 2;
             pointer-events: none;
         }
@@ -125,7 +138,7 @@
 
         /* SEZIONI TESTUALI */
         .section-near { background-color: var(--section-alt); padding: 120px 48px; }
-        .section-pure { background-color: var(--pure-black); padding: 140px 48px; text-align: center; }
+        .section-pure { background-color: var(--bg-color); padding: 140px 48px; text-align: center; }
 
         .content-wrap { max-width: 1200px; margin: 0 auto; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; text-align: left; }
@@ -140,10 +153,10 @@
         .manifesto { max-width: 850px; margin: 100px auto; font-size: 19px; line-height: 1.6; color: var(--text-main); opacity: 0.9; }
         .claim { font-weight: 700; font-size: 24px; margin-top: 40px; color: var(--text-main); opacity: 1; }
 
-        .btn-follow { background: #fff; color: #000; padding: 12px 28px; border-radius: 99px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; margin-top: 40px; font-size: 14px; }
+        .btn-follow { background: var(--text-main); color: var(--bg-color); padding: 12px 28px; border-radius: 99px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; margin-top: 40px; font-size: 14px; }
 
         /* FOOTER */
-        .footer { background-color: var(--grey-950); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--grey-500); border-top: 1px solid rgba(255,255,255,0.03); }
+        .footer { background-color: var(--navbar-bg); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--grey-500); border-top: 1px solid rgba(255,255,255,0.03); }
         .footer-right { display: flex; gap: 32px; align-items: center; }
         .footer-links { display: flex; gap: 20px; }
         .footer-links span { cursor: pointer; }
