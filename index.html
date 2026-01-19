@@ -28,6 +28,8 @@
             color: var(--cool-gray);
             font-family: var(--dm-sans);
             scroll-behavior: smooth;
+            /* Font globale leggermente più piccolo */
+            font-size: 15px; 
         }
 
         /* --- NAV --- */
@@ -50,12 +52,14 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            /* Font aggiornato per essere identico alla Hero */
             font-family: var(--dm-serif);
             font-weight: 400;
             font-size: 20px;
             letter-spacing: -0.5px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
+        .nav-left:hover { opacity: 0.7; }
 
         .nav-logo-img {
             width: 24px;
@@ -71,9 +75,15 @@
         .nav-links a {
             color: var(--cool-gray);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px; /* Leggermente più piccolo */
             font-weight: 500;
             opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover { 
+            opacity: 1; 
+            color: #FFF;
         }
 
         .btn-sign {
@@ -83,10 +93,13 @@
             font-weight: 600;
             color: var(--cool-gray);
             text-decoration: none;
+            transition: background 0.3s ease;
         }
+        .btn-sign:hover { background: #3a3533; }
 
-        /* --- HERO --- */
+        /* --- HERO FULLWIDTH --- */
         .hero {
+            width: 100vw; /* Full width */
             height: 80vh;
             display: flex;
             flex-direction: column;
@@ -96,6 +109,9 @@
             position: relative;
             overflow: hidden;
             background-color: var(--grey-950);
+            margin-left: calc(-50vw + 50%); /* Forza allineamento se in container */
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .noise-overlay {
@@ -129,7 +145,7 @@
         }
 
         .subtitle {
-            font-size: clamp(18px, 2.5vw, 24px);
+            font-size: clamp(18px, 2.5vw, 22px); /* Leggermente più piccolo */
             font-weight: 300;
             opacity: 0;
             position: absolute;
@@ -169,14 +185,14 @@
 
         .feature-card h2 {
             font-family: var(--dm-serif);
-            font-size: 32px;
+            font-size: 30px; /* Leggermente più piccolo */
             margin-bottom: 20px;
             color: #FFF;
         }
 
         .feature-card p {
             color: var(--grey-400);
-            font-size: 17px;
+            font-size: 15px; /* Leggermente più piccolo */
             line-height: 1.6;
         }
 
@@ -196,13 +212,13 @@
 
         .center-heading h1 {
             font-family: var(--dm-serif);
-            font-size: 56px;
+            font-size: 52px; /* Leggermente più piccolo */
             margin-bottom: 40px;
             color: #FFF;
         }
 
         .center-heading p {
-            font-size: 22px;
+            font-size: 20px; /* Leggermente più piccolo */
             color: var(--grey-400);
             line-height: 1.6;
         }
@@ -215,8 +231,8 @@
             margin: 0 auto 120px;
         }
 
-        .problem-way-grid h2 { font-family: var(--dm-serif); font-size: 28px; margin-bottom: 25px; color: #FFF; }
-        .problem-way-grid p { color: var(--grey-400); font-size: 16px; margin-bottom: 20px; line-height: 1.6; }
+        .problem-way-grid h2 { font-family: var(--dm-serif); font-size: 26px; margin-bottom: 25px; color: #FFF; }
+        .problem-way-grid p { color: var(--grey-400); font-size: 15px; margin-bottom: 20px; line-height: 1.6; }
 
         .manifesto-box {
             text-align: center;
@@ -225,7 +241,7 @@
         }
 
         .manifesto-box p {
-            font-size: 20px;
+            font-size: 18px; /* Leggermente più piccolo */
             color: var(--cool-gray);
             line-height: 1.8;
             margin-bottom: 40px;
@@ -233,7 +249,7 @@
 
         .manifesto-box h2 {
             font-family: var(--dm-serif);
-            font-size: 32px;
+            font-size: 30px; /* Leggermente più piccolo */
             color: #FFF;
         }
 
@@ -244,8 +260,8 @@
             text-align: center;
         }
 
-        .stay-updated h3 { font-family: var(--dm-serif); font-size: 36px; margin-bottom: 10px; color: #FFF; }
-        .stay-updated p { color: var(--grey-400); margin-bottom: 40px; font-size: 18px; }
+        .stay-updated h3 { font-family: var(--dm-serif); font-size: 34px; margin-bottom: 10px; color: #FFF; }
+        .stay-updated p { color: var(--grey-400); margin-bottom: 40px; font-size: 17px; }
 
         .x-btn {
             background-color: var(--cool-gray);
@@ -257,9 +273,14 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .x-btn:hover { 
+            transform: scale(1.05); 
+            background-color: #FFF;
         }
 
-        /* --- FOOTER IDENTICO ALL'IMMAGINE --- */
+        /* --- FOOTER --- */
         footer {
             background-color: #12100e;
             padding: 40px 60px;
@@ -267,7 +288,7 @@
             justify-content: space-between;
             align-items: center;
             color: var(--grey-400);
-            font-size: 14px;
+            font-size: 13px; /* Leggermente più piccolo */
             border-top: 1px solid #1c1917;
         }
 
@@ -285,7 +306,7 @@
         .footer-right a {
             color: var(--grey-400);
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color 0.3s ease;
         }
 
         .footer-right a:hover {
@@ -300,9 +321,12 @@
 
         .social-icons svg {
             fill: var(--grey-400);
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
+            transition: fill 0.3s ease;
+            cursor: pointer;
         }
+        .social-icons svg:hover { fill: #FFF; }
     </style>
 </head>
 <body>
