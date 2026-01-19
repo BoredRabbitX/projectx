@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* NAVBAR - Sfondo solido e proporzioni screenshot */
+        /* NAVBAR - Sfondo solido e Logo ufficiale */
         .navbar {
             height: 72px;
             background-color: var(--grey-950);
@@ -41,19 +41,20 @@
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
         }
 
         .logo-img {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
         }
 
         .brand-name {
             font-family: 'DM Serif Display', serif;
-            font-size: 20px;
+            font-size: 22px;
             color: #ffffff;
+            letter-spacing: -0.01em;
         }
 
         .nav-right {
@@ -65,49 +66,53 @@
         .nav-link {
             color: var(--cool-gray);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
         .btn-sign-in {
             background-color: var(--grey-900);
             color: #ffffff;
             border: 1px solid #292524;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 13px;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 14px;
             cursor: pointer;
         }
 
-        /* HERO SECTION - Con Effetto Noisy e Spotlight Mouse */
+        /* HERO SECTION - NOISY ANIMATO VETTORIALE */
         .hero {
             position: relative;
-            height: 85vh;
+            height: 90vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             background-color: #000;
             overflow: hidden;
-            margin-top: 72px;
+            margin-top: 0;
         }
 
-        /* La grana fissa */
-        .hero::before {
-            content: "";
+        /* Noise SVG animato (puntini che si muovono) */
+        .noise-canvas {
             position: absolute;
             inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.25'/%3E%3C/svg%3E");
-            pointer-events: none;
             z-index: 1;
+            opacity: 0.18;
+            pointer-events: none;
         }
 
-        /* L'ombra/spotlight dinamica */
+        /* Spotlight che segue il mouse */
         .spotlight {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 10%, rgba(0,0,0,0.95) 50%);
+            background: radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%), 
+                transparent 5%, 
+                rgba(0, 0, 0, 0.92) 45%, 
+                #000 70%
+            );
             z-index: 2;
             pointer-events: none;
         }
@@ -120,70 +125,61 @@
 
         .hero h1 {
             font-family: 'DM Serif Display', serif;
-            font-size: 110px;
+            font-size: clamp(80px, 12vw, 130px);
             margin: 0;
             line-height: 1;
+            color: #ffffff;
         }
 
         .hero p {
-            font-size: 32px;
+            font-size: clamp(20px, 4vw, 32px);
             color: var(--grey-500);
-            margin-top: 24px;
+            margin-top: 20px;
         }
 
-        /* SEZIONI TESTUALI - Proporzioni Screenshot */
+        /* GRID SECTION - Proporzioni Screenshot */
         .grid-section {
-            max-width: 1100px;
-            margin: 100px auto;
+            max-width: 1200px;
+            margin: 80px auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 60px;
-            padding: 0 40px;
+            padding: 0 60px;
         }
 
         .feature h3 {
             font-family: 'DM Serif Display', serif;
-            font-size: 26px;
-            margin-bottom: 16px;
+            font-size: 28px;
+            margin-bottom: 18px;
+            color: #ffffff;
         }
 
         .feature p {
             color: var(--grey-500);
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.6;
         }
 
-        .main-title {
-            text-align: center;
-            font-family: 'DM Serif Display', serif;
-            font-size: 52px;
-            margin: 120px 0 60px;
-        }
-
-        .stay-updated {
-            text-align: center;
-            padding: 100px 0;
-        }
-
-        .btn-x {
-            background: #fff;
-            color: #000;
-            padding: 12px 24px;
-            border-radius: 99px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
+        /* SVG FILTER PER IL NOISE DINAMICO */
+        svg#noise-filter {
+            height: 0; width: 0; position: absolute;
         }
     </style>
 </head>
 <body>
 
+    <svg id="noise-filter">
+      <filter id="grainy">
+        <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch">
+            <animate attributeName="seed" from="0" to="100" dur="1s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+    </svg>
+
     <nav class="navbar">
         <a href="#" class="nav-left">
-            <img src="polkadot-icon__cool-gray-on-near-black.png" class="logo-img" alt="logo">
+            <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" class="logo-img" alt="Polkadot Icon">
             <span class="brand-name">Polkadot</span>
         </a>
         <div class="nav-right">
@@ -196,7 +192,9 @@
     </nav>
 
     <div class="hero" id="hero">
+        <div class="noise-canvas" style="filter: url(#grainy); width: 100%; height: 100%;"></div>
         <div class="spotlight" id="spotlight"></div>
+        
         <div class="hero-content">
             <h1>Polkadot</h1>
             <p>Protocols for prosperity.</p>
@@ -218,18 +216,11 @@
         </div>
     </section>
 
-    <h2 class="main-title">A new age of internet-enabled society</h2>
-
-    <div class="stay-updated">
-        <h3>Stay Updated</h3>
-        <p style="color: var(--grey-500)">We're just getting started.</p>
-        <a href="#" class="btn-x">Follow on X</a>
-    </div>
-
     <script>
         const hero = document.getElementById('hero');
         const spotlight = document.getElementById('spotlight');
 
+        // Tracking del mouse per lo spotlight
         hero.addEventListener('mousemove', e => {
             const rect = hero.getBoundingClientRect();
             const x = ((e.clientX - rect.left) / rect.width) * 100;
