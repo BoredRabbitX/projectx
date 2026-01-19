@@ -4,18 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Polkadot | Protocols for prosperity.</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Colori ufficiali Brand Kit */
-            --grey-950: #0F0F0F; /* Near Black */
+            --grey-950: #0F0F0F;
             --grey-900: #1C1917;
-            --grey-800: #292524;
             --grey-500: #78716C;
-            --grey-400: #A8A29E;
-            --grey-200: #E7E5E4;
             --cool-gray: #E5E7EB;
-            --pink-accent: #FF2867;
         }
 
         * { box-sizing: border-box; }
@@ -24,163 +19,171 @@
             margin: 0;
             padding: 0;
             background-color: var(--grey-950);
-            color: var(--cool-gray);
+            color: #ffffff;
             font-family: 'DM Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* --- NAVBAR --- */
+        /* NAVBAR - Sfondo solido e proporzioni screenshot */
         .navbar {
-            height: 80px;
-            background-color: var(--grey-950); /* Sfondo pieno, no noise */
+            height: 72px;
+            background-color: var(--grey-950);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 40px;
-            position: sticky;
+            padding: 0 48px;
+            position: fixed;
+            width: 100%;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
         }
 
         .logo-img {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
         }
 
         .brand-name {
             font-family: 'DM Serif Display', serif;
-            font-size: 22px;
+            font-size: 20px;
             color: #ffffff;
-            letter-spacing: -0.02em;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 28px;
         }
 
         .nav-link {
-            color: var(--grey-400);
+            color: var(--cool-gray);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            transition: color 0.2s;
+            opacity: 0.8;
         }
-
-        .nav-link:hover { color: #ffffff; }
 
         .btn-sign-in {
             background-color: var(--grey-900);
             color: #ffffff;
-            border: 1px solid var(--grey-800);
-            padding: 8px 18px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
+            border: 1px solid #292524;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
             cursor: pointer;
         }
 
-        /* --- HERO SECTION (L'unica con il noise) --- */
+        /* HERO SECTION - Con Effetto Noisy e Spotlight Mouse */
         .hero {
             position: relative;
-            padding: 160px 20px;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+            overflow: hidden;
+            margin-top: 72px;
+        }
+
+        /* La grana fissa */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.25'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* L'ombra/spotlight dinamica */
+        .spotlight {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 10%, rgba(0,0,0,0.95) 50%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
             text-align: center;
-            background-color: var(--grey-950);
-            /* L'effetto noise è limitato alla sezione centrale hero come da screenshot */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
         }
 
         .hero h1 {
             font-family: 'DM Serif Display', serif;
-            font-size: clamp(60px, 10vw, 100px);
+            font-size: 110px;
             margin: 0;
-            color: #ffffff;
             line-height: 1;
         }
 
         .hero p {
-            font-size: 24px;
+            font-size: 32px;
             color: var(--grey-500);
-            margin-top: 20px;
+            margin-top: 24px;
         }
 
-        /* --- FEATURES GRID --- */
-        .features {
-            max-width: 1200px;
-            margin: 80px auto;
+        /* SEZIONI TESTUALI - Proporzioni Screenshot */
+        .grid-section {
+            max-width: 1100px;
+            margin: 100px auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            padding: 0 40px;
-        }
-
-        .feature-item h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 28px;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
-
-        .feature-item p {
-            color: var(--grey-500);
-            line-height: 1.6;
-            font-size: 15px;
-        }
-
-        /* --- CONTENT SECTION --- */
-        .content-block {
-            max-width: 900px;
-            margin: 120px auto;
-            text-align: center;
-            padding: 0 40px;
-        }
-
-        .content-block h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 48px;
-            color: #ffffff;
-            margin-bottom: 40px;
-        }
-
-        .columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 60px;
-            text-align: left;
-            margin-bottom: 60px;
+            padding: 0 40px;
         }
 
-        .col h4 { font-weight: 700; color: #ffffff; margin-bottom: 20px; }
-        .col p { color: var(--grey-500); line-height: 1.7; font-size: 15px; }
+        .feature h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 26px;
+            margin-bottom: 16px;
+        }
 
-        /* --- FOOTER --- */
-        .footer {
-            padding: 60px 40px;
-            border-top: 1px solid var(--grey-900);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
+        .feature p {
             color: var(--grey-500);
+            font-size: 15px;
+            line-height: 1.6;
         }
 
-        .footer-links { display: flex; gap: 20px; }
-        .footer-links a { color: var(--grey-500); text-decoration: none; }
+        .main-title {
+            text-align: center;
+            font-family: 'DM Serif Display', serif;
+            font-size: 52px;
+            margin: 120px 0 60px;
+        }
+
+        .stay-updated {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .btn-x {
+            background: #fff;
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 99px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <a href="#" class="nav-left">
-            <img src="polkadot-icon__cool-gray-on-near-black.png" alt="Polkadot Icon" class="logo-img">
+            <img src="polkadot-icon__cool-gray-on-near-black.png" class="logo-img" alt="logo">
             <span class="brand-name">Polkadot</span>
         </a>
         <div class="nav-right">
@@ -192,48 +195,48 @@
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Polkadot</h1>
-        <p>Protocols for prosperity.</p>
-    </header>
+    <div class="hero" id="hero">
+        <div class="spotlight" id="spotlight"></div>
+        <div class="hero-content">
+            <h1>Polkadot</h1>
+            <p>Protocols for prosperity.</p>
+        </div>
+    </div>
 
-    <section class="features">
-        <div class="feature-item">
+    <section class="grid-section">
+        <div class="feature">
             <h3>Honest by design</h3>
             <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
         </div>
-        <div class="feature-item">
+        <div class="feature">
             <h3>You own it</h3>
             <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
         </div>
-        <div class="feature-item">
+        <div class="feature">
             <h3>Built for humans</h3>
             <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
         </div>
     </section>
 
-    <section class="content-block">
-        <h2>A new age of internet-enabled society</h2>
-        <div class="columns">
-            <div class="col">
-                <h4>The Problem</h4>
-                <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships.</p>
-            </div>
-            <div class="col">
-                <h4>A Different Way</h4>
-                <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
-            </div>
-        </div>
-    </section>
+    <h2 class="main-title">A new age of internet-enabled society</h2>
 
-    <footer class="footer">
-        <div>© 2025</div>
-        <div class="footer-links">
-            <a href="#">Support</a>
-            <a href="#">Wiki</a>
-            <a href="#">About</a>
-        </div>
-    </footer>
+    <div class="stay-updated">
+        <h3>Stay Updated</h3>
+        <p style="color: var(--grey-500)">We're just getting started.</p>
+        <a href="#" class="btn-x">Follow on X</a>
+    </div>
 
+    <script>
+        const hero = document.getElementById('hero');
+        const spotlight = document.getElementById('spotlight');
+
+        hero.addEventListener('mousemove', e => {
+            const rect = hero.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            spotlight.style.setProperty('--x', `${x}%`);
+            spotlight.style.setProperty('--y', `${y}%`);
+        });
+    </script>
 </body>
 </html>
