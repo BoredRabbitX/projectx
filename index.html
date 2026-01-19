@@ -38,17 +38,27 @@
             width: 100%;
         }
 
+        /* --- NAVIGATION --- */
         nav {
             position: fixed; top: 0; left: 0; width: 100%; height: 56px;
             display: flex; justify-content: space-between; align-items: center;
             padding: 0 40px; z-index: 1000; background: rgba(15, 15, 15, 0.4);
             backdrop-filter: blur(12px);
         }
-        .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 18px; color: #FFF; text-decoration: none; }
+        .nav-logo { 
+            display: flex; align-items: center; gap: 10px; 
+            font-family: var(--font-serif); font-size: 18px; 
+            color: #FFF; text-decoration: none;
+            white-space: nowrap; /* Impedisce le 2 righe */
+        }
         .nav-links { display: flex; gap: 28px; align-items: center; }
         .nav-links a { font-size: 11px; text-decoration: none; color: var(--cool-gray); opacity: 0.6; }
-        .btn-sign { background: var(--grey-800); padding: 6px 14px; border-radius: 6px; font-weight: 600; font-size: 11px; }
 
+        /* Menu Mobile Toggle */
+        .menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 4px; z-index: 1001; }
+        .menu-toggle span { width: 20px; height: 2px; background: #FFF; transition: 0.3s; }
+
+        /* --- HERO --- */
         .hero {
             position: relative;
             width: 100vw; height: 100vh;
@@ -87,9 +97,7 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        .subtitle-item.active {
-            opacity: 1;
-        }
+        .subtitle-item.active { opacity: 1; }
 
         .fade-section {
             opacity: 0;
@@ -98,11 +106,9 @@
             will-change: opacity, transform;
         }
 
-        .fade-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-section.visible { opacity: 1; transform: translateY(0); }
 
+        /* --- CONTENT --- */
         .features-section { background: #141211; padding: 100px 5%; }
         .grid-container {
             max-width: 1000px; margin: 0 auto;
@@ -135,7 +141,7 @@
             font-size: 11px; color: var(--grey-400);
         }
 
-        /* --- MODAL INFO STYLE --- */
+        /* --- MODAL --- */
         .modal {
             display: none;
             position: fixed; z-index: 2000; left: 0; top: 0;
@@ -152,11 +158,26 @@
             position: relative;
         }
         .modal-content h3 { font-family: var(--font-serif); color: #FFF; margin-bottom: 20px; font-size: 20px; }
-        .close-modal {
-            position: absolute; top: 15px; right: 20px;
-            color: #FFF; font-size: 24px; cursor: pointer;
+        .close-modal { position: absolute; top: 15px; right: 20px; color: #FFF; font-size: 24px; cursor: pointer; }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-logo { font-size: 16px; }
+            
+            .menu-toggle { display: flex; }
+
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+                background: var(--grey-950); flex-direction: column; justify-content: center;
+                transition: 0.4s; z-index: 1000;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 18px; opacity: 1; }
+
+            .columns-grid { gap: 40px; }
+            footer { flex-direction: column; gap: 20px; text-align: center; }
         }
-        .modal-content p { margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -166,8 +187,18 @@
             <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" width="18" height="18" alt="Polkadot">
             Polkadot Italia
         </a>
-        <div class="nav-links">
-            <a href="https://polkadot.com/philosophy">Filosofia</a><a href="https://polkadot.com/tech">Tecnologia</a><a href="https://polkadot.com/platform">Piattaforma</a><a href="https://polkadot.com/ecosystem">Ecosistema</a>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="nav-links" id="nav-list">
+            <a href="https://polkadot.com/philosophy">Filosofia</a>
+            <a href="https://polkadot.com/tech">Tecnologia</a>
+            <a href="https://polkadot.com/platform">Piattaforma</a>
+            <a href="https://polkadot.com/ecosystem">Ecosistema</a>
         </div>
     </nav>
 
@@ -244,15 +275,26 @@
             <p>Questo sito web fornisce contenuti statici e informativi sulla rete Polkadot, ed è fornito "così com'è" e "come disponibile" senza garanzie di alcun tipo, espresse o implicite, incluse ma non limitate a garanzie di commerciabilità, idoneità per uno scopo particolare o non violazione.</p>
             <p>Non utilizziamo cookie, non raccogliamo dati personali e non forniamo consulenza finanziaria o legale. Alcuni dati tecnici potrebbero essere raccolti automaticamente dal tuo fornitore di servizi internet o dal browser web. Questo esula dal nostro controllo.</p>
             <p>I collegamenti a siti di terze parti sono solo di riferimento, non implicano approvazione e non abbiamo alcun controllo né ci assumiamo alcuna responsabilità per i contenuti, le politiche sulla privacy o le pratiche di siti web di terze parti.</p>
-            <!-- <p>Questo sito web è ospitato tramite GitHub Pages, che registra gli indirizzi IP dei visitatori quando viene visitato un sito Pages (gli IP sono memorizzati per scopi di sicurezza, indipendentemente dal fatto che il visitatore abbia effettuato l'accesso).</p>
-            <p>Questi termini sono regolati dalle leggi di Inghilterra e Galles. Utilizzando questo sito web, accetti tali termini.</p> -->
             <p>Per richieste, contattare: <strong>info@polkadotitalia.it</strong></p>
-            <!-- <p style="font-size: 11px; opacity: 0.7;">© 2025 Parity Technologies Limited, registrata in Inghilterra e Galles (n. 09760015) con sede legale presso 1 Sans Walk, Londra, EC1R 0LT.</p> -->
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
+        // MOBILE MENU LOGIC
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        menuToggle.onclick = () => {
+            navList.classList.toggle('active');
+            // Animazione icona opzionale
+        };
+
+        // Chiudi menu quando si clicca un link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.onclick = () => navList.classList.remove('active');
+        });
+
         // NOISE CANVAS
         const canvas = document.getElementById('noiseCanvas');
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
