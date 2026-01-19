@@ -20,10 +20,10 @@
             --navbar-bg: var(--grey-950);
             --section-alt: var(--grey-950);
             
-            /* Noise Settings Dark */
-            --noise-opacity: 0.4;
+            /* Parametri Noise Dark */
+            --noise-opacity: 0.45;
             --noise-blend: screen;
-            --shadow-color: rgba(0, 0, 0, 0.98);
+            --mouse-shadow: rgba(0, 0, 0, 0.95);
         }
 
         [data-theme="light"] {
@@ -33,10 +33,10 @@
             --section-alt: #F5F5F4;
             --grey-500: #57534E;
             
-            /* Noise Settings Light */
-            --noise-opacity: 0.2;
+            /* Parametri Noise Light */
+            --noise-opacity: 0.25;
             --noise-blend: multiply;
-            --shadow-color: rgba(250, 250, 249, 0.95);
+            --mouse-shadow: rgba(250, 250, 249, 0.9);
         }
 
         * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
@@ -91,7 +91,7 @@
             cursor: pointer;
         }
 
-        /* HERO - SABBIOLINA FINISSIMA */
+        /* HERO - SABBIOLINA FINISSIMA ANIMATA */
         .hero {
             position: relative;
             height: 100vh;
@@ -109,24 +109,24 @@
             opacity: var(--noise-opacity);
             mix-blend-mode: var(--noise-blend);
             pointer-events: none;
-            /* Frequenza 8.0 per grana microscopica */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='8.0' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            animation: grain-fast 0.08s steps(1) infinite;
+            /* Grana finissima frequenza 9.0 */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='9.0' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            animation: grain-micro 0.1s steps(1) infinite;
         }
 
-        @keyframes grain-fast {
+        @keyframes grain-micro {
             0%, 100% { transform: translate(0,0); }
             50% { transform: translate(-0.2%, -0.2%); }
         }
 
-        /* SPOTLIGHT INVERTITO: LASCIA UN'OMBRA NERA */
+        /* SPOTLIGHT: LASCIA UN'OMBRA NERA AL PASSAGGIO */
         .spotlight {
             position: absolute;
             inset: 0;
             background: radial-gradient(
                 circle at var(--x, 50%) var(--y, 50%), 
-                var(--shadow-color) 0%, 
-                transparent 25%
+                var(--mouse-shadow) 0%, 
+                transparent 30%
             );
             z-index: 2;
             pointer-events: none;
@@ -153,10 +153,10 @@
         .manifesto { max-width: 850px; margin: 100px auto; font-size: 19px; line-height: 1.6; color: var(--text-main); opacity: 0.9; }
         .claim { font-weight: 700; font-size: 24px; margin-top: 40px; color: var(--text-main); opacity: 1; }
 
-        .btn-follow { background: var(--text-main); color: var(--bg-color); padding: 12px 28px; border-radius: 99px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; margin-top: 40px; font-size: 14px; }
+        .btn-follow { background: #fff; color: #000; padding: 12px 28px; border-radius: 99px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; margin-top: 40px; font-size: 14px; }
 
         /* FOOTER */
-        .footer { background-color: var(--navbar-bg); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--grey-500); border-top: 1px solid rgba(255,255,255,0.03); }
+        .footer { background-color: var(--grey-950); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--grey-500); border-top: 1px solid rgba(255,255,255,0.03); }
         .footer-right { display: flex; gap: 32px; align-items: center; }
         .footer-links { display: flex; gap: 20px; }
         .footer-links span { cursor: pointer; }
@@ -214,17 +214,20 @@
     <section class="section-pure">
         <div class="content-wrap">
             <h2>A new age of internet-enabled society</h2>
+            <p style="font-size: 18px;">The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
             <div class="grid-2">
                 <div>
                     <h4>The Problem</h4>
-                    <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything...</p>
+                    <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
+                    <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
                 </div>
                 <div>
                     <h4>A Different Way</h4>
-                    <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
+                    <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
                 </div>
             </div>
             <div class="manifesto">
+                <p>The early internet was built by people who believed in transparency and freedom. They were right about what technology could enable. What they missed was that values need enforcement to survive.</p>
                 <div class="claim">They took the internet from us. We're taking it back.</div>
             </div>
         </div>
