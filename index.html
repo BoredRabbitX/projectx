@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polkadot | Software for Sovereignty</title>
+    <title>Polkadot</title>
     <link rel="icon" type="image/png" href="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,9 +13,10 @@
     <style>
         :root {
             --grey-950: #0F0F0F;
+            --grey-900: #1C1917;
+            --grey-800: #292524;
             --grey-400: #A8A29E;
             --cool-gray: #E5E7EB;
-            --pink-accent: #FF2867;
             --dm-sans: 'DM Sans', sans-serif;
             --dm-serif: 'DM Serif Display', serif;
         }
@@ -29,14 +30,14 @@
             scroll-behavior: smooth;
         }
 
-        /* --- NAVBAR FISSA E PULITA (SENZA NOISE) --- */
+        /* --- NAV MODIFICATA --- */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 80px;
-            background-color: var(--grey-950); /* Fisso e solido */
+            height: 64px; /* Altezza ridotta */
+            background-color: var(--grey-950);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -49,14 +50,15 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-weight: 700;
-            font-size: 20px;
-            letter-spacing: -0.5px;
+            font-family: var(--dm-sans); /* Font corretto */
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: -0.2px;
         }
 
         .nav-logo-img {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
         }
 
         .nav-links {
@@ -71,21 +73,18 @@
             font-size: 14px;
             font-weight: 500;
             opacity: 0.8;
-            transition: opacity 0.2s;
         }
 
-        .nav-links a:hover { opacity: 1; }
-
         .btn-sign {
-            background: #292524;
-            padding: 10px 20px;
+            background: var(--grey-800);
+            padding: 8px 16px;
             border-radius: 8px;
             font-weight: 600;
         }
 
-        /* --- HERO ZONE CON NOISE SABBIOSO --- */
+        /* --- HERO MODIFICATA --- */
         .hero {
-            height: 100vh;
+            height: 80vh; /* Altezza più breve */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -93,7 +92,6 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            margin-top: 0;
             background-color: var(--grey-950);
         }
 
@@ -103,14 +101,14 @@
             width: 200%; height: 200%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.25; /* Grana visibile come da immagine */
+            opacity: 0.25;
         }
 
         .noise-svg { width: 100%; height: 100%; }
 
         .title {
             font-family: var(--dm-serif);
-            font-size: clamp(80px, 12vw, 140px);
+            font-size: clamp(80px, 10vw, 120px);
             font-weight: 400;
             margin: 0;
             letter-spacing: -2px;
@@ -128,7 +126,7 @@
         }
 
         .subtitle {
-            font-size: clamp(18px, 2.5vw, 28px);
+            font-size: clamp(18px, 2.5vw, 24px);
             font-weight: 300;
             opacity: 0;
             position: absolute;
@@ -150,11 +148,11 @@
             100% { opacity: 0; }
         }
 
-        /* --- CONTENT SECTIONS --- */
+        /* --- SFONDO DIVERSO SOTTO HERO --- */
         .content-wrap {
             position: relative;
             z-index: 10;
-            background-color: var(--grey-950);
+            background-color: var(--grey-900); /* Colore sfondo cambiato */
         }
 
         .feature-grid {
@@ -163,7 +161,7 @@
             gap: 60px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 120px 40px;
+            padding: 100px 40px;
         }
 
         .feature-card h2 {
@@ -179,61 +177,63 @@
             line-height: 1.6;
         }
 
+        /* --- ALTRE SEZIONI --- */
         .manifesto-section {
             text-align: center;
             max-width: 900px;
-            margin: 100px auto;
-            padding: 0 40px;
+            margin: 0 auto;
+            padding: 100px 40px;
         }
 
-        .manifesto-section h1 {
-            font-family: var(--dm-serif);
-            font-size: clamp(40px, 6vw, 64px);
-            margin-bottom: 40px;
-            color: #FFF;
+        .manifesto-section h1 { font-family: var(--dm-serif); font-size: 56px; margin-bottom: 40px; color: #FFF; }
+        .manifesto-section p { font-size: 22px; color: var(--grey-400); line-height: 1.6; }
+
+        /* --- FOOTER AGGIUNTO --- */
+        .footer-main {
+            background-color: var(--grey-950);
+            padding: 80px 40px 40px;
+            border-top: 1px solid var(--grey-800);
         }
 
-        .manifesto-section p {
-            font-size: 22px;
-            color: var(--grey-400);
-            line-height: 1.6;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 60px;
         }
 
-        .problem-way-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            max-width: 1100px;
-            margin: 120px auto;
-            padding: 0 40px;
+        .footer-links {
+            display: flex;
+            gap: 80px;
         }
 
-        .problem-way-grid h2 { font-family: var(--dm-serif); font-size: 28px; margin-bottom: 25px; }
-        .problem-way-grid p { color: var(--grey-400); font-size: 16px; margin-bottom: 20px; }
+        .footer-col h4 { color: #FFF; font-size: 14px; margin-bottom: 20px; }
+        .footer-col a { display: block; color: var(--grey-400); text-decoration: none; font-size: 14px; margin-bottom: 12px; }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: 150px 40px;
-            text-align: center;
-            border-top: 1px solid #292524;
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid #1c1917;
+            display: flex;
+            justify-content: space-between;
+            color: var(--grey-500);
+            font-size: 12px;
         }
-
-        footer h3 { font-family: var(--dm-serif); font-size: 36px; margin-bottom: 40px; }
 
         .x-btn {
             background-color: #FFFFFF;
             color: #000;
-            padding: 14px 28px;
-            border-radius: 12px;
+            padding: 12px 24px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            transition: transform 0.2s;
         }
-        .x-btn:hover { transform: scale(1.05); }
-
     </style>
 </head>
 <body>
@@ -264,7 +264,6 @@
                 <rect width="100%" height="100%" filter="url(#noiseFilter)"></rect>
             </svg>
         </div>
-
         <h1 class="title">Polkadot</h1>
         <div class="subtitle-container">
             <div class="subtitle">Crypto beyond currency.</div>
@@ -294,26 +293,35 @@
             <h1>A new age of internet-enabled society</h1>
             <p>The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
         </section>
-
-        <section class="problem-way-grid">
-            <div class="col">
-                <h2>The Problem</h2>
-                <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships.</p>
-                <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
-            </div>
-            <div class="col">
-                <h2>A Different Way</h2>
-                <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
-                <p>We're building the social layer for this different kind of internet. Products that feel familiar, built on different foundations. That's Polkadot.</p>
-            </div>
-        </section>
-
-        <footer>
-            <h3>They took the internet from us. We're taking it back.</h3>
-            <p>Stay Updated. We're just getting started.</p>
-            <a href="#" class="x-btn">Follow on X</a>
-        </footer>
     </div>
+
+    <footer class="footer-main">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3 style="font-family: var(--dm-serif); font-size: 24px; margin-bottom: 10px;">Stay Updated</h3>
+                <p style="color: var(--grey-400); margin-bottom: 25px;">We're just getting started.</p>
+                <a href="#" class="x-btn">Follow on X</a>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>General</h4>
+                    <a href="#">About</a>
+                    <a href="#">Telemetry</a>
+                    <a href="#">Jobs</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Technology</h4>
+                    <a href="#">Whitepaper</a>
+                    <a href="#">Light paper</a>
+                    <a href="#">Wiki</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 Polkadot Network. All rights reserved.</div>
+            <div>Privacy Policy · Cookie Policy</div>
+        </div>
+    </footer>
 
 </body>
 </html>
