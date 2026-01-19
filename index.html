@@ -3,327 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polkadot | Products for people.</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <title>Merchant Dashboard</title>
     <style>
         :root {
-            --bg-dark: #0F0F0F; /* Near Black */
-            --bg-surface: #141312; 
-            --text-main: #E5E7EB; /* Cool Gray */
-            --text-muted: #78716C;
-            --pink-accent: #FF2867;
+            --topbar-bg: #111827; /* Nero/Grigio scuro profondo, senza noise */
+            --body-bg: #f9fafb;
+            --accent-blue: #3b82f6;
+            --text-main: #111827;
+            --text-muted: #6b7280;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            background-color: var(--bg-dark);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--body-bg);
             color: var(--text-main);
-            font-family: 'DM Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- HEADER --- */
-        header {
-            position: absolute;
-            top: 0;
-            width: 100%;
+        /* BARRA IN ALTO - CLONE IDENTICO */
+        .header {
+            background-color: var(--topbar-bg);
+            height: 64px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 30px 50px;
-            z-index: 100;
+            justify-content: space-between;
+            padding: 0 24px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
 
-        .logo-container {
+        .header-left {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-weight: 700;
-            font-size: 18px;
-            letter-spacing: -0.5px;
         }
 
-        .logo-icon {
-            width: 28px;
-            height: 28px;
-            background-image: url('polkadot-icon__cool-gray-on-near-black.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-
-        nav {
+        /* Logo Identico (Square con icona) */
+        .logo-box {
+            width: 32px;
+            height: 32px;
+            background-color: var(--accent-blue);
+            border-radius: 6px;
             display: flex;
-            gap: 30px;
             align-items: center;
-            font-size: 14px;
+            justify-content: center;
+        }
+
+        .logo-box svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .brand-text {
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .header-right {
+            color: #9ca3af;
+            font-size: 0.875rem;
             font-weight: 500;
         }
 
-        .btn-signin {
-            border: 1px solid #333;
-            padding: 8px 18px;
-            border-radius: 6px;
-            margin-left: 10px;
-        }
-
-        /* --- HERO SECTION (CON NOISE E SPOTLIGHT) --- */
-        .hero {
-            position: relative;
-            height: 85vh;
-            background-color: var(--bg-dark);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        /* Il noise è solo qui dentro */
-        #grain-canvas {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0.12;
-        }
-
-        .spotlight {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
-            background: radial-gradient(
-                circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                rgba(60, 60, 60, 0.2) 0%, 
-                rgba(15, 15, 15, 1) 100%
-            );
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 110px;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 26px;
-            color: var(--text-muted);
-            font-weight: 300;
-        }
-
-        /* --- SEZIONE FEATURES (GRIGLIA) --- */
-        .features-grid {
-            background-color: var(--bg-surface);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            padding: 100px 12%;
-            gap: 60px;
-            border-top: 1px solid #1C1917;
-        }
-
-        .feature-box h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .feature-box p {
-            color: var(--text-muted);
-            line-height: 1.6;
-            font-size: 15px;
-        }
-
-        /* --- SEZIONE CONTENT (TESTO E MANIFESTO) --- */
+        /* CONTENUTO */
         .main-content {
-            padding: 140px 12%;
-            text-align: center;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        .main-content h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 58px;
-            line-height: 1.1;
-            margin-bottom: 30px;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
         }
 
-        .subtitle {
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 0 0 4px 0;
+        }
+
+        .review-text {
             color: var(--text-muted);
-            font-size: 18px;
-            max-width: 800px;
-            margin: 0 auto 100px;
-        }
-
-        .columns-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 120px;
-            text-align: left;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .col h4 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 26px;
-            margin-bottom: 25px;
-        }
-
-        .col p {
-            color: var(--text-muted);
-            font-size: 16px;
-            line-height: 1.8;
             margin-bottom: 20px;
         }
 
-        /* --- FOOTER & CTA --- */
-        .cta-footer {
-            padding: 100px 12% 40px;
-            text-align: center;
+        /* SEZIONE RISPOSTA */
+        .reply-box {
+            border-top: 1px solid #f3f4f6;
+            padding-top: 20px;
         }
 
-        .quote-final {
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 18px;
-            margin-bottom: 50px;
+        .reply-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
-        .btn-x-white {
-            background: #FFFFFF;
-            color: #000;
-            padding: 14px 30px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+        textarea {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            box-sizing: border-box;
         }
 
-        footer {
-            margin-top: 100px;
-            padding: 30px 0;
-            border-top: 1px solid #1C1917;
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: #444;
+        .btn-submit {
+            background-color: var(--topbar-bg);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 12px;
+            cursor: pointer;
+            transition: opacity 0.2s;
         }
 
-        .footer-nav span { margin-left: 20px; }
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <div class="logo-icon"></div>
-            Polkadot
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-box">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+            </div>
+            <span class="brand-text">Merchant</span>
         </div>
-        <nav>
-            <span>Philosophy</span>
-            <span>Tech</span>
-            <span>Platform</span>
-            <span>Ecosystem</span>
-            <div class="btn-signin">Sign in</div>
-        </nav>
+        <div class="header-right">
+            Gestione Recensioni
+        </div>
     </header>
 
-    <section class="hero" id="hero-section">
-        <canvas id="grain-canvas"></canvas>
-        <div class="spotlight"></div>
-        <div class="hero-content">
-            <h1>Polkadot</h1>
-            <p>Products for people.</p>
-        </div>
-    </section>
-
-    <section class="features-grid">
-        <div class="feature-box">
-            <h3>Honest by design</h3>
-            <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
-        </div>
-        <div class="feature-box">
-            <h3>You own it</h3>
-            <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
-        </div>
-        <div class="feature-box">
-            <h3>Built for humans</h3>
-            <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
-        </div>
-    </section>
-
     <main class="main-content">
-        <h2>A new age of internet-enabled society</h2>
-        <p class="subtitle">The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
-
-        <div class="columns-container">
-            <div class="col">
-                <h4>The Problem</h4>
-                <p>Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships. They watch what you do. They decide what you see. They can lock you out whenever they want.</p>
-                <p>You don't have an account. You have permission to use someone else's platform, on their terms, until they decide otherwise.</p>
-            </div>
-            <div class="col">
-                <h4>A Different Way</h4>
-                <p>What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability. What if your stuff couldn't be frozen, your data couldn't be sold, and your apps couldn't disappear?</p>
-                <p>We're building the social layer for this different kind of internet. Products that feel familiar, built on different foundations. That's Polkadot.</p>
+        <h1 class="section-title">Recensioni</h1>
+        
+        <div class="card">
+            <h3 class="reviewer-name">Mario Rossi</h3>
+            <p class="review-text">"Servizio eccellente e spedizione rapida. Consigliato!"</p>
+            
+            <div class="reply-box">
+                <span class="reply-label">Rispondi alla recensione</span>
+                <textarea rows="3" placeholder="Scrivi qui la tua risposta ufficiale..."></textarea>
+                <button class="btn-submit">Invia Risposta</button>
             </div>
         </div>
 
-        <div class="cta-footer">
-            <p class="quote-final">They took the internet from us. We're taking it back.</p>
-            <div style="margin-bottom: 20px; color: var(--text-muted); font-size: 14px;">Stay Updated - We're just getting started.</div>
-            <a href="#" class="btn-x-white">𝕏 Follow on X</a>
+        <div class="card">
+            <h3 class="reviewer-name">Luca Bianchi</h3>
+            <p class="review-text">"Il prodotto è arrivato integro, ma con un giorno di ritardo."</p>
             
-            <footer>
-                <div>© 2026 Polkadot</div>
-                <div class="footer-nav">
-                    <span>Support</span><span>Wiki</span><span>About</span><span>𝕏</span><span>GitHub</span>
-                </div>
-            </footer>
+            <div class="reply-box">
+                <span class="reply-label">Rispondi alla recensione</span>
+                <textarea rows="3" placeholder="Scrivi qui la tua risposta ufficiale..."></textarea>
+                <button class="btn-submit">Invia Risposta</button>
+            </div>
         </div>
     </main>
 
-    <script>
-        // --- NOISE SOLO NELLA HERO ---
-        const canvas = document.getElementById('grain-canvas');
-        const ctx = canvas.getContext('2d');
-        let w, h;
-
-        function resize() {
-            w = canvas.width = canvas.offsetWidth;
-            h = canvas.height = canvas.offsetHeight;
-        }
-
-        function noise() {
-            const idata = ctx.createImageData(w, h);
-            const buffer32 = new Uint32Array(idata.data.buffer);
-            for (let i = 0; i < buffer32.length; i++) {
-                if (Math.random() < 0.5) buffer32[i] = 0xffffffff;
-            }
-            ctx.putImageData(idata, 0, 0);
-            requestAnimationFrame(noise);
-        }
-
-        window.addEventListener('resize', resize);
-        resize();
-        noise();
-
-        // --- SPOTLIGHT TRACKING ---
-        const hero = document.getElementById('hero-section');
-        window.addEventListener('mousemove', (e) => {
-            const rect = hero.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            hero.style.setProperty('--mouse-x', x + '%');
-            hero.style.setProperty('--mouse-y', y + '%');
-        });
-    </script>
 </body>
 </html>
