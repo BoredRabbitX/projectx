@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polkadot | Crypto beyond currency</title>
+    <title>Polkadot | Products for people</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
             --grey-950: #0F0F0F;
             --grey-900: #1C1917;
+            --grey-800: #292524;
             --grey-500: #78716C;
             --grey-400: #A8A29E;
             --cool-gray: #E5E7EB;
@@ -22,170 +23,258 @@
             color: var(--cool-gray);
             font-family: 'DM Sans', sans-serif;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- EFFETTO NOISE E MOUSE SHADOW --- */
-        #noise-canvas {
+        /* --- LAYER DEL RUMORE ANIMATO --- */
+        #grain-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
-            opacity: 0.15; /* Regola l'intensità del rumore */
+            z-index: 2;
+            opacity: 0.08; /* Intensità del noise come da screenshot */
         }
 
-        .hero-interactive {
+        /* --- HERO CON EFFETTO TORCIA --- */
+        .hero-section {
             position: relative;
-            height: 90vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            text-align: center;
             background: var(--grey-950);
+            cursor: none; /* Nasconde il cursore per l'effetto torcia */
         }
 
-        /* L'ombra che segue il mouse */
-        .mouse-shadow {
+        /* Ombra nera dinamica che segue il mouse */
+        .spotlight {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            z-index: 1;
             background: radial-gradient(
-                circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                rgba(28, 25, 23, 0) 0%, 
-                rgba(15, 15, 15, 1) 100%
+                circle 350px at var(--x, 50%) var(--y, 50%), 
+                rgba(255, 255, 255, 0.03) 0%, 
+                rgba(0, 0, 0, 0.95) 100%
             );
-            z-index: 2;
+            pointer-events: none;
         }
 
         /* --- CONTENUTI --- */
-        .content-wrapper {
+        .ui-overlay {
             position: relative;
-            z-index: 3;
-            text-align: center;
+            z-index: 10;
+            width: 100%;
         }
 
-        nav {
-            position: absolute;
+        header {
+            position: fixed;
             top: 0;
             width: 100%;
-            box-sizing: border-box;
             display: flex;
             justify-content: space-between;
-            padding: 30px 60px;
-            z-index: 10;
+            padding: 25px 50px;
+            box-sizing: border-box;
+            font-size: 13px;
+            font-weight: 500;
         }
 
         .hero-h1 {
             font-family: 'DM Serif Display', serif;
-            font-size: clamp(6rem, 15vw, 10rem);
+            font-size: 100px;
             margin: 0;
-            line-height: 0.9;
+            letter-spacing: -1px;
         }
 
-        .hero-p {
-            font-size: 1.5rem;
-            font-weight: 300;
+        .hero-sub {
+            font-size: 24px;
             color: var(--grey-400);
-            margin-top: 20px;
+            margin-top: 15px;
+            font-weight: 300;
         }
 
-        /* Sezioni Testuali */
-        .section-dark {
-            background: #11100F;
-            padding: 120px 10%;
+        /* Sezione Griglia (Honest by Design, etc) */
+        .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 60px;
-            border-top: 1px solid #222;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 100px 15%;
+            background: #121110;
+            border-top: 1px solid var(--grey-900);
+            position: relative;
+            z-index: 10;
         }
 
-        .title-serif {
+        .info-card h2 {
             font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 28px;
+            margin-bottom: 15px;
         }
 
-        .text-body {
+        .info-card p {
             color: var(--grey-500);
-            line-height: 1.7;
-            font-size: 1.1rem;
+            line-height: 1.6;
+            font-size: 15px;
         }
 
-        .btn-outline {
-            border: 1px solid var(--grey-500);
-            padding: 10px 20px;
-            color: white;
+        /* Sezione Manifesto */
+        .manifesto {
+            padding: 150px 15%;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .manifesto h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 52px;
+            margin-bottom: 30px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            text-align: left;
+            margin-top: 80px;
+        }
+
+        .btn-follow {
+            background: white;
+            color: black;
+            padding: 12px 30px;
+            border-radius: 50px;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        footer {
+            padding: 40px 50px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--grey-500);
+            border-top: 1px solid var(--grey-900);
         }
     </style>
 </head>
 <body>
 
-    <svg id="noise-canvas">
-        <filter id="grainy">
-            <feTurbulence type="turbulence" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch">
-                <animate attributeName="baseFrequency" dur="10s" values="0.65;0.68;0.65" repeatCount="indefinite" />
-            </feTurbulence>
-            <feColorMatrix type="saturate" values="0"/>
-        </filter>
-        <rect width="100%" height="100%" filter="url(#grainy)"></rect>
-    </svg>
+    <canvas id="grain-canvas"></canvas>
 
-    <nav>
-        <div style="font-weight: 700; font-size: 1.5rem;">Polkadot</div>
-        <div style="display: flex; gap: 30px; align-items: center;">
-            <span style="opacity: 0.6">Philosophy</span>
-            <span style="opacity: 0.6">Tech</span>
-            <span style="opacity: 0.6">Ecosystem</span>
-            <a href="#" class="btn-outline">Sign in</a>
+    <header class="ui-overlay">
+        <div style="font-weight: 800; font-size: 18px;">● Polkadot</div>
+        <div style="display: flex; gap: 25px;">
+            <span>Philosophy</span>
+            <span>Tech</span>
+            <span>Platform</span>
+            <span>Ecosystem</span>
+            <span style="border: 1px solid #444; padding: 4px 12px; border-radius: 4px;">Sign in</span>
         </div>
-    </nav>
+    </header>
 
-    <div class="hero-interactive" id="hero">
-        <div class="mouse-shadow"></div>
-        <div class="content-wrapper">
+    <section class="hero-section" id="hero">
+        <div class="spotlight"></div>
+        <div class="ui-overlay">
             <h1 class="hero-h1">Polkadot</h1>
-            <p class="hero-p">Crypto beyond currency.</p>
-        </div>
-    </div>
-
-    <section class="section-dark">
-        <div>
-            <h2 class="title-serif">Honest by design</h2>
-            <p class="text-body">The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
-        </div>
-        <div>
-            <h2 class="title-serif">You own it</h2>
-            <p class="text-body">No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
-        </div>
-        <div>
-            <h2 class="title-serif">Built for humans</h2>
-            <p class="text-body">The Second Age brings focus to the user. Technology that serves society, not the other way around.</p>
+            <p class="hero-sub">Products for people.</p>
         </div>
     </section>
 
+    <section class="info-grid">
+        <div class="info-card">
+            <h2>Honest by design</h2>
+            <p>The rules are in the product, not buried in fine print. We couldn't change that even if we wanted to.</p>
+        </div>
+        <div class="info-card">
+            <h2>You own it</h2>
+            <p>No company can seize or freeze your stuff, snoop on you, or shut you out. It's yours.</p>
+        </div>
+        <div class="info-card">
+            <h2>Built for humans</h2>
+            <p>Everything you expect from modern apps. Nothing you have to compromise on.</p>
+        </div>
+    </section>
+
+    <section class="manifesto">
+        <h2>A new age of internet-enabled society</h2>
+        <p style="color: var(--grey-500); font-size: 18px;">The way we connect, do business, and organize is changing. Polkadot is the social tooling to make it work.</p>
+
+        <div class="comparison">
+            <div>
+                <h3 style="font-family: 'DM Serif Display'; font-size: 24px;">The Problem</h3>
+                <p style="color: var(--grey-500);">Today's internet is built on a bad deal. You get free services. In exchange, companies own everything: your photos, your messages, your relationships.</p>
+            </div>
+            <div>
+                <h3 style="font-family: 'DM Serif Display'; font-size: 24px;">A Different Way</h3>
+                <p style="color: var(--grey-500);">What if the apps you use couldn't spy on you? Not because they promised not to, but because it is not within their ability.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 100px;">
+            <p style="font-style: italic; color: var(--grey-400);">They took the internet from us. We're taking it back.</p>
+            <a href="#" class="btn-follow">𝕏 Follow on X</a>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2026 Polkadot</div>
+        <div style="display: flex; gap: 20px;">
+            <span>Support</span>
+            <span>Wiki</span>
+            <span>About</span>
+            <span>𝕏</span>
+            <span>GitHub</span>
+        </div>
+    </footer>
+
     <script>
-        // Script per tracciare il mouse e muovere l'ombra
+        // --- LOGICA DEL RUMORE (GRAIN) ---
+        const canvas = document.getElementById('grain-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function grain() {
+            const pixels = ctx.createImageData(canvas.width, canvas.height);
+            const data = pixels.data;
+            for (let i = 0; i < data.length; i += 4) {
+                const val = Math.random() * 255;
+                data[i] = val;
+                data[i+1] = val;
+                data[i+2] = val;
+                data[i+3] = 255;
+            }
+            ctx.putImageData(pixels, 0, 0);
+            requestAnimationFrame(grain);
+        }
+        grain();
+
+        // --- LOGICA DEL MOUSE (SPOTLIGHT) ---
         const hero = document.getElementById('hero');
-        
-        window.addEventListener('mousemove', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            
-            // Calcola la posizione in percentuale per il CSS
-            const xPct = (x / window.innerWidth) * 100;
-            const yPct = (y / window.innerHeight) * 100;
-            
-            hero.style.setProperty('--mouse-x', `${xPct}%`);
-            hero.style.setProperty('--mouse-y', `${yPct}%`);
+        window.addEventListener('mousemove', e => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            hero.style.setProperty('--x', x + '%');
+            hero.style.setProperty('--y', y + '%');
         });
     </script>
 </body>
