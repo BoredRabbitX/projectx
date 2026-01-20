@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Ecosistema | Polkadot Italia</title>
+    <link rel="icon" type="image/png" href="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true">
+
+    <style>
+        @font-face {
+            font-family: 'DM Sans';
+            font-style: normal; font-weight: 300 700; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmsans/v14/rP2Fp2ywxg089UriCZa4Hz-A.woff2) format("woff2");
+        }
+        @font-face {
+            font-family: "DM Serif Display";
+            font-style: normal; font-weight: 400; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmserifdisplay/v15/-F6ufjN0uS2ttSbcK3lFE9v6v6icCIJ7.woff2) format("woff2");
+        }
+
+        :root {
+            --font-sans: 'DM Sans', sans-serif;
+            --font-serif: 'DM Serif Display', serif;
+            --grey-950: #0F0F0F;
+            --grey-900: #1C1917;
+            --grey-800: #292524;
+            --grey-400: #A8A29E;
+            --cool-gray: #E5E7EB;
+            --bg-nav: rgba(15, 15, 15, 0.4);
+            --text-main: #FFF;
+            --feature-bg: #141211;
+        }
+
+        body.light-mode {
+            --grey-950: #F5F5F4;
+            --grey-900: #E7E5E4;
+            --grey-800: #D6D3D1;
+            --grey-400: #57534E;
+            --cool-gray: #1C1917;
+            --bg-nav: rgba(245, 245, 244, 0.6);
+            --text-main: #0F0F0F;
+            --feature-bg: #E7E5E4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body, html {
+            background-color: var(--grey-950);
+            color: var(--cool-gray);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            width: 100%;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 56px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 40px; z-index: 1000; background: var(--bg-nav);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--grey-900);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 18px; color: var(--text-main); text-decoration: none; }
+        body.light-mode .nav-logo img { filter: invert(1); }
+
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a { font-size: 11px; text-decoration: none; color: var(--cool-gray); opacity: 0.6; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 1; }
+
+        .theme-toggle { background: none; border: none; cursor: pointer; color: var(--text-main); font-size: 18px; transition: transform 0.3s ease; }
+        .theme-toggle:hover { transform: scale(1.1); }
+
+        .hero {
+            position: relative;
+            width: 100vw; height: 60vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: var(--grey-950); overflow: hidden;
+        }
+        #noiseCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; text-align: center; pointer-events: none; }
+        .hero-title { font-family: var(--font-serif); font-size: clamp(45px, 6vw, 70px); color: var(--text-main); margin: 0; }
+        .hero-subtitle { color: var(--grey-400); font-size: 18px; margin-top: 20px; font-weight: 300; }
+
+        .main-content { padding: 80px 5%; max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
+
+        .section-block { margin-bottom: 100px; }
+        .section-header { margin-bottom: 40px; }
+        .section-header h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 10px; }
+        .section-header p { font-size: 14px; color: var(--grey-400); }
+        .subsection-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--grey-400); margin-bottom: 25px; display: block; border-bottom: 1px solid var(--grey-900); padding-bottom: 10px; }
+
+        .eco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-bottom: 60px; }
+        .eco-card { text-decoration: none; color: inherit; transition: opacity 0.3s; }
+        .eco-card:hover { opacity: 0.7; }
+        .eco-card h3 { font-family: var(--font-serif); font-size: 18px; color: var(--text-main); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .eco-card h3::after { content: '↗'; font-size: 14px; opacity: 0.5; }
+        .eco-card p { font-size: 13px; line-height: 1.6; color: var(--grey-400); }
+
+        .fade-section { opacity: 0; transform: translateY(30px); transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .fade-section.visible { opacity: 1; transform: translateY(0); }
+
+        .stay-in-loop { text-align: center; padding: 100px 0; border-top: 1px solid var(--grey-900); }
+        .stay-in-loop h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 10px; }
+        .stay-in-loop p { color: var(--grey-400); margin-bottom: 30px; font-size: 14px; }
+        .btn-x { background: var(--text-main); color: var(--grey-950); padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.3s; }
+        .btn-x:hover { opacity: 0.9; }
+
+        footer { padding: 40px 5%; border-top: 1px solid var(--grey-900); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--grey-400); }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            footer { flex-direction: column; gap: 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="nav-logo">
+            <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" width="18" height="18" alt="Polkadot">
+            Polkadot Italia
+        </a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="/philosophy">Filosofia</a>
+                <a href="/tech">Tecnologia</a>
+                <a href="/platform">Piattaforma</a>
+                <a href="/ecosystem">Ecosistema</a>
+            </div>
+            <button class="theme-toggle" id="theme-btn">☀</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <canvas id="noiseCanvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">Ecosistema</h1>
+            <p class="hero-subtitle">Team indipendenti che costruiscono sull'infrastruttura di Polkadot.</p>
+        </div>
+    </section>
+
+    <main class="main-content">
+        
+        <section class="section-block fade-section">
+            <div class="section-header">
+                <h2>Wallet</h2>
+                <p>Conserva i tuoi asset in sicurezza.</p>
+            </div>
+            
+            <span class="subsection-label">Software</span>
+            <div class="eco-grid">
+                <a href="#" class="eco-card">
+                    <h3>Nova</h3>
+                    <p>Mobile-first. Oltre 100 reti, staking, governance, supporto hardware wallet.</p>
+                </a>
+                <a href="#" class="eco-card">
+                    <h3>Talisman</h3>
+                    <p>Estensione browser con portale web. Portfolio, staking, trasferimenti cross-chain.</p>
+                </a>
+                <a href="#" class="eco-card">
+                    <h3>SubWallet</h3>
+                    <p>Desktop e mobile. Polkadot, Ethereum e catene Substrate in un unico posto.</p>
+                </a>
+            </div>
+
+            <span class="subsection-label">Hardware</span>
+            <div class="eco-grid">
+                <a href="#" class="eco-card">
+                    <h3>Polkadot Vault</h3>
+                    <p>Trasforma un vecchio telefono in un hardware wallet. Air-gapped, firma basata su QR.</p>
+                </a>
+                <a href="#" class="eco-card">
+                    <h3>Ledger</h3>
+                    <p>App nativa Polkadot con supporto per staking e governance.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="section-block fade-section">
+            <div class="section-header">
+                <h2>Bridge</h2>
+                <p>Trasferisci asset tra Polkadot e altre piattaforme.</p>
+            </div>
+            <div class="eco-grid">
+                <a href="#" class="eco-card">
+                    <h3>Snowbridge</h3>
+                    <p>Polkadot ↔ Ethereum. Verifica light-client su entrambi i lati. Integrato nell'infrastruttura core di Polkadot.</p>
+                </a>
+                <a href="#" class="eco-card">
+                    <h3>Hyperbridge</h3>
+                    <p>Polkadot ↔ catene EVM. Base, Optimism, Arbitrum, BSC ed Ethereum.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="section-block fade-section">
+            <div class="section-header">
+                <h2>DeFi</h2>
+                <p>Servizi finanziari, senza le banche.</p>
+            </div>
+            <div class="eco-grid">
+                <a href="#" class="eco-card">
+                    <h3>Hydration</h3>
+                    <p>Liquidità unificata. L'Omnipool combina gli asset in un'unica sede di trading. Swap, money market, primitive DeFi.</p>
+                </a>
+                <a href="#" class="eco-card">
+                    <h3>Bifrost</h3>
+                    <p>Liquid staking. Metti in staking DOT, ricevi vDOT. Guadagna premi di staking rimanendo liquido.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="section-block fade-section">
+            <div class="section-header">
+                <h2>Strumenti</h2>
+                <p>Ottieni il massimo da Polkadot.</p>
+            </div>
+            <div class="eco-grid">
+                <a href="#" class="eco-card">
+                    <h3>Subscan</h3>
+                    <p>Explorer multi-catena. Transazioni, account, blocchi ed eventi per ogni catena dell'ecosistema.</p>
+                </a>
+                <a href="#" class="eco-card">
+                    <h3>Subsquare</h3>
+                    <p>Piattaforma di governance. Visualizza e vota sui referendum, segui le proposte, partecipa alle discussioni.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="section-block fade-section">
+            <div class="section-header">
+                <h2>Esplora di più</h2>
+                <p>Questa pagina è solo l'inizio.</p>
+            </div>
+            <div class="eco-grid">
+                <a href="#" class="eco-card">
+                    <h3>Mappa dell'Ecosistema</h3>
+                    <p>Una mappa completa e interattiva di tutto ciò che viene costruito su Polkadot.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="stay-in-loop fade-section">
+            <h2>Resta aggiornato</h2>
+            <p>Segui gli aggiornamenti dell'ecosistema e i nuovi lanci.</p>
+            <a href="https://x.com/PolkadotItalia" class="btn-x">Segui su X</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div>Polkadot Italia © 2026</div>
+        <div style="display: flex; gap: 20px;">
+            <a href="#" style="text-decoration:none; color:inherit;">Supporto</a>
+            <a href="#" style="text-decoration:none; color:inherit;">Wiki</a>
+            <a href="#" style="text-decoration:none; color:inherit;">Info</a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // THEME TOGGLE
+        const themeBtn = document.getElementById('theme-btn');
+        themeBtn.onclick = () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            themeBtn.innerText = isLight ? '☾' : '☀';
+            if(window.material) window.material.uniforms.u_lightMode.value = isLight ? 1.0 : 0.0;
+        };
+
+        // NOISE CANVAS
+        const canvas = document.getElementById('noiseCanvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                u_time: { value: 0 },
+                u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
+                u_resolution: { value: new THREE.Vector2() },
+                u_lightMode: { value: 0.0 }
+            },
+            vertexShader: `void main() { gl_Position = vec4(position, 1.0); }`,
+            fragmentShader: `
+                precision highp float;
+                uniform float u_time;
+                uniform vec2 u_mouse;
+                uniform vec2 u_resolution;
+                uniform float u_lightMode;
+                float random(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
+                void main() {
+                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                    float n = random(uv + fract(u_time * 0.15)); 
+                    float dist = distance(uv, vec2(u_mouse.x, 1.0 - u_mouse.y));
+                    float shadow = smoothstep(0.1, 0.8, dist);
+                    vec3 color;
+                    if(u_lightMode > 0.5) {
+                        color = vec3(0.95) - vec3(mix(0.0, 0.20, n)) - (shadow * 0.12);
+                    } else {
+                        color = vec3(mix(0.0, 0.12, n)) - (shadow * 0.15);
+                    }
+                    gl_FragColor = vec4(color, 1.0);
+                }
+            `
+        });
+        window.material = material;
+        scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+        function resize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+        window.addEventListener('mousemove', (e) => {
+            material.uniforms.u_mouse.value.set(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+        });
+        function animate(time) {
+            material.uniforms.u_time.value = time * 0.001;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+
+        // FADE OBSERVER
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
+    </script>
+</body>
+</html>
