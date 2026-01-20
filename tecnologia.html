@@ -82,8 +82,21 @@
         }
         .theme-toggle:hover { transform: scale(1.1); }
 
-        .menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 4px; z-index: 1001; }
-        .menu-toggle span { width: 20px; height: 2px; background: var(--text-main); transition: 0.3s; }
+        /* Stile pulsante hamburger */
+        .menu-toggle { 
+            display: none; 
+            cursor: pointer; 
+            flex-direction: column; 
+            gap: 4px; 
+            z-index: 1100; 
+        }
+
+        .menu-toggle span { 
+            width: 20px; 
+            height: 2px; 
+            background: var(--text-main); 
+            transition: 0.3s; 
+        }
 
         .hero {
             position: relative;
@@ -132,12 +145,10 @@
             margin: 80px 0;
         }
 
-        /* DEFENSE AGAINST AI */
         .defense-section { margin-bottom: 100px; }
         .defense-section h2 { font-family: var(--font-serif); font-size: 28px; margin-bottom: 20px; color: var(--text-main); }
         .defense-section p { font-size: 14px; line-height: 1.8; color: var(--grey-400); margin-bottom: 20px; }
 
-        /* STATS SECTION */
         .stats-container { text-align: center; margin-bottom: 100px; }
         .stats-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -160,7 +171,6 @@
         }
         .visible .path-anim { stroke-dashoffset: 0; }
 
-        /* INFO LIST (HALF-SECOND ETC) */
         .info-list { margin-bottom: 100px; }
         .info-row {
             display: grid; grid-template-columns: 1fr 1.5fr;
@@ -169,12 +179,10 @@
         .info-row h3 { font-family: var(--font-serif); font-size: 20px; color: var(--text-main); }
         .info-row p { font-size: 14px; color: var(--grey-400); line-height: 1.7; }
 
-        /* BUILDING ON POLKADOT SECT */
         .building-header { text-align: center; margin-bottom: 40px; }
         .building-header h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 10px; }
         .building-header p { font-size: 14px; color: var(--grey-400); }
 
-        /* CTA */
         .cta-section { text-align: center; margin: 100px 0; }
         .btn-white {
             background: var(--text-main); color: var(--grey-950);
@@ -192,14 +200,26 @@
 
         @media (max-width: 768px) {
             nav { padding: 0 20px; }
+            .nav-logo { font-size: 16px; }
             .menu-toggle { display: flex; order: 3; }
-            .nav-links {
-                position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-                background: var(--grey-950); flex-direction: column; justify-content: center;
-                transition: 0.4s; z-index: 1000;
-            }
-            .nav-links.active { right: 0; }
             .theme-toggle { order: 2; margin-left: auto; margin-right: 15px; }
+
+            .nav-links {
+                position: fixed; 
+                top: 0; 
+                right: -100%; 
+                width: 100%; 
+                height: 100vh;
+                background: var(--grey-950); 
+                flex-direction: column; 
+                justify-content: center;
+                transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); 
+                z-index: 1050;
+            }
+
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 18px; opacity: 1; color: var(--text-main); }
+            
             .info-row { grid-template-columns: 1fr; gap: 10px; }
             footer { flex-direction: column; gap: 20px; text-align: center; }
         }
@@ -212,7 +232,7 @@
             <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" width="18" height="18" alt="Polkadot">
             Polkadot Italia
         </a>
-        <!-- QUI SI MODIFICA IL MENU DI NAVIGAZIONE -->
+        
         <div class="nav-right">
             <div class="nav-links" id="nav-list">
                 <a href="./filosofia.html">Filosofia</a>
@@ -382,12 +402,12 @@
     <script>
         // THEME TOGGLE
         const themeBtn = document.getElementById('theme-btn');
-        const themeIcon = document.getElementById('theme-icon');
         themeBtn.onclick = () => {
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
+            const themeIcon = document.getElementById('theme-icon');
             themeIcon.innerText = isLight ? '☾' : '☀';
-            material.uniforms.u_lightMode.value = isLight ? 1.0 : 0.0;
+            if(window.material) window.material.uniforms.u_lightMode.value = isLight ? 1.0 : 0.0;
         };
 
         // NOISE CANVAS
@@ -425,6 +445,7 @@
                 }
             `
         });
+        window.material = material;
         scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
         function resize() {
             renderer.setSize(window.innerWidth, window.innerHeight);
@@ -471,7 +492,19 @@
             });
         }
 
-        document.getElementById('mobile-menu').onclick = () => document.getElementById('nav-list').classList.toggle('active');
+        // MENU HAMBURGER LOGIC
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        menuToggle.onclick = (e) => {
+            e.stopPropagation();
+            navList.classList.toggle('active');
+        };
+
+        // Chiudi il menu cliccando fuori
+        document.addEventListener('click', () => {
+            navList.classList.remove('active');
+        });
     </script>
 </body>
 </html>
