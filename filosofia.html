@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Polkadot Italia</title>
+    <title>Filosofia | Polkadot Italia</title>
     <link rel="icon" type="image/png" href="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true">
 
     <style>
@@ -21,14 +21,14 @@
         :root {
             --font-sans: 'DM Sans', sans-serif;
             --font-serif: 'DM Serif Display', serif;
-            --grey-950: #0F0F0F;
+            --grey-950: #0F0F0F; /* Sfondo principale */
             --grey-900: #1C1917;
             --grey-800: #292524;
             --grey-400: #A8A29E;
             --cool-gray: #E5E7EB;
             --bg-nav: rgba(15, 15, 15, 0.4);
             --text-main: #FFF;
-            --feature-bg: #141211;
+            --feature-bg: #141211; /* Sfondo dei box */
         }
 
         body.light-mode {
@@ -50,9 +50,10 @@
             font-family: var(--font-sans);
             overflow-x: hidden;
             width: 100%;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            transition: background-color 0.5s ease;
         }
 
+        /* --- NAVIGATION --- */
         nav {
             position: fixed; top: 0; left: 0; width: 100%; height: 56px;
             display: flex; justify-content: space-between; align-items: center;
@@ -60,56 +61,61 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--grey-900);
         }
-        .nav-logo { 
-            display: flex; align-items: center; gap: 10px; 
-            font-family: var(--font-serif); font-size: 18px; 
-            color: var(--text-main); text-decoration: none;
-        }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 18px; color: var(--text-main); text-decoration: none; }
         body.light-mode .nav-logo img { filter: invert(1); }
-
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .nav-links { display: flex; gap: 28px; align-items: center; }
         .nav-links a { font-size: 11px; text-decoration: none; color: var(--cool-gray); opacity: 0.6; }
-
         .theme-toggle { background: none; border: none; cursor: pointer; color: var(--text-main); font-size: 18px; }
 
-        /* --- PHILOSOPHY LAYOUT --- */
-        .container { max-width: 1000px; margin: 0 auto; padding: 140px 5% 80px; }
+        /* --- CONTENT --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 140px 5% 100px; }
 
-        .page-title { text-align: center; margin-bottom: 100px; }
-        .page-title h1 { font-family: var(--font-serif); font-size: clamp(60px, 10vw, 100px); color: var(--text-main); margin-bottom: 10px; }
-        .page-title p { font-size: 14px; color: var(--grey-400); letter-spacing: 0.1em; text-transform: uppercase; }
+        .philosophy-title { text-align: center; margin-bottom: 120px; }
+        .philosophy-title h1 { font-family: var(--font-serif); font-size: clamp(60px, 10vw, 100px); color: var(--text-main); margin-bottom: 10px; }
+        .philosophy-title p { font-size: 14px; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.1em; }
 
-        .intro-block { margin-bottom: 120px; }
-        .intro-block h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 20px; }
-        .intro-block em { font-size: 18px; color: var(--grey-400); display: block; margin-bottom: 30px; font-style: italic; }
-        .intro-block p { font-size: 16px; line-height: 1.8; color: var(--grey-400); margin-bottom: 25px; }
+        .section-intro { margin-bottom: 140px; }
+        .section-intro h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 24px; }
+        .section-intro em { font-size: 18px; color: var(--grey-400); display: block; margin-bottom: 40px; font-style: italic; }
+        .section-intro p { font-size: 16px; line-height: 1.8; color: var(--grey-400); margin-bottom: 24px; }
 
-        .lineage-section h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 10px; }
-        .lineage-section .sub { font-size: 14px; color: var(--grey-400); margin-bottom: 60px; }
+        /* Timeline Grid System */
+        .lineage-header { margin-bottom: 80px; }
+        .lineage-header h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 12px; }
+        .lineage-header p { font-size: 14px; color: var(--grey-400); }
 
-        /* Timeline & Quotes Grid */
-        .grid-layout { display: grid; grid-template-columns: 1fr 320px; gap: 60px; }
+        .lineage-row { 
+            display: grid; 
+            grid-template-columns: 1fr 340px; 
+            gap: 60px; 
+            margin-bottom: 100px; 
+            align-items: center; /* Allinea perfettamente le altezze */
+        }
 
-        .timeline-content { display: flex; flex-direction: column; gap: 80px; }
-        .timeline-item span.tag { font-size: 10px; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; display: block; }
-        .timeline-item h3 { font-family: var(--font-serif); font-size: 22px; color: var(--text-main); margin-bottom: 12px; }
-        .timeline-item p { font-size: 14px; line-height: 1.7; color: var(--grey-400); }
+        .lineage-text span.tag { font-size: 10px; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; display: block; }
+        .lineage-text h3 { font-family: var(--font-serif); font-size: 24px; color: var(--text-main); margin-bottom: 16px; }
+        .lineage-text p { font-size: 14px; line-height: 1.7; color: var(--grey-400); }
 
-        .sidebar-quotes { display: flex; flex-direction: column; gap: 30px; }
-        .quote-box { background: var(--feature-bg); border: 1px solid var(--grey-900); padding: 30px; border-radius: 8px; }
-        .quote-box p { font-style: italic; font-size: 14px; line-height: 1.6; color: var(--cool-gray); margin-bottom: 15px; }
-        .quote-box span { font-size: 11px; color: var(--grey-400); display: block; }
+        .quote-box { 
+            background: var(--feature-bg); 
+            border: 1px solid var(--grey-900); 
+            padding: 32px; 
+            border-radius: 12px; 
+            transition: background 0.5s ease;
+        }
+        .quote-box p { font-style: italic; font-size: 14px; line-height: 1.6; color: var(--cool-gray); margin-bottom: 20px; }
+        .quote-box cite { font-style: normal; font-size: 11px; color: var(--grey-400); display: block; }
 
-        .final-cta { text-align: center; margin-top: 140px; }
-        .final-cta h2 { font-family: var(--font-serif); font-size: 28px; color: var(--text-main); margin-bottom: 40px; }
-        .btn-x { background: var(--text-main); color: var(--grey-950); padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; }
+        .footer-cta { text-align: center; margin-top: 150px; }
+        .footer-cta h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 40px; line-height: 1.3; }
+        .btn-x { background: var(--text-main); color: var(--grey-950); padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 10px; }
 
         footer { padding: 40px 5%; border-top: 1px solid var(--grey-900); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--grey-400); }
 
-        @media (max-width: 850px) {
-            .grid-layout { grid-template-columns: 1fr; }
-            .sidebar-quotes { order: -1; }
+        @media (max-width: 900px) {
+            .lineage-row { grid-template-columns: 1fr; gap: 30px; }
+            .philosophy-title h1 { font-size: 50px; }
             .nav-links { display: none; }
         }
     </style>
@@ -133,92 +139,82 @@
     </nav>
 
     <div class="container">
-        <header class="page-title fade-section">
+        <header class="philosophy-title">
             <h1>Filosofia</h1>
-            <p>Tecnologia sovrana per persone sovrane.</p>
+            <p>Sovereign technology for sovereign people.</p>
         </header>
 
-        <section class="intro-block fade-section">
-            <h2>L'alba di una tecnologia umano-centrica</h2>
-            <em>In un'era di accelerazione, Polkadot ritorna alle radici: la tecnologia come strumento di liberazione, non di controllo.</em>
-            <p>I primi personal computer e internet sono stati costruiti da persone che volevano dare agli individui strumenti per la creatività e la libertà. Oggi, ci troviamo a vivere in un mondo in cui gli esseri umani sono trattati come carburante per algoritmi da trilioni di dollari e grandi aziende tecnologiche.</p>
-            <p>Questa crisi di proprietà è ora amplificata dall'accelerazione dell'IA. Gli algoritmi dettano ciò che vedi, mentre sofisticati contenuti fake dissolvono il confine tra verità e fabbricazione, compromettendo la nostra realtà condivisa.</p>
-            <p>Polkadot offre un'alternativa radicale. Crediamo che la tecnologia debba essere reclamata come uno strumento dell'agire umano, permettendo agli individui di tracciare i propri percorsi verso la libertà.</p>
-            <p><strong>È, e sarà sempre, il tuo strumento, sotto il tuo controllo.</strong></p>
+        <section class="section-intro">
+            <h2>A Dawn of Human-Centric Technology</h2>
+            <em>In an age of acceleration, Polkadot returns to the root: technology as a tool for liberation, not control.</em>
+            <p>The early personal computers and the internet were built by people who wished to empower individuals with tools for creativity and freedom. Today, we find ourselves living in a world where humans are rather treated as fuel for trillion-dollar algorithms and big tech companies.</p>
+            <p>This crisis of ownership is now amplified by accelerating AI. Algorithms dictate what you see, while sophisticated fake content dissolves the boundary between truth and fabrication, compromising our shared reality.</p>
+            <p>Polkadot offers a radical alternative. We believe technology must be reclaimed as an instrument of human agency, enabling individuals to shape their own paths to freedom.</p>
+            <p><strong>It is, and will always be, your tool, under your own control.</strong></p>
         </section>
 
-        <section class="lineage-section fade-section">
-            <h2>Un lignaggio di filosofia</h2>
-            <p class="sub">La tecnologia cambia, ma l'ethos resiste. Tracciare le radici della sovranità umana nel mondo digitale.</p>
-            
-            <div class="grid-layout">
-                <div class="timeline-content">
-                    <div class="timeline-item">
-                        <span class="tag">Oltre il Crypto</span>
-                        <h3>Il vero lignaggio del Web3</h3>
-                        <p>La narrativa tipica spesso connette il Web3 solo a Bitcoin o all'evoluzione dal Web1. Tuttavia, questa visione perde il quadro generale. L'ethos originale del Web3 — come immaginato da Gavin Wood — affonda le radici nella stessa filosofia che ha dato il via alla rivoluzione del personal computing. L'obiettivo è sempre stato coerente: equipaggiare gli individui con il potere di tracciare i propri percorsi e determinare le proprie vite senza intermediari.</p>
-                    </div>
+        <div class="lineage-header">
+            <h2>A Lineage of Philosophy</h2>
+            <p>The technology changes, but the ethos endures. Tracing the roots of human sovereignty in the digital world.</p>
+        </div>
 
-                    <div class="timeline-item">
-                        <span class="tag">La Controcultura (Anni '60-'70)</span>
-                        <h3>Accesso agli Strumenti</h3>
-                        <p>Molto prima del Macintosh, pionieri come Steve Jobs furono influenzati dalla controcultura degli anni '60. Il Whole Earth Catalog offriva una radicale alternativa: "Accesso agli Strumenti" — una filosofia che dava potere agli individui per educare se stessi e progettare le proprie vite. Questo spirito, che valorizzava il potere personale, divenne l'ethos fondante per i primi computer Apple.</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <span class="tag">Libertà Digitale (Anni '80-'90)</span>
-                        <h3>Il Codice è Libertà, la Privacy è Potere</h3>
-                        <p>Con la maturazione del computing, l'attenzione si spostò sulla libertà di avere il controllo sui programmi che utilizzi. Negli anni '90, con l'ascesa di Internet, i Cypherpunk enfatizzarono che una società digitale aperta richiede la privacy — il potere di rivelare se stessi selettivamente. L'obiettivo rimaneva chiaro: assicurare che la tecnologia servisse l'utente, non l'autorità.</p>
-                    </div>
-                </div>
-
-                <div class="sidebar-quotes">
-                    <div class="quote-box">
-                        <p>"I computer sono usati principalmente contro le persone invece che per le persone... È ora di cambiare tutto questo."</p>
-                        <span>— People's Computer Company (1972)</span>
-                    </div>
-                    <div class="quote-box">
-                        <p>"Un regno di potere personale intimo, individuale, si sta sviluppando... il potere dell'individuo di plasmare il proprio ambiente."</p>
-                        <span>— Stewart Brand, Whole Earth Catalog (1968)</span>
-                    </div>
-                    <div class="quote-box">
-                        <p>"Libertà significa avere il controllo sulla propria vita... meriti di avere il controllo sui programmi che usi."</p>
-                        <span>— Richard Stallman, FSF</span>
-                    </div>
-                </div>
+        <div class="lineage-row">
+            <div class="lineage-text">
+                <span class="tag">Beyond Crypto</span>
+                <h3>The True Lineage of Web3</h3>
+                <p>The typical narrative often connects Web3 solely to Bitcoin or the evolution from Web1. However, this view misses the bigger picture. The original ethos of Web3 — as envisioned by Gavin Wood — is rooted in the same philosophy that sparked the personal computing revolution. The goal has always been consistent: to equip individuals with the power to shape their own paths, manage their rights, and determine their lives without intermediaries.</p>
             </div>
-        </section>
+            <div class="quote-box">
+                <p>“Computers are mostly used against people instead of for people... Time to change all that – we need a People’s Computer Company.”</p>
+                <cite>— People’s Computer Company Vol.1 (1972)</cite>
+            </div>
+        </div>
 
-        <section class="final-cta fade-section">
-            <h2>Con Polkadot, la tecnologia torna ad essere <br>uno strumento per gli umani.</h2>
-            <a href="https://x.com/PolkadotItalia" class="btn-x">𝕏 Seguici su X</a>
+        <div class="lineage-row">
+            <div class="lineage-text">
+                <span class="tag">The Counterculture (1960s-70s)</span>
+                <h3>Access to Tools</h3>
+                <p>Long before the Macintosh, pioneers like Steve Jobs were deeply shaped by the 60s counterculture. They rejected lives dominated by corporate uniformity and mass media in the 50s. The Whole Earth Catalog offered a radical alternative: “Access to Tools” – a philosophy empowering individuals to educate themselves and design their own lives. This spirit, valuing personal power, became the foundational ethos for the first Apple computers.</p>
+            </div>
+            <div class="quote-box">
+                <p>“A realm of intimate, personal power is developing... power of the individual to conduct his own education, find his own inspiration, shape his own environment.”</p>
+                <cite>— Stewart Brand, Whole Earth Catalog (1968)</cite>
+            </div>
+        </div>
+
+        <div class="lineage-row">
+            <div class="lineage-text">
+                <span class="tag">The Fight for Digital Freedom (1980s-90s)</span>
+                <h3>Code is Speech, Privacy is Power</h3>
+                <p>As computing matured, the focus shifted to software and freedom as having control over the programs you use. Hacker Ethics became the mantra for computer hackers. By the 1990s, with the rise of the Internet, the Cypherpunks emphasized that an open digital society requires privacy – the power to selectively reveal oneself. The objective remained clear: to ensure technology serves the user, not the authority.</p>
+            </div>
+            <div class="quote-box">
+                <p>“Freedom means having control over your own life... You deserve to have control over the programs you use.”</p>
+                <cite>— Richard Stallman, Free Software Foundation</cite>
+            </div>
+        </div>
+
+        <section class="footer-cta">
+            <h2>With Polkadot, technology becomes <br>a tool for humans again.</h2>
+            <a href="https://x.com/PolkadotItalia" class="btn-x">𝕏 Follow on X</a>
         </section>
     </div>
 
     <footer>
         <div>Polkadot Italia© 2026</div>
         <div style="display: flex; gap: 20px;">
-            <a href="#" style="text-decoration:none; color:inherit;">Supporto</a>
+            <a href="#" style="text-decoration:none; color:inherit;">Support</a>
             <a href="#" style="text-decoration:none; color:inherit;">Wiki</a>
-            <a href="#" style="text-decoration:none; color:inherit;">Info</a>
+            <a href="#" style="text-decoration:none; color:inherit;">About</a>
         </div>
     </footer>
 
     <script>
-        // Tema Dark/Light
         const themeBtn = document.getElementById('theme-btn');
         themeBtn.onclick = () => {
             document.body.classList.toggle('light-mode');
             themeBtn.innerText = document.body.classList.contains('light-mode') ? '☾' : '☀';
         };
-
-        // Animazioni al caricamento/scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
     </script>
 </body>
 </html>
