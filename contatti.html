@@ -73,6 +73,22 @@
         .theme-toggle { background: none; border: none; cursor: pointer; color: var(--text-main); font-size: 18px; transition: transform 0.3s ease; }
         .theme-toggle:hover { transform: scale(1.1); }
 
+        /* Stile pulsante hamburger */
+        .menu-toggle { 
+            display: none; 
+            cursor: pointer; 
+            flex-direction: column; 
+            gap: 4px; 
+            z-index: 1100; 
+        }
+
+        .menu-toggle span { 
+            width: 20px; 
+            height: 2px; 
+            background: var(--text-main); 
+            transition: 0.3s; 
+        }
+
         /* Hero / Header Section */
         .hero {
             position: relative;
@@ -135,61 +151,32 @@
 
         footer { padding: 40px 5%; border-top: 1px solid var(--grey-900); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--grey-400); }
 
+        /* Media Query per Mobile */
         @media (max-width: 768px) {
             nav { padding: 0 20px; }
-            .nav-links { display: none; }
+            .nav-logo { font-size: 16px; }
+            .menu-toggle { display: flex; order: 3; }
+            .theme-toggle { order: 2; margin-left: auto; margin-right: 15px; }
+
+            .nav-links {
+                position: fixed; 
+                top: 0; 
+                right: -100%; 
+                width: 100%; 
+                height: 100vh;
+                background: var(--grey-950); 
+                flex-direction: column; 
+                justify-content: center;
+                transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); 
+                z-index: 1050;
+            }
+
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 18px; opacity: 1; color: var(--text-main); }
+            
             .contact-form { padding: 30px; }
             footer { flex-direction: column; gap: 20px; text-align: center; }
         }
-
-
-    /* Stile base del pulsante hamburger (nascosto di default) */
-.menu-toggle { 
-    display: none; 
-    cursor: pointer; 
-    flex-direction: column; 
-    gap: 4px; 
-    z-index: 1001; 
-}
-
-.menu-toggle span { 
-    width: 20px; 
-    height: 2px; 
-    background: var(--text-main); 
-    transition: 0.3s; 
-}
-
-/* Comportamento Mobile (sotto i 768px) */
-@media (max-width: 768px) {
-    .menu-toggle { 
-        display: flex; /* Appare su mobile */
-        order: 3; 
-    }
-
-    .nav-links {
-        position: fixed; 
-        top: 0; 
-        right: -100%; /* Nascosto a destra */
-        width: 100%; 
-        height: 100vh;
-        background: var(--grey-950); 
-        flex-direction: column; 
-        justify-content: center;
-        transition: 0.4s; 
-        z-index: 1000;
-    }
-
-    /* Classe aggiunta via JavaScript quando si clicca l'hamburger */
-    .nav-links.active { 
-        right: 0; /* Entra in scivolamento */
-    }
-
-    .nav-links a { 
-        font-size: 18px; 
-        opacity: 1; 
-        color: var(--text-main); 
-    }
-}
     </style>
 </head>
 <body>
@@ -199,7 +186,7 @@
             <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" width="18" height="18" alt="Polkadot">
             Polkadot Italia
         </a>
-        <!-- QUI SI MODIFICA IL MENU DI NAVIGAZIONE -->
+        
         <div class="nav-right">
             <div class="nav-links" id="nav-list">
                 <a href="./filosofia.html">Filosofia</a>
@@ -354,13 +341,19 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
 
+        // MENU HAMBURGER LOGIC
         const menuToggle = document.getElementById('mobile-menu');
-const navList = document.getElementById('nav-list');
+        const navList = document.getElementById('nav-list');
 
-// Al click sul pulsante hamburger, aggiunge o toglie la classe 'active' alla lista link
-menuToggle.onclick = () => {
-    navList.classList.toggle('active');
-};
+        menuToggle.onclick = (e) => {
+            e.stopPropagation();
+            navList.classList.toggle('active');
+        };
+
+        // Chiudi il menu cliccando fuori
+        document.addEventListener('click', () => {
+            navList.classList.remove('active');
+        });
     </script>
 </body>
 </html>
