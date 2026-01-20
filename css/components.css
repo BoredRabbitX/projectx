@@ -140,8 +140,8 @@ body {
 
 .hero-subtitle {
   color: var(--grey-400);
-  font-size: 16px;
-  margin-top: 20px;
+  font-size: clamp(14px, 1.8vw, 17px);
+  margin-top: 15px;
   font-weight: 300;
 }
 
@@ -240,20 +240,18 @@ body[data-page="home"] .hero-title {
 }
 
 .main-content {
-  padding: 80px 5%;
+  padding: 100px 5%;
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
 }
 
-body[data-page="home"] .main-content {
-  padding: 100px 5%;
-}
+
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: clamp(24px, 3.5vw, 38px);
+  font-size: 28px;
   text-align: center;
   margin-bottom: 70px;
   color: var(--text-main);
@@ -312,7 +310,7 @@ body[data-page="home"] .cta-section {
   background: var(--text-main);
   color: var(--grey-950);
   padding: 12px 28px;
-  border-radius: 50px;
+  border-radius: 12px;
   text-decoration: none;
   font-weight: 700;
   font-size: 13px;
@@ -373,7 +371,7 @@ body[data-page="tecnologia"] .hero {
 }
 
 body[data-page="tecnologia"] .hero-title {
-  font-size: clamp(45px, 6vw, 70px);
+  font-size: clamp(55px, 8vw, 80px);
 }
 
 body[data-page="tecnologia"] .columns-grid {
@@ -404,8 +402,8 @@ body[data-page="tecnologia"] .defense-section h2 {
 }
 
 body[data-page="tecnologia"] .defense-section p {
-  font-size: 14px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--grey-400);
   margin-bottom: 20px;
 }
@@ -486,14 +484,18 @@ body[data-page="tecnologia"] .info-row {
 
 body[data-page="tecnologia"] .info-row h3 {
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: 24px;
   color: var(--text-main);
 }
 
 body[data-page="tecnologia"] .info-row p {
-  font-size: 14px;
+
+  font-size: 15px;
+
   color: var(--grey-400);
+
   line-height: 1.7;
+
 }
 
 body[data-page="tecnologia"] .building-header {
@@ -502,22 +504,30 @@ body[data-page="tecnologia"] .building-header {
 }
 
 body[data-page="tecnologia"] .building-header h2 {
+
   font-family: var(--font-serif);
-  font-size: 32px;
+
+  font-size: 28px;
+
   color: var(--text-main);
+
   margin-bottom: 10px;
+
 }
 
 body[data-page="tecnologia"] .building-header p {
-  font-size: 14px;
+
+  font-size: 15px;
+
   color: var(--grey-400);
+
 }
 
 .btn-white {
   background: var(--text-main);
   color: var(--grey-950);
   padding: 12px 28px;
-  border-radius: 50px;
+  border-radius: 12px;
   text-decoration: none;
   font-weight: 700;
   font-size: 13px;
@@ -542,13 +552,13 @@ body[data-page="tecnologia"] .building-header p {
 
 .section-header h2 {
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: 28px;
   color: var(--text-main);
   margin-bottom: 10px;
 }
 
 .section-header p {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--grey-400);
 }
 
@@ -582,9 +592,9 @@ body[data-page="tecnologia"] .building-header p {
 
 .eco-card h3 {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 24px;
   color: var(--text-main);
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -597,8 +607,8 @@ body[data-page="tecnologia"] .building-header p {
 }
 
 .eco-card p {
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--grey-400);
 }
 
@@ -609,16 +619,21 @@ body[data-page="tecnologia"] .building-header p {
 }
 
 .stay-in-loop h2 {
+
   font-family: var(--font-serif);
-  font-size: 32px;
+
+  font-size: 28px;
+
   color: var(--text-main);
+
   margin-bottom: 10px;
+
 }
 
 .stay-in-loop p {
   color: var(--grey-400);
   margin-bottom: 30px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 /* ============== piattaforma.html ============== */
@@ -660,14 +675,14 @@ body[data-page="piattaforma"] .stat-sub {
 
 .usage-col h3 {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 24px;
   color: var(--text-main);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .usage-col p {
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--grey-400);
 }
 
@@ -692,11 +707,17 @@ body[data-page="piattaforma"] .cta-section h2 {
 
 /* ============== filosofia.html ============== */
 body[data-page="filosofia"] .container {
+
   max-width: 1000px;
+
   margin: 0 auto;
-  padding: 80px 5% 60px;
+
+  padding: 100px 5% 60px;
+
   position: relative;
+
   z-index: 2;
+
 }
 
 .page-title {
@@ -706,32 +727,34 @@ body[data-page="filosofia"] .container {
 
 .page-title h1 {
   font-family: var(--font-serif);
-  font-size: clamp(60px, 10vw, 90px);
+  font-size: clamp(55px, 8vw, 80px);
   color: var(--text-main);
-  margin-bottom: 10px;
+  margin: 0;
 }
 
 .page-title p {
-  font-size: 14px;
+  font-size: clamp(14px, 1.8vw, 17px);
   color: var(--grey-400);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 300;
+  margin-top: 15px;
 }
 
 .intro-section {
-  margin-top: 80px;
+  margin-top: 0;
   margin-bottom: 120px;
 }
 
 .intro-section h2 {
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: 28px;
   color: var(--text-main);
   margin-bottom: 24px;
 }
 
 .intro-section em {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--grey-400);
   display: block;
   margin-bottom: 40px;
@@ -739,21 +762,21 @@ body[data-page="filosofia"] .container {
 }
 
 .intro-section p {
-  font-size: 16px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--grey-400);
   margin-bottom: 25px;
 }
 
 .lineage-header h2 {
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: 28px;
   color: var(--text-main);
   margin-bottom: 10px;
 }
 
 .lineage-header p {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--grey-400);
   margin-bottom: 60px;
 }
@@ -783,7 +806,7 @@ body[data-page="filosofia"] .container {
 }
 
 .lineage-text p {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.7;
   color: var(--grey-400);
 }
@@ -819,7 +842,7 @@ body[data-page="filosofia"] .quote-box cite {
 
 .completing-cycle h2 {
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: 28px;
   color: var(--text-main);
   margin-bottom: 20px;
 }
@@ -858,16 +881,28 @@ body[data-page="filosofia"] .quote-box cite {
   font-size: 14px;
 }
 
+body[data-page="piattaforma"] .hero-title {
+  font-size: clamp(55px, 8vw, 80px);
+}
+
+body[data-page="ecosistema"] .hero-title {
+  font-size: clamp(55px, 8vw, 80px);
+}
+
+body[data-page="contatti"] .hero-title {
+  font-size: clamp(55px, 8vw, 80px);
+}
+
 /* ============== contatti.html ============== */
 body[data-page="contatti"] .hero {
-  height: 50vh;
+  height: 60vh;
 }
 
 body[data-page="contatti"] .hero-subtitle {
-  font-size: 16px;
+  font-size: clamp(14px, 1.8vw, 17px);
   margin-top: 15px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 body[data-page="contatti"] .main-content {
@@ -878,7 +913,6 @@ body[data-page="contatti"] .main-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 80px;
-  margin-top: 40px;
 }
 
 .contact-info h2 {
@@ -959,7 +993,7 @@ textarea.form-control {
   color: var(--grey-950);
   border: none;
   padding: 14px 32px;
-  border-radius: 50px;
+  border-radius: 12px;
   font-weight: 700;
   font-size: 13px;
   cursor: pointer;
