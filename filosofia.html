@@ -1,1 +1,351 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Filosofia | Polkadot Italia</title>
+    <link rel="icon" type="image/png" href="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true">
 
+    <style>
+        @font-face {
+            font-family: 'DM Sans';
+            font-style: normal; font-weight: 300 700; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmsans/v14/rP2Fp2ywxg089UriCZa4Hz-A.woff2) format("woff2");
+        }
+        @font-face {
+            font-family: "DM Serif Display";
+            font-style: normal; font-weight: 400; font-display: swap;
+            src: url(https://fonts.gstatic.com/s/dmserifdisplay/v15/-F6ufjN0uS2ttSbcK3lFE9v6v6icCIJ7.woff2) format("woff2");
+        }
+
+        :root {
+            --font-sans: 'DM Sans', sans-serif;
+            --font-serif: 'DM Serif Display', serif;
+            --grey-950: #0F0F0F;
+            --grey-900: #1C1917;
+            --grey-800: #292524;
+            --grey-400: #A8A29E;
+            --cool-gray: #E5E7EB;
+            --bg-nav: rgba(15, 15, 15, 0.4);
+            --text-main: #FFF;
+            --feature-bg: #141211;
+        }
+
+        body.light-mode {
+            --grey-950: #F5F5F4;
+            --grey-900: #E7E5E4;
+            --grey-800: #D6D3D1;
+            --grey-400: #57534E;
+            --cool-gray: #1C1917;
+            --bg-nav: rgba(245, 245, 244, 0.6);
+            --text-main: #0F0F0F;
+            --feature-bg: #E7E5E4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body, html {
+            background-color: var(--grey-950);
+            color: var(--cool-gray);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            width: 100%;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 56px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 40px; z-index: 1000; background: var(--bg-nav);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--grey-900);
+            transition: background 0.5s ease, border-bottom 0.5s ease;
+        }
+        .nav-logo { 
+            display: flex; align-items: center; gap: 10px; 
+            font-family: var(--font-serif); font-size: 18px; 
+            color: var(--text-main); text-decoration: none;
+            white-space: nowrap;
+        }
+        body.light-mode .nav-logo img { filter: invert(1); }
+
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a { font-size: 11px; text-decoration: none; color: var(--cool-gray); opacity: 0.6; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 1; }
+
+        .theme-toggle {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-main); font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 5px; transition: transform 0.3s ease;
+        }
+
+        /* --- PHILOSOPHY SPECIFIC --- */
+        .philosophy-hero {
+            padding: 160px 5% 100px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .philosophy-hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(60px, 10vw, 120px);
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+        .philosophy-hero p {
+            font-size: 16px;
+            color: var(--grey-400);
+            letter-spacing: 0.05em;
+        }
+
+        #noiseCanvas {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 5%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header { margin-bottom: 60px; }
+        .section-header h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 20px; }
+        .section-header em { color: var(--grey-400); font-style: italic; font-size: 18px; display: block; margin-bottom: 30px; }
+
+        .text-block p { font-size: 15px; line-height: 1.8; color: var(--grey-400); margin-bottom: 25px; }
+        .text-block strong { color: var(--text-main); }
+
+        /* Timeline / Lineage Styles */
+        .lineage-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .lineage-item { margin-bottom: 100px; }
+        .lineage-tag { font-size: 11px; text-transform: uppercase; color: var(--grey-800); letter-spacing: 0.1em; margin-bottom: 10px; display: block; }
+        .lineage-item h3 { font-family: var(--font-serif); font-size: 24px; color: var(--text-main); margin-bottom: 15px; }
+
+        .quote-card {
+            background: var(--feature-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--grey-900);
+            height: fit-content;
+            margin-bottom: 40px;
+        }
+        .quote-card p { font-style: italic; font-size: 14px; line-height: 1.6; color: var(--cool-gray); margin-bottom: 15px; }
+        .quote-card span { font-size: 12px; color: var(--grey-400); }
+
+        .cta-section { text-align: center; padding: 100px 5%; }
+        .btn-x { background: var(--text-main); color: var(--grey-950); padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; }
+
+        footer {
+            padding: 40px 5%; border-top: 1px solid var(--grey-900);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 11px; color: var(--grey-400);
+            position: relative; z-index: 2;
+        }
+
+        @media (max-width: 900px) {
+            .lineage-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="nav-logo">
+            <img src="https://github.com/Tomen/polkadot-second-age-brand-kit/blob/main/icon/png/256x256/polkadot-icon__cool-gray-on-near-black.png?raw=true" width="18" height="18" alt="Polkadot">
+            Polkadot Italia
+        </a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#">Filosofia</a>
+                <a href="#">Tecnologia</a>
+                <a href="#">Piattaforma</a>
+                <a href="#">Ecosistema</a>
+            </div>
+            <button class="theme-toggle" id="theme-btn">☀</button>
+        </div>
+    </nav>
+
+    <canvas id="noiseCanvas"></canvas>
+
+    <header class="philosophy-hero fade-section">
+        <h1>Filosofia</h1>
+        <p>TECNOLOGIA SOVRANA PER PERSONE SOVRANE.</p>
+    </header>
+
+    <main class="content-section">
+        <section class="fade-section">
+            <div class="section-header">
+                <h2>L'alba di una tecnologia umano-centrica</h2>
+                <em>In un'era di accelerazione, Polkadot torna alle radici: la tecnologia come strumento di liberazione, non di controllo.</em>
+            </div>
+            <div class="text-block">
+                <p>I primi personal computer e internet furono costruiti da persone che desideravano dare agli individui strumenti per la creatività e la libertà. Oggi, ci ritroviamo a vivere in un mondo dove gli esseri umani sono trattati come carburante per algoritmi da trilioni di dollari e grandi compagnie tecnologiche.</p>
+                <p>Questa crisi di proprietà è ora amplificata dall'accelerazione dell'IA. Gli algoritmi dettano ciò che vedi, mentre sofisticati contenuti fake dissolvono il confine tra verità e fabbricazione, compromettendo la nostra realtà condivisa.</p>
+                <p>Polkadot offre un'alternativa radicale. Crediamo che la tecnologia debba essere reclamata come uno strumento dell'agire umano, permettendo agli individui di tracciare i propri percorsi verso la libertà.</p>
+                <p><strong>È, e sarà sempre, il tuo strumento, sotto il tuo controllo.</strong></p>
+            </div>
+        </section>
+
+        <section class="fade-section" style="margin-top: 150px;">
+            <div class="section-header">
+                <h2>Un lignaggio di filosofia</h2>
+                <p style="color: var(--grey-400);">La tecnologia cambia, ma l'ethos resiste. Tracciare le radici della sovranità umana nel mondo digitale.</p>
+            </div>
+
+            <div class="lineage-grid">
+                <div class="lineage-main">
+                    <div class="lineage-item">
+                        <span class="lineage-tag">Oltre il Crypto</span>
+                        <h3>Il vero lignaggio del Web3</h3>
+                        <p>La narrativa tipica spesso connette il Web3 solo a Bitcoin o all'evoluzione dal Web1. Tuttavia, questa visione perde il quadro generale. L'ethos originale del Web3 — come immaginato da Gavin Wood — affonda le radici nella stessa filosofia che ha dato il via alla rivoluzione del personal computing. L'obiettivo è sempre stato coerente: equipaggiare gli individui con il potere di tracciare i propri percorsi, gestire i propri diritti e determinare le proprie vite senza intermediari.</p>
+                    </div>
+
+                    <div class="lineage-item">
+                        <span class="lineage-tag">La Controcultura (Anni '60-'70)</span>
+                        <h3>Accesso agli Strumenti</h3>
+                        <p>Molto prima del Macintosh, pionieri come Steve Jobs furono profondamente influenzati dalla controcultura degli anni '60. Rifiutavano vite dominate dall'uniformità aziendale e dai mass media degli anni '50. Il Whole Earth Catalog offriva una radicale alternativa: "Accesso agli Strumenti" — una filosofia che dava potere agli individui per educare se stessi e progettare le proprie vite. Questo spirito, che valorizzava il potere personale, divenne l'ethos fondante per i primi computer Apple.</p>
+                    </div>
+
+                    <div class="lineage-item">
+                        <span class="lineage-tag">La Lotta per la Libertà Digitale (Anni '80-'90)</span>
+                        <h3>Il Codice è Libertà, la Privacy è Potere</h3>
+                        <p>Con la maturazione del computing, l'attenzione si spostò sul software e sulla libertà di avere il controllo sui programmi che utilizzi. L'Etica Hacker divenne il mantra per i computer hacker. Negli anni '90, con l'ascesa di Internet, i Cypherpunk enfatizzarono che una società digitale aperta richiede la privacy — il potere di rivelare se stessi selettivamente. L'obiettivo rimaneva chiaro: assicurare che la tecnologia servisse l'utente, non l'autorità.</p>
+                    </div>
+                </div>
+
+                <div class="lineage-sidebar">
+                    <div class="quote-card">
+                        <p>"I computer sono usati principalmente contro le persone invece che per le persone... È ora di cambiare tutto questo — abbiamo bisogno di una People's Computer Company."</p>
+                        <span>— People's Computer Company Vol.1 (1972)</span>
+                    </div>
+
+                    <div class="quote-card">
+                        <p>"Un regno di potere personale intimo, individuale, si sta sviluppando... il potere dell'individuo di condurre la propria educazione, trovare la propria ispirazione, plasmare il proprio ambiente."</p>
+                        <span>— Stewart Brand, Whole Earth Catalog (1968)</span>
+                    </div>
+
+                    <div class="quote-card">
+                        <p>"Libertà significa avere il controllo sulla propria vita... meriti di avere il controllo sui programmi che usi."</p>
+                        <span>— Richard Stallman, Free Software Foundation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-section cta-section">
+            <div class="section-header">
+                <h2>Completare il Ciclo</h2>
+                <p style="color: var(--grey-400); margin-bottom: 40px;">Dai primi hacker ai moderni sviluppatori Web3, la visione continua. Polkadot sta costruendo un nuovo strato sociale per un tipo diverso di internet.</p>
+                <h3 style="font-family: var(--font-serif); font-size: 28px; color: var(--text-main);">Con Polkadot, la tecnologia torna ad essere uno strumento per gli esseri umani.</h3>
+            </div>
+            
+            <div style="margin-top: 80px;">
+                <p style="font-size: 14px; color: var(--grey-400); margin-bottom: 20px;">Resta Aggiornato</p>
+                <a href="#" class="btn-x">𝕏 Seguici su X</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>Polkadot Italia© 2026</div>
+        <div style="display: flex; gap: 20px;">
+            <a href="#" style="text-decoration:none; color:inherit;">Supporto</a>
+            <a href="#" style="text-decoration:none; color:inherit;">Wiki</a>
+            <a href="javascript:void(0)" id="infoBtn" style="text-decoration:none; color:inherit;">Info</a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const themeBtn = document.getElementById('theme-btn');
+        let isLightMode = false;
+
+        themeBtn.onclick = () => {
+            isLightMode = !isLightMode;
+            document.body.classList.toggle('light-mode');
+            themeBtn.innerText = isLightMode ? '☾' : '☀';
+            material.uniforms.u_lightMode.value = isLightMode ? 1.0 : 0.0;
+        };
+
+        // NOISE CANVAS
+        const canvas = document.getElementById('noiseCanvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                u_time: { value: 0 },
+                u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
+                u_resolution: { value: new THREE.Vector2() },
+                u_lightMode: { value: 0.0 }
+            },
+            vertexShader: `void main() { gl_Position = vec4(position, 1.0); }`,
+            fragmentShader: `
+                precision highp float;
+                uniform float u_time;
+                uniform vec2 u_mouse;
+                uniform vec2 u_resolution;
+                uniform float u_lightMode;
+                float random(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
+                void main() {
+                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                    float n = random(uv + fract(u_time * 0.15)); 
+                    float dist = distance(uv, vec2(u_mouse.x, 1.0 - u_mouse.y));
+                    float shadow = smoothstep(0.1, 0.8, dist);
+                    vec3 color;
+                    if(u_lightMode > 0.5) {
+                        float grain = mix(0.0, 0.20, n); 
+                        color = vec3(0.95) - vec3(grain) - (shadow * 0.12);
+                    } else {
+                        float grain = mix(0.0, 0.12, n);
+                        color = vec3(grain) - (shadow * 0.15);
+                    }
+                    gl_FragColor = vec4(color, 1.0);
+                }
+            `
+        });
+
+        scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+
+        function resize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', (e) => {
+            material.uniforms.u_mouse.value.set(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+        });
+
+        function animate(time) {
+            material.uniforms.u_time.value = time * 0.001;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+
+        // FADE OBSERVER
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
+    </script>
+</body>
+</html>
