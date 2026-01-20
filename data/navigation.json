@@ -1,0 +1,11 @@
+{
+  "items": [
+    { "label": "Home", "href": "./index.html" },
+    { "label": "Filosofia", "href": "./filosofia.html" },
+    { "label": "Tecnologia", "href": "./tecnologia.html" },
+    { "label": "Piattaforma", "href": "./piattaforma.html" },
+    { "label": "Ecosistema", "href": "./ecosistema.html" },
+    { "label": "Contatti", "href": "./contatti.html" }
+  ]
+}
+
