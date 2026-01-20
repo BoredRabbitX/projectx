@@ -1,0 +1,16 @@
+{
+  "tecnologia": {
+    "account_unici_2025": { "growth_percent": 54, "value": "20.4M" },
+    "nuovi_account_2025": { "growth_percent": 48, "value": "13.5M" },
+    "trasferimenti_cross_chain_2025": { "growth_percent": 26, "value": "528K" },
+    "account_attivi_2025": { "growth_percent": 4, "value": "12M" }
+  },
+  "piattaforma": {
+    "hard_cap": "2.1B",
+    "staked": "826M",
+    "staking_rate": "51%",
+    "referenda_2025": 474,
+    "dot_bloccati_nel_voto": "319M"
+  }
+}
+
