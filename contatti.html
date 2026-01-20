@@ -141,6 +141,55 @@
             .contact-form { padding: 30px; }
             footer { flex-direction: column; gap: 20px; text-align: center; }
         }
+
+
+    /* Stile base del pulsante hamburger (nascosto di default) */
+.menu-toggle { 
+    display: none; 
+    cursor: pointer; 
+    flex-direction: column; 
+    gap: 4px; 
+    z-index: 1001; 
+}
+
+.menu-toggle span { 
+    width: 20px; 
+    height: 2px; 
+    background: var(--text-main); 
+    transition: 0.3s; 
+}
+
+/* Comportamento Mobile (sotto i 768px) */
+@media (max-width: 768px) {
+    .menu-toggle { 
+        display: flex; /* Appare su mobile */
+        order: 3; 
+    }
+
+    .nav-links {
+        position: fixed; 
+        top: 0; 
+        right: -100%; /* Nascosto a destra */
+        width: 100%; 
+        height: 100vh;
+        background: var(--grey-950); 
+        flex-direction: column; 
+        justify-content: center;
+        transition: 0.4s; 
+        z-index: 1000;
+    }
+
+    /* Classe aggiunta via JavaScript quando si clicca l'hamburger */
+    .nav-links.active { 
+        right: 0; /* Entra in scivolamento */
+    }
+
+    .nav-links a { 
+        font-size: 18px; 
+        opacity: 1; 
+        color: var(--text-main); 
+    }
+}
     </style>
 </head>
 <body>
@@ -304,6 +353,14 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-section').forEach(s => observer.observe(s));
+
+        const menuToggle = document.getElementById('mobile-menu');
+const navList = document.getElementById('nav-list');
+
+// Al click sul pulsante hamburger, aggiunge o toglie la classe 'active' alla lista link
+menuToggle.onclick = () => {
+    navList.classList.toggle('active');
+};
     </script>
 </body>
 </html>
