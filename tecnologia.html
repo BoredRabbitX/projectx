@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polkadot - Tech</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent-color: #e6007a;
+            --gray-text: #a0a0a0;
+            --card-bg: #1a1a1a;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-serif: 'Georgia', serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover { opacity: 1; }
+
+        .btn-sign {
+            border: 1px solid #333;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-family: var(--font-serif);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: var(--gray-text);
+            font-size: 18px;
+        }
+
+        /* Grid Layouts */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 100px;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .sub-text {
+            color: var(--gray-text);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            text-align: center;
+            padding: 80px 0;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 24px;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            margin: 100px 0;
+        }
+
+        /* Defense against AI section */
+        .defense-section {
+            margin-bottom: 120px;
+        }
+
+        .defense-section h2 { text-align: left; }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray-text);
+        }
+
+        .stat-sub {
+            font-size: 10px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Info List */
+        .info-row {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            padding: 30px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .info-row h3 {
+            font-family: var(--font-serif);
+            margin: 0;
+            font-size: 20px;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .btn-white {
+            background: white;
+            color: black;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        footer {
+            padding: 40px;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .social-icons { display: flex; gap: 15px; }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .grid-2, .stats-grid, .info-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">● Polkadot</div>
+        <nav>
+            <a href="#">Philosophy</a>
+            <a href="#">Tech</a>
+            <a href="#">Platform</a>
+            <a href="#">Ecosystem</a>
+            <a href="#">☼</a>
+            <a href="#" class="btn-sign">Sign in</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        <section class="hero">
+            <h1>Tech</h1>
+            <p>L'architettura dietro i prodotti che non possono essere interrotti.</p>
+        </section>
+
+        <section class="grid-2">
+            <div>
+                <h2>Sicurezza tramite decentralizzazione</h2>
+                <p class="sub-text">
+                    Le piattaforme tradizionali servono prima i propri azionisti. Quando i loro interessi confliggono con i tuoi, tu perdi.<br><br>
+                    Centinaia di operatori indipendenti gestiscono Polkadot. Ognuno ha impegnato il proprio capitale come garanzia di buon comportamento e riceve ricompense per mantenere la rete in funzione onestamente. Comportati male e perderai quel deposito. Il protocollo stesso non risponde a nessuno.<br><br>
+                    La teoria dei giochi sostituisce contratti e tribunali. Questi operatori non si conoscono, non si fidano l'uno dell'altro e sono sparsi in tutto il mondo. Coordinare un attacco contro così tante parti indipendenti non è realistico.
+                </p>
+            </div>
+            <div>
+                <h2>Scalabilità tramite parallelizzazione</h2>
+                <p class="sub-text">
+                    Per raggiungere i livelli di performance necessari per servire miliardi di persone, dividiamo il carico di lavoro tra un vasto numero di maintainer operati indipendentemente in un processo chiamato <i>parallelizzazione</i>. Questo permette a Polkadot di sfruttare non solo la velocità dei computer moderni, ma di combinare le forze di molte persone diverse in tutto il mondo per creare un supercomputer decentralizzato.<br><br>
+                    Chiunque può costruire su questo computer. Non serve il permesso di un gatekeeper, l'approvazione di un comitato di revisione o finanziamenti da venture capital. E poiché ogni applicazione gira sullo stesso sistema integrato, possono lavorare insieme naturalmente. Ciò che costruisci può connettersi a ciò che altri hanno costruito, senza che nessuno debba negoziare l'accesso.<br><br>
+                    Polkadot è un grande sandbox per costruire un arazzo economico.
+                </p>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            "Privacy garantita dalla matematica, non dalle banalità."
+        </section>
+
+        <section class="defense-section">
+            <h2>Difesa contro l'IA</h2>
+            <p class="sub-text">
+                Mentre l'IA cresce, la minaccia per le nostre società digitali aumenta a una scala inimmaginabile. Le nostre società industriali primitive si affidano pesantemente alla fiducia a tutti i livelli. Confidiamo nelle istituzioni e nelle aziende con cui trattiamo, e le nostre aziende devono fidarsi dei loro clienti e partner commerciali. Ognuno deve riporre fiducia in una risoluzione equa delle controversie. Questo ha funzionato fino a un certo punto, ma con l'avvento di Internet, e ultimamente dell'IA, quel punto è superato da tempo.<br><br>
+                Ciò che rimane è un mondo di giardini recintati, opacità e privilegi. Gli app store che inspiegabilmente non funzionano oltre confine, accordi di licenza che i migliori avvocati del mondo non possono interpretare con certezza, carte di credito che smettono di funzionare se il paese di consegna cambia, ordini cancellati e account bloccati con ricorsi minimi sulla base di nient'altro che i sospetti infondati di un'IA opaca.<br><br>
+                Polkadot è all'avanguardia di questa difesa con la prova di umanità (proof-of-personhood) che preserva la privacy. Concepita in linea con la nostra filosofia umanocentrica, Polkadot può distinguere tra un algoritmo e un essere umano su scala globale. Non ha bisogno di compromettere la tua privacy usando passaporti, carte di credito o persino un numero di telefono. Utilizzando tecniche crittografiche, Polkadot offre questa capacità a tutte le applicazioni sulla sua piattaforma assicurandoti di mantenere la tua privacy quando ti sposti tra di esse.
+            </p>
+        </section>
+
+        <section style="text-align: center; margin-bottom: 80px;">
+            <h2>Costruito per miliardi</h2>
+            <p class="sub-text">La maggior parte delle reti rallenta man mano che cresce. Questa accelera.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">+54%</div>
+                    <div class="stat-label">Account unici</div>
+                    <div class="stat-sub">28.4M nel 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">+48%</div>
+                    <div class="stat-label">Nuovi account</div>
+                    <div class="stat-sub">13.5M nel 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">+26%</div>
+                    <div class="stat-label">Trasferimenti cross-chain</div>
+                    <div class="stat-sub">528K nel 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">+4%</div>
+                    <div class="stat-label">Account attivi</div>
+                    <div class="stat-sub">1.2M nel 2025</div>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <h3>Conferme in mezzo secondo</h3>
+                <p class="sub-text">Quando invii denaro o firmi un contratto, vuoi sapere che ha funzionato. 500 millisecondi dall'azione alla conferma. Abbastanza veloce da sembrare istantaneo.</p>
+            </div>
+            <div class="info-row">
+                <h3>Scalabilità su richiesta</h3>
+                <p class="sub-text">Le app affollate non significano app lente. L'architettura mantiene le cose in movimento anche sotto carico pesante.</p>
+            </div>
+            <div class="info-row">
+                <h3>Così economico da ignorarlo</h3>
+                <p class="sub-text">La maggior parte delle transazioni costa una frazione di centesimo. Abbastanza basso da non pensarci, proprio come non controlli la bolletta elettrica prima di accendere una luce.</p>
+            </div>
+        </section>
+
+        <section style="text-align: center; margin-bottom: 80px;">
+            <h2>Costruire su Polkadot</h2>
+            <p class="sub-text">Scrivi codice che gira nello stesso modo per tutti, per sempre.</p>
+            
+            <div class="info-row">
+                <h3>PolkaVM</h3>
+                <p class="sub-text">Una virtual machine basata su RISC-V costruita per Polkadot. Scrivi smart contract in Rust, C o qualsiasi cosa che compili in RISC-V.</p>
+            </div>
+            <div class="info-row">
+                <h3>Compatibile con EVM</h3>
+                <p class="sub-text">Hai già costruito qualcosa per Ethereum? Gira anche qui, con commissioni inferiori e accesso all'intera piattaforma Polkadot.</p>
+            </div>
+            <div class="info-row">
+                <h3>Cross-chain di default</h3>
+                <p class="sub-text">Le applicazioni su Polkadot possono parlarsi direttamente. Sposta valore tra di esse, attiva azioni attraverso di esse, costruisci su ciò che altri hanno fatto. Funziona e basta.</p>
+            </div>
+        </section>
+
+        <section class="grid-2">
+            <div>
+                <h2>Protocollo per i prodotti</h2>
+                <p class="sub-text">Quando la logica della tua applicazione vive on-chain, si comporta allo stesso modo per tutti, per sempre. Quando è ospitata su una rete decentralizzata, non c'è un server da spegnere e nessuna azienda da costringere. Quando gli utenti possiedono le proprie chiavi, nessun altro può accedere ai loro dati. Insieme, queste proprietà creano prodotti che non possono essere interrotti, censurati o corrotti.</p>
+            </div>
+            <div>
+                <h2>Cosa succederà dopo</h2>
+                <p class="sub-text">JAM (Join-Accumulate Machine) è la prossima generazione dell'architettura core di Polkadot. Progettata da Gavin Wood, sostituisce la relay chain con un sistema più flessibile e parallelizzato che mira a oltre un milione di transazioni al secondo.<br><br>
+                Diversi team indipendenti stanno costruendo implementazioni. La specifica è pubblica.</p>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Costruisci con noi</h2>
+            <p class="sub-text">Aiutaci a costruire ciò che le Big Tech non faranno.</p>
+            <a href="#" class="btn-white">Documentazione per Sviluppatori ↗</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div>© 2025</div>
+        <div style="display: flex; gap: 20px;">
+            <a href="#" style="color:#666; text-decoration:none;">Support</a>
+            <a href="#" style="color:#666; text-decoration:none;">Wiki</a>
+            <a href="#" style="color:#666; text-decoration:none;">About</a>
+        </div>
+        <div class="social-icons">
+            <span>𝕏</span>
+            <span>GitHub</span>
+        </div>
+    </footer>
+
+</body>
+</html>
