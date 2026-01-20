@@ -68,13 +68,30 @@
         .nav-links a { font-size: 11px; text-decoration: none; color: var(--cool-gray); opacity: 0.6; }
         .theme-toggle { background: none; border: none; cursor: pointer; color: var(--text-main); font-size: 18px; }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 140px 5% 60px; }
+        /* HERO con Noise Background */
+        .hero {
+            position: relative;
+            width: 100vw; height: 60vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: var(--grey-950); overflow: hidden;
+        }
+        #noiseCanvas {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+        }
+        .hero-content {
+            position: relative; z-index: 2; text-align: center; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center;
+        }
 
-        .page-title { text-align: center; margin-bottom: 100px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 80px 5% 60px; position: relative; z-index: 2; }
+
+        .page-title { text-align: center; margin-bottom: 0; } /* Reset margin per hero layout */
         .page-title h1 { font-family: var(--font-serif); font-size: clamp(60px, 10vw, 90px); color: var(--text-main); margin-bottom: 10px; }
         .page-title p { font-size: 14px; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.1em; }
 
-        .intro-section { margin-bottom: 120px; }
+        .intro-section { margin-top: 80px; margin-bottom: 120px; }
         .intro-section h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 24px; }
         .intro-section em { font-size: 18px; color: var(--grey-400); display: block; margin-bottom: 40px; font-style: italic; }
         .intro-section p { font-size: 16px; line-height: 1.8; color: var(--grey-400); margin-bottom: 25px; }
@@ -82,7 +99,6 @@
         .lineage-header h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 10px; }
         .lineage-header p { font-size: 14px; color: var(--grey-400); margin-bottom: 60px; }
 
-        /* Grid per contenuti + citazioni */
         .lineage-row { display: grid; grid-template-columns: 1fr 340px; gap: 60px; margin-bottom: 80px; align-items: start; }
         .lineage-text span.tag { font-size: 10px; color: var(--grey-400); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; display: block; }
         .lineage-text h3 { font-family: var(--font-serif); font-size: 24px; color: var(--text-main); margin-bottom: 16px; }
@@ -92,7 +108,6 @@
         .quote-box p { font-style: italic; font-size: 14px; line-height: 1.6; color: var(--cool-gray); margin-bottom: 15px; }
         .quote-box cite { font-style: normal; font-size: 11px; color: var(--grey-400); display: block; }
 
-        /* Sezione Finale con SFONDO DIVERSO */
         .completing-cycle { background-color: var(--feature-bg); padding: 120px 5%; text-align: center; transition: background 0.5s ease; }
         .completing-cycle h2 { font-family: var(--font-serif); font-size: 32px; color: var(--text-main); margin-bottom: 20px; }
         .completing-cycle p { max-width: 700px; margin: 0 auto 40px; font-size: 15px; line-height: 1.7; color: var(--grey-400); }
@@ -129,12 +144,17 @@
         </div>
     </nav>
 
-    <div class="container">
-        <header class="page-title">
-            <h1>Filosofia</h1>
-            <p>Tecnologia sovrana per persone sovrane.</p>
-        </header>
+    <section class="hero">
+        <canvas id="noiseCanvas"></canvas>
+        <div class="hero-content">
+            <header class="page-title">
+                <h1>Filosofia</h1>
+                <p>Tecnologia sovrana per persone sovrane.</p>
+            </header>
+        </div>
+    </section>
 
+    <div class="container">
         <section class="intro-section">
             <h2>L'alba di una tecnologia umano-centrica</h2>
             <em>In un'era di accelerazione, Polkadot torna alle radici: la tecnologia come strumento di liberazione, non di controllo.</em>
@@ -153,7 +173,7 @@
             <div class="lineage-text">
                 <span class="tag">Oltre il Crypto</span>
                 <h3>Il vero lignaggio del Web3</h3>
-                <p>La narrativa tipica spesso connette il Web3 solo a Bitcoin o all'evoluzione dal Web1. Tuttavia, questa visione perde il quadro generale. L'ethos originale del Web3 — come immaginato da Gavin Wood — affonda le sue radici nella stessa filosofia che ha dato il via alla rivoluzione del personal computing. L'obiettivo è sempre stato coerente: equipaggiare gli individui con il potere di plasmare i propri percorsi, gestire i propri diritti e determinare le proprie vite senza intermediari.</p>
+                <p>La narrativa tipica spesso connette il Web3 solo a Bitcoin o all'evoluzione dal Web1. Tuttavia, questa visione perde il quadro generale. L'ethos originale del Web3 affonda le sue radici nella stessa filosofia che ha dato il via alla rivoluzione del personal computing.</p>
             </div>
             <div class="quote-box">
                 <p>"I computer sono usati principalmente contro le persone invece che per le persone... È ora di cambiare tutto questo – abbiamo bisogno di una People's Computer Company."</p>
@@ -165,7 +185,7 @@
             <div class="lineage-text">
                 <span class="tag">La Controcultura (Anni '60-'70)</span>
                 <h3>Accesso agli Strumenti</h3>
-                <p>Molto prima del Macintosh, pionieri come Steve Jobs furono profondamente influenzati dalla controcultura degli anni '60. Rifiutavano vite dominate dall'uniformità aziendale e dai mass media degli anni '50. Il Whole Earth Catalog offriva una radicale alternativa: "Accesso agli Strumenti" – una filosofia che dava potere agli individui per istruirsi e progettare le proprie vite. Questo spirito divenne l'ethos fondante per i primi computer Apple.</p>
+                <p>Molto prima del Macintosh, pionieri come Steve Jobs furono profondamente influenzati dalla controcultura degli anni '60. Il Whole Earth Catalog offriva una radicale alternativa: "Accesso agli Strumenti" – una filosofia che dava potere agli individui per istruirsi e progettare le proprie vite.</p>
             </div>
             <div class="quote-box">
                 <p>"Si sta sviluppando un regno di potere personale intimo, individuale... il potere dell'individuo di condurre la propria educazione, trovare la propria ispirazione, plasmare il proprio ambiente."</p>
@@ -177,7 +197,7 @@
             <div class="lineage-text">
                 <span class="tag">La lotta per la libertà digitale (Anni '80-'90)</span>
                 <h3>Il Codice è Libertà, la Privacy è Potere</h3>
-                <p>Con la maturazione dell'informatica, l'attenzione si è spostata sul software e sulla libertà intesa come controllo sui programmi che usi. L'Etica Hacker divenne il mantra per gli smanettoni. Negli anni '90, con l'ascesa di Internet, i Cypherpunk sottolinearono che una società digitale aperta richiede privacy – il potere di rivelarsi selettivamente. L'obiettivo era garantire che la tecnologia servisse l'utente, non l'autorità.</p>
+                <p>Con la maturazione dell'informatica, l'attenzione si è spostata sul software e sulla libertà intesa come controllo sui programmi che usi. Negli anni '90, con l'ascesa di Internet, i Cypherpunk sottolinearono che una società digitale aperta richiede privacy.</p>
             </div>
             <div class="quote-box">
                 <p>"Libertà significa avere il controllo sulla propria vita... Ti meriti di avere il controllo sui programmi che usi."</p>
@@ -189,10 +209,10 @@
             <div class="lineage-text">
                 <span class="tag">Prova Crittografica (Anni 2000)</span>
                 <h3>Prova, invece di Fiducia</h3>
-                <p>Il fallimento delle istituzioni centralizzate durante la crisi finanziaria del 2008 ha fornito il contesto perfetto per il Whitepaper di Bitcoin. Offriva un'alternativa diretta: un sistema che non richiedeva terze parti fidate, operando invece su prove crittografiche. Le rivelazioni successive di figure come Edward Snowden hanno confermato l'urgenza. La visione dei cypherpunk si è solidificata: un sistema basato sulla matematica, non sulla vulnerabilità istituzionale.</p>
+                <p>Il fallimento delle istituzioni centralizzate durante la crisi finanziaria del 2008 ha fornito il contesto perfetto per il Whitepaper di Bitcoin. Offriva un'alternativa diretta: un sistema che non richiedeva terze parti fidate, operando invece su prove crittografiche.</p>
             </div>
             <div class="quote-box">
-                <p>"Ciò che serve è un sistema di pagamento elettronico basato su prove crittografiche invece che sulla fiducia... permettendo a due parti qualsiasi di transare direttamente tra loro senza la necessità di una terza parte fidata."</p>
+                <p>"Ciò che serve è un sistema di pagamento elettronico basato su prove crittografiche invece che sulla fiducia... permettendo a due parti qualsiasi di transare direttamente tra loro."</p>
                 <cite>— Satoshi Nakamoto, Whitepaper di Bitcoin (2008)</cite>
             </div>
         </div>
@@ -201,7 +221,7 @@
             <div class="lineage-text">
                 <span class="tag">La Nascita del Web3 (2014+)</span>
                 <h3>Un Sistema Operativo Sociale Sicuro</h3>
-                <p>Riconoscendo il potenziale generalizzato della blockchain, Vitalik Buterin ha spinto il concetto oltre la valuta verso un sistema di calcolo globale (Ethereum). Costruendo su questo con Buterin, Gavin Wood ha coniato il termine "Web3". Questo termine rappresentava la consapevolezza che, dopo Snowden, affidare dati alle organizzazioni era un "modello fondamentalmente rotto". Il Web3 è stato concettualizzato come un Sistema Operativo Sociale Sicuro, fornendo l'infrastruttura per una società digitale veramente autonoma.</p>
+                <p>Riconoscendo il potenziale generalizzato della blockchain, Gavin Wood ha coniato il termine "Web3". Rappresentava la consapevolezza che affidare dati alle organizzazioni era un "modello fondamentalmente rotto". Il Web3 è un Sistema Operativo Sociale Sicuro.</p>
             </div>
             <div class="quote-box">
                 <p>"Ci rendiamo conto che affidare le nostre informazioni alle organizzazioni in generale è un modello fondamentalmente rotto... Dì 'ciao' al Web 3.0, un Sistema Operativo Sociale Sicuro."</p>
@@ -231,12 +251,74 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         const themeBtn = document.getElementById('theme-btn');
         themeBtn.onclick = () => {
             document.body.classList.toggle('light-mode');
-            themeBtn.innerText = document.body.classList.contains('light-mode') ? '☾' : '☀';
+            const isLight = document.body.classList.contains('light-mode');
+            themeBtn.innerText = isLight ? '☾' : '☀';
+            if (material) material.uniforms.u_lightMode.value = isLight ? 1.0 : 0.0;
         };
+
+        // --- SHADER BACKGROUND ---
+        const canvas = document.getElementById('noiseCanvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                u_time: { value: 0 },
+                u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
+                u_resolution: { value: new THREE.Vector2() },
+                u_lightMode: { value: 0.0 }
+            },
+            vertexShader: `void main() { gl_Position = vec4(position, 1.0); }`,
+            fragmentShader: `
+                precision highp float;
+                uniform float u_time;
+                uniform vec2 u_mouse;
+                uniform vec2 u_resolution;
+                uniform float u_lightMode;
+
+                float random(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
+
+                void main() {
+                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                    float n = random(uv + fract(u_time * 0.15)); 
+                    float dist = distance(uv, vec2(u_mouse.x, 1.0 - u_mouse.y));
+                    float shadow = smoothstep(0.1, 0.8, dist);
+                    vec3 color;
+                    if(u_lightMode > 0.5) {
+                        color = vec3(0.95) - vec3(mix(0.0, 0.20, n)) - (shadow * 0.12);
+                    } else {
+                        color = vec3(mix(0.0, 0.12, n)) - (shadow * 0.15);
+                    }
+                    gl_FragColor = vec4(color, 1.0);
+                }
+            `
+        });
+
+        scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+
+        function resize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', (e) => {
+            material.uniforms.u_mouse.value.set(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+        });
+
+        function animate(time) {
+            material.uniforms.u_time.value = time * 0.001;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
     </script>
 </body>
 </html>
