@@ -1,20 +1,4 @@
-@font-face {
-  font-family: "DM Sans";
-  font-style: normal;
-  font-weight: 300 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/dmsans/v14/rP2Fp2ywxg089UriCZa4Hz-A.woff2)
-    format("woff2");
-}
 
-@font-face {
-  font-family: "DM Serif Display";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/dmserifdisplay/v15/-F6ufjN0uS2ttSbcK3lFE9v6v6icCIJ7.woff2)
-    format("woff2");
-}
 
 :root {
   --font-sans: "DM Sans", sans-serif;
