@@ -137,6 +137,90 @@
             </div>
         </section>
 
+        <section class="fade-section">
+            <div class="section-header">
+                <h2>Schedule di emissione</h2>
+                <p>Nuovi DOT vengono emessi come ricompense per chi aiuta a proteggere la piattaforma. A partire da marzo 2026, l'emissione diminuisce ogni due anni fino al raggiungimento del limite massimo.</p>
+            </div>
+
+            <div class="supply-chart-container">
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #e6007a;"></div>
+                        <span>Emissione annuale (DOT)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #ff4da6;"></div>
+                        <span>Offerta totale (DOT)</span>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper">
+                    <svg class="supply-chart" viewBox="0 0 800 400">
+                        <!-- Grid lines -->
+                        <g class="grid">
+                            <line x1="100" y1="50" x2="100" y2="350" stroke="#333" stroke-width="1"/>
+                            <line x1="100" y1="350" x2="750" y2="350" stroke="#333" stroke-width="1"/>
+                            
+                            <!-- Horizontal grid lines -->
+                            <line x1="100" y1="290" x2="750" y2="290" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+                            <line x1="100" y1="230" x2="750" y2="230" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+                            <line x1="100" y1="170" x2="750" y2="170" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+                            <line x1="100" y1="110" x2="750" y2="110" stroke="#444" stroke-width="0.5" opacity="0.3"/>
+                            
+                            <!-- Y-axis labels (Millions) -->
+                            <text x="90" y="355" text-anchor="end" fill="#888" font-size="12">0M</text>
+                            <text x="90" y="295" text-anchor="end" fill="#888" font-size="12">20M</text>
+                            <text x="90" y="235" text-anchor="end" fill="#888" font-size="12">40M</text>
+                            <text x="90" y="175" text-anchor="end" fill="#888" font-size="12">60M</text>
+                            
+                            <!-- Right Y-axis labels (Total Supply) -->
+                            <text x="760" y="355" text-anchor="start" fill="#888" font-size="12">1.7B</text>
+                            <text x="760" y="295" text-anchor="start" fill="#888" font-size="12">1.8B</text>
+                            <text x="760" y="235" text-anchor="start" fill="#888" font-size="12">1.9B</text>
+                            <text x="760" y="175" text-anchor="start" fill="#888" font-size="12">2.0B</text>
+                            <text x="760" y="115" text-anchor="start" fill="#888" font-size="12">2.1B</text>
+                        </g>
+
+                        <!-- Yearly issuance line -->
+                        <path class="emission-line" d="M 150 290 L 250 290 L 350 290 L 450 290 L 550 290 L 650 290 L 750 290" 
+                              fill="none" stroke="#e6007a" stroke-width="3"/>
+                        
+                        <!-- Total supply line -->
+                        <path class="supply-line" d="M 150 200 L 250 170 L 350 140 L 450 110 L 550 80 L 650 50 L 750 50" 
+                              fill="none" stroke="#ff4da6" stroke-width="3"/>
+                        
+                        <!-- Data points for yearly issuance -->
+                        <circle cx="150" cy="290" r="4" fill="#e6007a"/>
+                        <circle cx="250" cy="290" r="4" fill="#e6007a"/>
+                        <circle cx="350" cy="290" r="4" fill="#e6007a"/>
+                        <circle cx="450" cy="290" r="4" fill="#e6007a"/>
+                        <circle cx="550" cy="290" r="4" fill="#e6007a"/>
+                        <circle cx="650" cy="290" r="4" fill="#e6007a"/>
+                        <circle cx="750" cy="290" r="4" fill="#e6007a"/>
+                        
+                        <!-- Data points for total supply -->
+                        <circle cx="150" cy="200" r="4" fill="#ff4da6"/>
+                        <circle cx="250" cy="170" r="4" fill="#ff4da6"/>
+                        <circle cx="350" cy="140" r="4" fill="#ff4da6"/>
+                        <circle cx="450" cy="110" r="4" fill="#ff4da6"/>
+                        <circle cx="550" cy="80" r="4" fill="#ff4da6"/>
+                        <circle cx="650" cy="50" r="4" fill="#ff4da6"/>
+                        <circle cx="750" cy="50" r="4" fill="#ff4da6"/>
+                        
+                        <!-- X-axis labels -->
+                        <text x="150" y="370" text-anchor="middle" fill="#888" font-size="12">2026</text>
+                        <text x="250" y="370" text-anchor="middle" fill="#888" font-size="12">2030</text>
+                        <text x="350" y="370" text-anchor="middle" fill="#888" font-size="12">2034</text>
+                        <text x="450" y="370" text-anchor="middle" fill="#888" font-size="12">2038</text>
+                        <text x="550" y="370" text-anchor="middle" fill="#888" font-size="12">2042</text>
+                        <text x="650" y="370" text-anchor="middle" fill="#888" font-size="12">2046</text>
+                        <text x="750" y="370" text-anchor="middle" fill="#888" font-size="12">2050</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
         <section class="cta-section fade-section">
             <h2>Partecipa</h2>
             <p style="color: var(--grey-400); margin-bottom: 30px;">Se possiedi DOT, hai già un posto a tavola.</p>

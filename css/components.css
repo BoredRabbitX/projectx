@@ -1009,3 +1009,98 @@ textarea.form-control {
   opacity: 0.9;
 }
 
+/* Supply Chart Styles */
+.supply-chart-container {
+  margin: 40px 0;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--cool-gray);
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.chart-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.light-mode .chart-wrapper {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.supply-chart {
+  width: 100%;
+  height: 400px;
+  max-width: 800px;
+  margin: 0 auto;
+  display: block;
+}
+
+.emission-line, .supply-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2s ease-out forwards;
+}
+
+.emission-line {
+  animation-delay: 0.5s;
+}
+
+.supply-line {
+  animation-delay: 0.8s;
+}
+
+.emission-line ~ circle, .supply-line ~ circle {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.emission-line ~ circle {
+  animation-delay: 1.1s;
+}
+
+.supply-line ~ circle {
+  animation-delay: 1.4s;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Chart hover effects */
+.supply-chart circle {
+  transition: r 0.2s ease;
+  cursor: pointer;
+}
+
+.supply-chart circle:hover {
+  r: 6;
+}
+
